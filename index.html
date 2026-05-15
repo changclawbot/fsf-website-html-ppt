@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>富盛豐網站內容分析｜HTML 圖文簡報</title>
+<meta name="description" content="分析富盛豐 OEM 官網與品牌商城的內容定位、品類結構、品牌語言與優化方向。" />
+<style>
+:root{
+  --bg:#071114;--ink:#f7f2df;--muted:#b5c2bd;--green:#9bf55a;--mint:#58f4d4;--amber:#ffb45c;--red:#ff6b6b;--blue:#71b7ff;
+  --panel:rgba(255,255,255,.085);--panel2:rgba(8,22,27,.78);--line:rgba(255,255,255,.18);--shadow:0 28px 90px rgba(0,0,0,.42);
+  --title-size:clamp(1.9rem,5.4vw,4.8rem);--h2-size:clamp(1.45rem,3.7vw,3rem);--body-size:clamp(.82rem,1.34vw,1.08rem);
+  --slide-padding:clamp(1rem,4vw,4rem);--gap:clamp(.75rem,2vw,1.5rem)
+}
+*{box-sizing:border-box}html,body{height:100%;margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC",Arial,sans-serif;overflow-x:hidden}html{scroll-snap-type:y mandatory;scroll-behavior:smooth}body{counter-reset:slide}
+.slide{width:100vw;height:100vh;height:100dvh;overflow:hidden;position:relative;display:flex;flex-direction:column;scroll-snap-align:start;isolation:isolate;background:radial-gradient(circle at 12% 16%,rgba(88,244,212,.18),transparent 28%),radial-gradient(circle at 88% 78%,rgba(155,245,90,.15),transparent 30%),linear-gradient(135deg,#071114,#10242a 55%,#071114)}
+.slide:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.7),transparent 80%);z-index:-2}.slide:after{counter-increment:slide;content:counter(slide,decimal-leading-zero);position:absolute;right:clamp(1rem,3vw,2.4rem);bottom:clamp(.7rem,2vw,1.4rem);color:rgba(255,255,255,.25);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9rem}.slide-content{flex:1;display:flex;flex-direction:column;justify-content:center;gap:var(--gap);padding:var(--slide-padding);max-height:100%;overflow:hidden;max-width:1240px;width:100%;margin:auto}
+h1,h2,h3,p{margin:0}h1{font-size:var(--title-size);line-height:.92;letter-spacing:-.065em}h2{font-size:var(--h2-size);line-height:1.02;letter-spacing:-.045em}h3{font-size:clamp(1rem,1.8vw,1.45rem)}p,li{font-size:var(--body-size);line-height:1.55;color:var(--muted)}strong{color:var(--ink)}.accent{color:var(--mint)}.warm{color:var(--amber)}.danger{color:var(--red)}.blue{color:var(--blue)}
+.kicker{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;text-transform:uppercase;letter-spacing:.15em;color:var(--green);font-size:clamp(.7rem,1vw,.92rem)}.subtitle{font-size:clamp(1rem,2vw,1.38rem);max-width:900px}.source{font-size:clamp(.68rem,1vw,.88rem);opacity:.78}.source a{color:var(--mint)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:clamp(.65rem,1.45vw,1rem)}.two{display:grid;grid-template-columns:.98fr 1.02fr;align-items:center;gap:clamp(1rem,3vw,2rem)}.two.flip{grid-template-columns:1.06fr .94fr}.stack{display:flex;flex-direction:column;gap:.8rem}.card{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:clamp(.85rem,1.8vw,1.35rem);box-shadow:var(--shadow);backdrop-filter:blur(16px)}.card p{font-size:clamp(.78rem,1.15vw,1rem)}
+.metric{display:flex;flex-direction:column;gap:.2rem}.metric b{font-size:clamp(1.8rem,4vw,3.4rem);line-height:1;color:var(--ink);letter-spacing:-.05em}.metric span{font-size:clamp(.75rem,1.15vw,1rem);color:var(--muted)}
+.visual{background:linear-gradient(160deg,rgba(255,255,255,.12),rgba(255,255,255,.04));border:1px solid var(--line);border-radius:28px;padding:clamp(.6rem,1.5vw,1rem);box-shadow:var(--shadow);position:relative;overflow:hidden}.visual img{width:100%;height:100%;max-height:min(56vh,500px);object-fit:cover;display:block;border-radius:18px;background:#fff}.visual.contain img{object-fit:contain;background:#f7f7f2}.caption{position:absolute;left:1rem;top:1rem;background:rgba(7,17,20,.78);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:.42rem .7rem;color:var(--ink);font-size:.78rem;backdrop-filter:blur(10px)}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem;position:relative}.timeline:before{content:"";position:absolute;left:5%;right:5%;top:32px;height:2px;background:linear-gradient(90deg,var(--mint),var(--green),var(--amber));opacity:.55}.phase{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:1rem;min-height:150px}.phase:before{content:"";display:block;width:18px;height:18px;border-radius:50%;background:var(--mint);box-shadow:0 0 22px var(--mint);margin-bottom:.75rem}.phase small{color:var(--green);font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:.7rem}.node{background:var(--panel2);border:1px solid var(--line);border-radius:24px;padding:1.15rem;min-height:180px}.arrow{font-size:2rem;color:var(--mint)}.quote{font-size:clamp(1.35rem,3.1vw,2.55rem);line-height:1.18;letter-spacing:-.035em;color:var(--ink);max-width:980px}.note{border-left:4px solid var(--mint);padding-left:1rem}.pillrow{display:flex;flex-wrap:wrap;gap:.55rem}.pill{border:1px solid var(--line);border-radius:999px;padding:.48rem .75rem;background:rgba(255,255,255,.08);color:var(--ink);font-size:clamp(.75rem,1.05vw,.95rem)}
+.checklist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.check{background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:22px;padding:1rem}.check b{display:block;font-size:1rem;margin-bottom:.4rem;color:var(--ink)}
+.progress{position:fixed;left:0;top:0;height:4px;width:0;background:linear-gradient(90deg,var(--mint),var(--green),var(--amber));z-index:10}.nav{position:fixed;right:15px;top:50%;translate:0 -50%;display:flex;flex-direction:column;gap:8px;z-index:9}.nav button{width:9px;height:9px;border:0;border-radius:99px;background:rgba(255,255,255,.26);cursor:pointer}.nav button.active{height:24px;background:var(--mint)}.hint{position:fixed;left:18px;bottom:14px;color:rgba(255,255,255,.45);font-size:.78rem;z-index:9}.reveal{opacity:0;transform:translateY(18px);transition:opacity .75s ease,transform .75s cubic-bezier(.2,.8,.2,1)}.visible .reveal{opacity:1;transform:none}.visible .reveal:nth-child(2){transition-delay:.08s}.visible .reveal:nth-child(3){transition-delay:.16s}.visible .reveal:nth-child(4){transition-delay:.24s}.visible .reveal:nth-child(5){transition-delay:.32s}
+.control-dock{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 74px);transform:translateX(-50%);z-index:2147483647;display:flex;align-items:center;gap:.55rem;width:min(94vw,820px);max-width:820px;padding:.62rem .68rem;border-radius:24px;background:rgba(255,255,255,.97);box-shadow:0 18px 55px rgba(0,0,0,.35);backdrop-filter:blur(18px);border:2px solid rgba(15,39,64,.12)}
+.control-title{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:900;color:#12324a;font-size:clamp(.82rem,2.4vw,1.05rem)}.control-buttons{display:flex;gap:.42rem;flex:0 0 auto}.control-btn{min-width:46px;height:42px;padding:0 .72rem;border:0;border-radius:15px;background:#0f2740;color:#fff;font-weight:900;font-size:1rem;box-shadow:0 8px 18px rgba(15,39,64,.28);cursor:pointer;display:inline-grid;place-items:center;line-height:1}.control-btn:hover{background:#1b4b74}.control-btn .label{display:inline;margin-left:.22rem;font-size:.78rem;font-weight:800}.overview-panel{position:fixed;inset:0;z-index:2147483646;background:rgba(4,10,14,.76);backdrop-filter:blur(14px);display:none;padding:clamp(1rem,4vw,3rem);overflow:auto}.overview-panel.show{display:block}.overview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1rem;max-width:1100px;margin:0 auto}.overview-card{border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:1rem;background:rgba(255,255,255,.1);color:white;min-height:120px;cursor:pointer;box-shadow:0 20px 60px rgba(0,0,0,.25)}.overview-card b{display:block;color:#9bf55a;margin-bottom:.45rem;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.overview-card span{font-weight:800;line-height:1.25}.text-focus img{filter:saturate(.72) brightness(.75)}.text-focus .card,.text-focus .visual{border-color:rgba(155,245,90,.35)!important}
+@media(max-width:900px){.two,.two.flip,.flow{grid-template-columns:1fr}.timeline{grid-template-columns:1fr 1fr}.checklist{grid-template-columns:1fr}.arrow{display:none}.nav{display:none}.visual img{max-height:34vh}.grid{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.grid,.timeline{grid-template-columns:1fr}.hint{display:none}.control-dock{bottom:calc(env(safe-area-inset-bottom, 0px) + 82px);width:94vw;border-radius:22px;padding:.58rem;gap:.38rem}.control-title{font-size:.82rem;max-width:30vw}.control-btn{min-width:42px;height:42px;padding:0 .55rem;border-radius:14px;font-size:1rem}.control-btn .label{display:none}}
+@media(max-height:700px){:root{--slide-padding:clamp(.65rem,3vw,2rem);--title-size:clamp(1.6rem,5vw,3.6rem);--h2-size:clamp(1.2rem,3vw,2.25rem);--body-size:clamp(.7rem,1.15vw,.95rem)}.visual img{max-height:40vh}.card{padding:.8rem}.phase{min-height:120px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition-duration:.2s!important;animation-duration:.01ms!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="nav" id="nav"></div>
+<div class="hint">← → / Space 換頁・可滑動</div>
+
+<section class="slide visible" data-title="Cover"><main class="slide-content">
+  <div class="kicker reveal">FSF Website Analysis → HTML Consultant Deck</div>
+  <h1 class="reveal">富盛豐網站內容分析<br><span class="accent">從 OEM 代工官網</span>到<span class="warm">品牌商城</span></h1>
+  <p class="subtitle reveal">把 <strong>FSF BIO 代工定位</strong>、<strong>富盛豐生活植萃館品類結構</strong>、<strong>品牌價值主張</strong> 與 <strong>網站優化機會</strong>，整理成一份可討論的圖文簡報。</p>
+  <div class="pillrow reveal">
+    <span class="pill">天然植萃</span><span class="pill">OEM / ODM</span><span class="pill">居家清潔</span><span class="pill">防蟲</span><span class="pill">寵物洗護</span><span class="pill">除甲醛 / TVOC</span>
+  </div>
+  <p class="source reveal">分析時間：2026-05-15｜來源：<a href="https://www.fsf-alexandra.com/" target="_blank">fsf-alexandra.com</a>、<a href="https://www.fsfstore.com/" target="_blank">fsfstore.com</a> 可見頁面與結構化資料</p>
+</main></section>
+
+<section class="slide" data-title="Dual Website System"><main class="slide-content">
+  <div class="kicker">Website system</div>
+  <h2>富盛豐現在對外其實是<span class="accent">兩條網站敘事</span></h2>
+  <div class="flow">
+    <div class="node">
+      <h3>FSF BIO 代工官網</h3>
+      <p>主打 <strong>天然有機洗護化妝品 ODM/OEM</strong>，明確強調 <strong>GMP、ISO 22716、ECOCERT、USDA</strong> 與台灣製造，對象是尋找代工夥伴的 B 端客戶。</p>
+    </div>
+    <div class="arrow">→</div>
+    <div class="node">
+      <h3>富盛豐生活植萃館</h3>
+      <p>主打 <strong>天然植萃生活產品</strong>，把品牌落到日常使用情境：清潔、防蟲、寵物洗護、衣物洗護、除甲醛與空間淨化。</p>
+    </div>
+    <div class="arrow">→</div>
+    <div class="node">
+      <h3>合起來的品牌訊號</h3>
+      <p>前者建立<strong>可信製造能力</strong>，後者建立<strong>真實市場與品牌感</strong>。這是很好的雙輪結構，只差把兩邊的故事橋接得更清楚。</p>
+    </div>
+  </div>
+</main></section>
+
+<section class="slide" data-title="OEM Positioning"><main class="slide-content">
+  <div class="kicker">OEM / ODM positioning</div>
+  <h2>代工官網傳遞出的核心定位：<span class="accent">專業天然植萃代工廠</span></h2>
+  <div class="grid">
+    <div class="card metric"><b>4+</b><span>官網明確露出的國際 / 制度認證：GMP、ISO 22716、ECOCERT、USDA</span></div>
+    <div class="card metric"><b>B2B</b><span>訊息核心是 ODM / OEM、一站式配方研發、生產製造、代工合作</span></div>
+    <div class="card metric"><b>TW → Asia</b><span>台灣製造，服務台灣、大陸、東南亞市場</span></div>
+    <div class="card metric"><b>Natural</b><span>天然、有機、無毒、低碳、植萃，是整個 B 端網站反覆出現的價值關鍵字</span></div>
+  </div>
+  <p class="note">這讓網站一眼看起來不是 generic OEM，而是<strong>有認證、有植萃主張、有出口視野</strong>的代工工廠。</p>
+</main></section>
+
+<section class="slide" data-title="OEM Service Scope"><main class="slide-content">
+  <div class="kicker">Service catalog</div>
+  <h2>從結構化資料看，富盛豐 OEM 端主推四類服務</h2>
+  <div class="grid">
+    <div class="card"><h3>天然植萃洗護化妝品 ODM</h3><p>官網直接寫明：提供<strong>完整配方研發、原料採購、生產製造</strong>的一站式服務。</p></div>
+    <div class="card"><h3>天然植萃洗護化妝品 OEM</h3><p>承接品牌既有配方，由富盛豐完成後段生產製造，對成熟品牌更友善。</p></div>
+    <div class="card"><h3>天然植萃家居清潔代工</h3><p>重點放在<strong>低碳、環保、無毒</strong>的居家清潔系列，對應富盛豐長期最重要的生活清潔賽道。</p></div>
+    <div class="card"><h3>寵物洗護系列代工</h3><p>明確點出<strong>人寵友善</strong>與天然植萃，等於把毛孩市場也納入製造端提案能力。</p></div>
+  </div>
+</main></section>
+
+<section class="slide" data-title="Website Screens"><main class="slide-content">
+  <div class="kicker">Visual evidence</div>
+  <h2>畫面層面也在強化兩條敘事：<span class="accent">科學可信</span> × <span class="warm">生活場景</span></h2>
+  <div class="two">
+    <div class="visual"><span class="caption">OEM 官網首頁</span><img src="assets/fsf-alexandra-home.png" alt="FSF BIO OEM website screenshot"></div>
+    <div class="stack">
+      <div class="card"><h3>代工官網的視覺語言</h3><p>深綠與實驗 / 製造感畫面，對應天然、專業、技術、製造信任。這種調性適合承接 B 端詢問。</p></div>
+      <div class="card"><h3>消費商城的視覺語言</h3><p>米白、植萃、瓶器、生活感，讓商品更接近日常家庭使用。這個方向與「安全無毒」的主張是一致的。</p></div>
+      <div class="card"><h3>對品牌的意義</h3><p>一邊讓人相信「你做得出來」，一邊讓人看見「市場真的有人買這類產品」。兩邊如果互相導流，說服力會更完整。</p></div>
+    </div>
+  </div>
+</main></section>
+
+<section class="slide" data-title="Consumer Categories"><main class="slide-content">
+  <div class="kicker">Store architecture</div>
+  <h2>消費端商城目前最清楚的，是<span class="accent">品類分區</span>與<span class="warm">使用情境</span></h2>
+  <div class="timeline">
+    <div class="phase"><small>01</small><h3>除甲醛 / 空氣淨化</h3><p>強調雪松提取物、分解甲醛與 TVOC，切入居家呼吸環境。</p></div>
+    <div class="phase"><small>02</small><h3>居家防蟲</h3><p>主打無殺蟲劑、無 DEET、非殺滅取向的安全防護。</p></div>
+    <div class="phase"><small>03</small><h3>家居清潔</h3><p>天然植萃潔淨、溫和不刺激、不殘留，是家庭清潔核心盤。</p></div>
+    <div class="phase"><small>04</small><h3>PetAngel / 衣物洗護</h3><p>把毛孩與衣物照護納入品牌生活場景，擴大客單與回購機會。</p></div>
+  </div>
+  <p class="note">這種分類方式很適合做成<strong>「空間 × 對象 × 問題」</strong>的選購導航，例如：空間淨化 / 居家防護 / 清潔抑菌 / 毛孩照護 / 衣物護理。</p>
+</main></section>
+
+<section class="slide" data-title="Brand Philosophy"><main class="slide-content">
+  <div class="kicker">Brand philosophy</div>
+  <div class="two flip">
+    <div class="stack">
+      <h2>品牌頁把富盛豐講成：<span class="accent">真正天然</span>、<span class="blue">安全無毒</span>、<span class="warm">環保永續</span></h2>
+      <p class="quote">「家的美好，源於自然的純粹。」</p>
+      <div class="card"><p>品牌頁提到自 2008 年創立、在桃園蘆竹建立專業工廠，並把清潔、除醛、防蟲、寵物洗護都收斂到同一個生活哲學：<strong>安全、健康、環保</strong>。</p></div>
+      <div class="pillrow"><span class="pill">真正天然</span><span class="pill">無毒、無害、無殘留</span><span class="pill">減塑 / 減碳</span><span class="pill">CO₂ 低碳排優良廠商</span><span class="pill">碳足跡標籤</span></div>
+    </div>
+    <div class="visual contain"><span class="caption">品牌理念頁</span><img src="assets/fsfstore-about.png" alt="FSF Store about page screenshot"></div>
+  </div>
+</main></section>
+
+<section class="slide" data-title="What The Sites Say Together"><main class="slide-content">
+  <div class="kicker">Synthesis</div>
+  <h2>如果把兩個網站合起來看，富盛豐對外其實已經在說一個很完整的故事</h2>
+  <div class="checklist">
+    <div class="check"><b>1. 製造能力</b><p>有代工、有認證、有台灣製造、有亞洲市場服務能力。</p></div>
+    <div class="check"><b>2. 產品賽道</b><p>清潔、防蟲、除臭、除甲醛 / TVOC、寵物洗護、衣物洗護，已經不是單品，而是生活系統。</p></div>
+    <div class="check"><b>3. 品牌文化</b><p>天然植萃、有機、環保低碳、健康無毒，價值主軸很一致。</p></div>
+    <div class="check"><b>4. 市場驗證</b><p>商城存在代表不是只會代工，也有自己的前台品牌與零售場景。</p></div>
+  </div>
+  <p class="note">這很接近「<strong>B 端代工 + C 端品牌零售</strong>」的雙引擎模型，只差再把兩邊的入口與故事接得更順。</p>
+</main></section>
+
+<section class="slide" data-title="Opportunities"><main class="slide-content">
+  <div class="kicker">Content opportunities</div>
+  <h2>從網站內容看，現在最值得補強的 5 個地方</h2>
+  <div class="grid">
+    <div class="card"><h3>OEM 首屏更快講清楚</h3><p>把「做哪些品類、憑什麼可信、怎麼開始合作」縮成首屏 3 個訊號，減少訪客理解成本。</p></div>
+    <div class="card"><h3>雙站互相導流</h3><p>代工站可以導去品牌商城做市場案例；商城可回導「我們也提供代工」，把 B / C 端串起來。</p></div>
+    <div class="card"><h3>品類地圖化</h3><p>把清潔、防蟲、除醛、毛孩、衣物做成一張總覽，讓訪客更快理解富盛豐到底覆蓋多大生活面積。</p></div>
+    <div class="card"><h3>信任證據前置</h3><p>認證、檢測、低碳、碳足跡、工廠資訊，建議更模組化排列，讓詢價前就能快速掃描。</p></div>
+    <div class="card"><h3>轉換 CTA 明確分流</h3><p>OEM 客戶要的是詢價 / 打樣 / 洽談；消費者要的是選品 / 比較 / 立即購買。CTA 需要更明確區分。</p></div>
+  </div>
+</main></section>
+
+<section class="slide" data-title="Consultant Takeaway"><main class="slide-content">
+  <div class="kicker">Consultant takeaway</div>
+  <h2>一句話總結：富盛豐不是單一產品網站，而是<span class="accent">天然植萃生活系統</span>的雙站佈局</h2>
+  <div class="stack">
+    <div class="card"><p><strong>FSF BIO 代工官網</strong> 讓人相信富盛豐有工廠、認證與品類研製能力。</p></div>
+    <div class="card"><p><strong>富盛豐生活植萃館</strong> 讓人看到這些能力如何落成真實商品、真實使用場景與真實品牌語言。</p></div>
+    <div class="card"><p>下一步如果把 <strong>雙站橋接</strong>、<strong>品類地圖</strong>、<strong>信任證據</strong> 與 <strong>轉換 CTA</strong> 再做強，富盛豐的整體網站說服力會再上一階。</p></div>
+  </div>
+  <p class="source">製作：OpenClaw｜分析來源：FSF BIO 代工官網、富盛豐植粹生活館、品牌理念頁、網站 sitemap 與 schema 結構化資料｜擷取時間：2026-05-15</p>
+</main></section>
+
+<div class="control-dock" id="controlDock">
+  <div class="control-title" id="controlTitle">富盛豐網站內容分析</div>
+  <div class="control-buttons">
+    <button class="control-btn" id="prevBtn">←<span class="label">上一頁</span></button>
+    <button class="control-btn" id="nextBtn">→<span class="label">下一頁</span></button>
+    <button class="control-btn" id="overviewBtn">O<span class="label">總覽</span></button>
+    <button class="control-btn" id="focusBtn">T<span class="label">重點</span></button>
+    <button class="control-btn" id="fullscreenBtn">F<span class="label">沉浸</span></button>
+  </div>
+</div>
+
+<div class="overview-panel" id="overviewPanel"><div class="overview-grid" id="overviewGrid"></div></div>
+
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+const nav=document.getElementById('nav');
+const progress=document.getElementById('progress');
+const controlTitle=document.getElementById('controlTitle');
+const overviewPanel=document.getElementById('overviewPanel');
+const overviewGrid=document.getElementById('overviewGrid');
+let current=0;
+let textFocus=false;
+slides.forEach((slide,i)=>{
+  const dot=document.createElement('button');
+  dot.addEventListener('click',()=>go(i));
+  nav.appendChild(dot);
+  const card=document.createElement('div');
+  card.className='overview-card';
+  card.innerHTML=`<b>${String(i+1).padStart(2,'0')}</b><span>${slide.dataset.title||'Slide'}</span>`;
+  card.addEventListener('click',()=>{go(i);toggleOverview(false)});
+  overviewGrid.appendChild(card);
+});
+function update(){
+  slides.forEach((s,i)=>s.classList.toggle('visible',i===current));
+  progress.style.width=((current+1)/slides.length*100)+'%';
+  [...nav.children].forEach((b,i)=>b.classList.toggle('active',i===current));
+  controlTitle.textContent=slides[current].dataset.title||'投影片';
+  slides[current].scrollIntoView({behavior:'smooth',block:'start'});
+}
+function go(i){ current=Math.max(0,Math.min(slides.length-1,i)); update(); }
+function next(){ go(current+1); }
+function prev(){ go(current-1); }
+function toggleOverview(force){ const show=force ?? !overviewPanel.classList.contains('show'); overviewPanel.classList.toggle('show',show); }
+function toggleFocus(){ textFocus=!textFocus; document.body.classList.toggle('text-focus',textFocus); }
+function toggleFullscreen(){ if(!document.fullscreenElement){ document.documentElement.requestFullscreen?.(); } else { document.exitFullscreen?.(); } }
+document.getElementById('nextBtn').addEventListener('click',next);
+document.getElementById('prevBtn').addEventListener('click',prev);
+document.getElementById('overviewBtn').addEventListener('click',()=>toggleOverview());
+document.getElementById('focusBtn').addEventListener('click',toggleFocus);
+document.getElementById('fullscreenBtn').addEventListener('click',toggleFullscreen);
+overviewPanel.addEventListener('click',(e)=>{ if(e.target===overviewPanel) toggleOverview(false); });
+document.addEventListener('keydown',(e)=>{
+  if(['ArrowRight','PageDown',' '].includes(e.key)){ e.preventDefault(); next(); }
+  if(['ArrowLeft','PageUp'].includes(e.key)){ e.preventDefault(); prev(); }
+  if(e.key==='Home') go(0);
+  if(e.key==='End') go(slides.length-1);
+  if(e.key==='o' || e.key==='O') toggleOverview();
+  if(e.key==='t' || e.key==='T') toggleFocus();
+  if(e.key==='f' || e.key==='F') toggleFullscreen();
+  if(e.key==='Escape') toggleOverview(false);
+});
+window.addEventListener('scroll',()=>{
+  const idx=Math.round(window.scrollY / window.innerHeight);
+  if(idx!==current && idx>=0 && idx<slides.length){ current=idx; updateNavOnly(); }
+},{passive:true});
+function updateNavOnly(){
+  progress.style.width=((current+1)/slides.length*100)+'%';
+  [...nav.children].forEach((b,i)=>b.classList.toggle('active',i===current));
+  controlTitle.textContent=slides[current].dataset.title||'投影片';
+}
+update();
+</script>
+</body>
+</html>
