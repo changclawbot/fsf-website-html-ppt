@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PetAngel 毛天使官網全站分析｜HTML 圖文簡報</title>
+<meta name="description" content="針對 petangel.com.tw 的首頁敘事、品牌定位、品類架構、信任頁、內容 SEO 與轉換路徑進行完整分析。" />
+<style>
+:root{--bg:#081116;--bg2:#0f2027;--ink:#f6f3ea;--muted:#b7c7c0;--line:rgba(255,255,255,.15);--panel:rgba(255,255,255,.08);--panel2:rgba(11,25,31,.82);--mint:#68f0d1;--green:#9deb67;--amber:#ffbf70;--red:#ff7e76;--blue:#8dc4ff;--shadow:0 24px 70px rgba(0,0,0,.32);--title:clamp(2rem,5vw,4.8rem);--h2:clamp(1.45rem,3vw,3rem);--body:clamp(.86rem,1.24vw,1.05rem);--pad:clamp(1rem,3vw,3rem)}
+*{box-sizing:border-box}html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC",sans-serif}html{scroll-snap-type:y mandatory;scroll-behavior:smooth}body{counter-reset:slide;overflow-x:hidden}a{color:var(--mint)}
+.slide{position:relative;width:100vw;height:100vh;height:100dvh;scroll-snap-align:start;display:flex;flex-direction:column;overflow:hidden;background:radial-gradient(circle at 16% 15%,rgba(104,240,209,.14),transparent 24%),radial-gradient(circle at 84% 82%,rgba(157,235,103,.1),transparent 28%),linear-gradient(135deg,var(--bg),var(--bg2) 50%,var(--bg))}.slide::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.78),transparent 82%)}.slide::after{counter-increment:slide;content:counter(slide,decimal-leading-zero);position:absolute;right:1.2rem;bottom:1rem;color:rgba(255,255,255,.22);font:600 .86rem ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em}
+.slide-content{position:relative;z-index:1;max-width:1240px;width:100%;margin:auto;padding:var(--pad);display:flex;flex-direction:column;gap:clamp(.8rem,1.8vw,1.4rem)}
+.kicker{color:var(--green);font:700 .82rem ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.16em;text-transform:uppercase}.tagrow,.pillrow{display:flex;flex-wrap:wrap;gap:.55rem}.tag,.pill{display:inline-flex;align-items:center;padding:.42rem .72rem;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.08);color:var(--ink);font-size:.82rem}
+h1,h2,h3,p{margin:0}h1{font-size:var(--title);line-height:.92;letter-spacing:-.06em}h2{font-size:var(--h2);line-height:1.03;letter-spacing:-.04em}h3{font-size:clamp(1rem,1.5vw,1.25rem)}p,li{font-size:var(--body);line-height:1.58;color:var(--muted)}strong{color:var(--ink)}.accent{color:var(--mint)}.warm{color:var(--amber)}.blue{color:var(--blue)}
+.grid{display:grid;gap:1rem}.grid.c2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid.c3{grid-template-columns:repeat(3,minmax(0,1fr))}.grid.c4{grid-template-columns:repeat(4,minmax(0,1fr))}.two{display:grid;grid-template-columns:1.02fr .98fr;gap:1.2rem;align-items:center}.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:.8rem;align-items:center}.arrow{font-size:2rem;color:var(--mint);text-align:center}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:1rem 1.08rem;backdrop-filter:blur(16px);box-shadow:var(--shadow)}.node{min-height:170px;background:var(--panel2);border:1px solid var(--line);border-radius:24px;padding:1rem}.metric b{display:block;font-size:clamp(1.85rem,4vw,3.3rem);line-height:1;color:var(--ink);letter-spacing:-.05em}.metric span{display:block;margin-top:.35rem}
+.visual{position:relative;background:linear-gradient(160deg,rgba(255,255,255,.14),rgba(255,255,255,.05));border:1px solid var(--line);border-radius:28px;padding:.8rem;overflow:hidden;box-shadow:var(--shadow)}.visual img{width:100%;height:min(56vh,520px);object-fit:cover;border-radius:18px;display:block;background:#fff}.visual.contain img{object-fit:contain;background:#f6f5ef}.caption{position:absolute;left:1.2rem;top:1rem;background:rgba(8,17,22,.78);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:.42rem .72rem;font-size:.78rem;color:var(--ink)}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}.phase{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:1rem;position:relative}.phase::before{content:"";display:block;width:16px;height:16px;border-radius:50%;background:var(--mint);box-shadow:0 0 18px var(--mint);margin-bottom:.7rem}.phase small{font:700 .75rem ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--green)}
+.bar-chart{display:flex;flex-direction:column;gap:.7rem}.bar{display:grid;grid-template-columns:190px 1fr auto;align-items:center;gap:.7rem}.bar-track{height:14px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}.bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--mint),var(--green))}.bar-fill.alt{background:linear-gradient(90deg,var(--amber),#ffd89b)}.bar-fill.blue{background:linear-gradient(90deg,var(--blue),#cde1ff)}.bar-fill.red{background:linear-gradient(90deg,var(--red),#ffb2ac)}
+.quote{font-size:clamp(1.35rem,2.7vw,2.45rem);line-height:1.18;color:var(--ink);letter-spacing:-.03em;max-width:980px}.note{padding-left:1rem;border-left:4px solid var(--mint)}
+.control-dock{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 18px);transform:translateX(-50%);z-index:9999;display:flex;align-items:center;gap:.6rem;width:min(94vw,840px);padding:.54rem .62rem;border-radius:24px;background:rgba(255,255,255,.97);box-shadow:0 18px 55px rgba(0,0,0,.35);backdrop-filter:blur(18px);border:2px solid rgba(15,39,64,.12)}.control-title{flex:1 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:900;color:#12324a;font-size:clamp(.84rem,2vw,1.06rem)}.control-buttons{display:flex;gap:.42rem}.control-btn{min-width:72px;height:50px;padding:.24rem .56rem;border:0;border-radius:15px;background:#0f2740;color:#fff;font-weight:900;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.02;box-shadow:0 8px 18px rgba(15,39,64,.28)}.control-btn:hover{background:#1b4b74}.glyph{font-size:1.02rem}.label{margin-top:.16rem;font-size:.64rem}.control-btn.is-active,.mobile-btn.is-active{background:#1b6b57!important;box-shadow:0 0 0 2px rgba(104,240,209,.35),0 8px 18px rgba(15,39,64,.28)}
+.mobile-dock{display:none}.mobile-buttons{display:grid;grid-template-columns:repeat(5,1fr);gap:.15rem;width:100%}.mobile-btn{height:42px;border:0;border-radius:10px;background:#0f2740;color:#fff;font-weight:900;display:flex;flex-direction:column;align-items:center;justify-content:center}.mobile-btn .glyph{font-size:.76rem}.mobile-btn .label{font-size:.48rem;margin-top:.1rem}
+.nav{position:fixed;right:14px;top:50%;translate:0 -50%;display:flex;flex-direction:column;gap:8px;z-index:12}.nav button{width:9px;height:9px;border:0;border-radius:999px;background:rgba(255,255,255,.24);cursor:pointer}.nav button.active{height:24px;background:var(--mint)}.progress{position:fixed;left:0;top:0;height:4px;width:0;background:linear-gradient(90deg,var(--mint),var(--green),var(--amber));z-index:13}.hint{position:fixed;left:16px;bottom:14px;color:rgba(255,255,255,.46);font-size:.78rem;z-index:12}.overview-panel{position:fixed;inset:0;display:none;z-index:9998;background:rgba(4,10,14,.76);backdrop-filter:blur(14px);padding:clamp(1rem,4vw,3rem);overflow:auto}.overview-panel.show{display:block}.overview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1rem;max-width:1100px;margin:0 auto}.overview-card{min-height:120px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:1rem;color:#fff;cursor:pointer;box-shadow:0 20px 60px rgba(0,0,0,.25)}.overview-card b{display:block;color:var(--green);font:700 .76rem ui-monospace,SFMono-Regular,Menlo,monospace;margin-bottom:.45rem}.overview-card span{display:block;font-weight:800;line-height:1.28;margin-bottom:.45rem}.overview-card p{margin:0;color:rgba(255,255,255,.78);font-size:.88rem;line-height:1.5}.focus-toast{position:fixed;left:50%;top:18px;transform:translateX(-50%);z-index:2147483647;background:rgba(9,25,31,.92);color:#fff;padding:.62rem .9rem;border:1px solid rgba(104,240,209,.34);border-radius:999px;font-size:.84rem;box-shadow:0 18px 40px rgba(0,0,0,.28);opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease}.focus-toast.show{opacity:1;transform:translateX(-50%) translateY(0)} body.fullscreen-mode .control-dock,body.fullscreen-mode .mobile-dock,body.fullscreen-mode .nav,body.fullscreen-mode .hint{opacity:0;pointer-events:none} body.fullscreen-mode .progress{height:6px}
+.text-focus img{filter:saturate(.35) brightness(.42);opacity:.22}.text-focus .visual{border-color:rgba(104,240,209,.45)!important}.text-focus .card,.text-focus .visual,.text-focus .node,.text-focus .phase,.text-focus .note{border-color:rgba(104,240,209,.55)!important;box-shadow:0 0 0 2px rgba(104,240,209,.14),var(--shadow)}.text-focus h2,.text-focus h3,.text-focus strong,.text-focus .quote{color:#fff}.text-focus p,.text-focus li{color:#e4f6ef}
+@media(max-width:960px){.grid.c4,.grid.c3,.timeline{grid-template-columns:repeat(2,1fr)}.two,.flow{grid-template-columns:1fr}.arrow{display:none}}
+@media(max-width:640px){.grid.c4,.grid.c3,.grid.c2,.timeline{grid-template-columns:1fr}.hint,.nav,.control-dock{display:none}.mobile-dock{display:block;position:fixed;left:8px;right:8px;bottom:calc(env(safe-area-inset-bottom,0px) + 12px);z-index:9999;padding:.22rem;border-radius:16px;background:rgba(255,255,255,.97);box-shadow:0 18px 55px rgba(0,0,0,.35);backdrop-filter:blur(18px);border:2px solid rgba(15,39,64,.12)}.visual img{height:34vh}}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="nav" id="nav"></div>
+<div class="hint">← → / Space 換頁・可直接滑動</div>
+
+<section class="slide" data-title="Cover"><main class="slide-content">
+  <div class="kicker">PETANGEL OFFICIAL SITE REVIEW</div>
+  <h1>PetAngel 毛天使官網<br><span class="accent">全站分析</span>與<span class="warm">HTML 圖文簡報</span></h1>
+  <p>從 <strong>首頁敘事</strong>、<strong>品類架構</strong>、<strong>品牌承諾</strong>、<strong>安全認證</strong>、<strong>內容 SEO</strong> 到 <strong>轉換動線</strong>，完整拆解 <strong>www.petangel.com.tw</strong> 目前對外的品牌表現。</p>
+  <div class="tagrow"><span class="tag">網站：petangel.com.tw</span><span class="tag">分析日期：2026-05-16</span><span class="tag">定位：天然有機寵物護理品牌官網</span></div>
+  <div class="pillrow"><span class="pill">防蚤驅蟲</span><span class="pill">洗護洗毛</span><span class="pill">除臭抑菌</span><span class="pill">精緻保養</span><span class="pill">免水洗清潔</span></div>
+</main></section>
+
+<section class="slide" data-title="Executive Summary"><main class="slide-content">
+  <div class="kicker">Executive summary</div>
+  <h2>先講結論：毛天使官網已經很明確站在<span class="accent">天然低敏寵物護理</span>，而且更像一個<span class="warm">毛孩家庭照護品牌入口</span></h2>
+  <div class="grid c4">
+    <div class="card metric"><b>49</b><span>產品頁節點，SKU 已達可支撐完整照護線的密度</span></div>
+    <div class="card metric"><b>17</b><span>collections 節點，代表商品分類已具備基本貨架層次</span></div>
+    <div class="card metric"><b>13</b><span>品牌 / 制度 / 說明頁，信任內容不是空白</span></div>
+    <div class="card metric"><b>9</b><span>部落格節點，內容 SEO 已開始累積可搜尋資產</span></div>
+  </div>
+  <div class="grid c3">
+    <div class="card"><h3>最強的地方</h3><p>品牌語氣一致，首頁直接把「低敏植萃、成分透明、第三方檢驗、MIT 工廠」一口氣講出來。</p></div>
+    <div class="card"><h3>最值得放大的地方</h3><p><strong>防蚤驅蟲</strong> 明顯是最重的主力賽道，已經有單品、補充瓶、套組、季節型組合。</p></div>
+    <div class="card"><h3>最該補的地方</h3><p>讓分類頁與商品頁更完整承接「情境導購」，把內容閱讀者更自然帶去購買。</p></div>
+  </div>
+</main></section>
+
+<section class="slide" data-title="Homepage"><main class="slide-content">
+  <div class="kicker">Homepage first read</div>
+  <div class="two">
+    <div class="visual"><span class="caption">首頁首屏</span><img src="assets/home.png" alt="PetAngel 首頁截圖"></div>
+    <div class="grid">
+      <div class="card"><h3>首頁敘事很清楚</h3><p>一開始就不是硬推單品，而是先用「依需求快速選購」把人帶入情境，再講品牌怎麼理解毛孩與家庭空間。</p></div>
+      <div class="card"><h3>品牌口吻偏溫柔安心</h3><p>不是醫療感或工廠感，而是以「懂毛孩，也懂你對家的挑剔」做切入，這很適合毛孩家庭客群。</p></div>
+      <div class="card"><h3>轉換語言已經成熟</h3><p>首頁直接搭配「外出散步首選、好康超值組合、鐵粉囤貨必買」等選購引導，商業導向很明確。</p></div>
+    </div>
+  </div>
+</main></section>
+
+<section class="slide" data-title="Site Architecture"><main class="slide-content">
+  <div class="kicker">Architecture</div>
+  <h2>這個站的核心不是「寵物用品很多」，而是已經長出<span class="accent">品類架構 + 信任架構 + 內容架構</span></h2>
+  <div class="flow">
+    <div class="node"><h3>品類架構</h3><p>防蚤驅蟲、天然洗護、除臭抑菌、精緻保養、免水洗清潔、套裝組合、狗狗 / 貓咪分流。</p></div>
+    <div class="arrow">→</div>
+    <div class="node"><h3>信任架構</h3><p>關於毛天使、安全認證、有機嚴選、社群推薦、客服資訊，幫品牌補齊「為什麼可信」。</p></div>
+    <div class="arrow">→</div>
+    <div class="node"><h3>內容架構</h3><p>透過毛漲知識與寵物知識文章，把乾洗、潔耳、洗毛、除臭等需求轉成搜尋與教育入口。</p></div>
+  </div>
+</main></section>
+
+<section class="slide" data-title="Product Mix"><main class="slide-content">
+  <div class="kicker">Product mix from sitemap</div>
+  <h2>從 sitemap 看，PetAngel 現在最重押的是<span class="warm">防蚤驅蟲 / 外出防護</span></h2>
+  <div class="bar-chart card">
+    <div class="bar"><strong>防蚤驅蟲 / 外出防護</strong><div class="bar-track"><div class="bar-fill" style="width:43%"></div></div><span>21</span></div>
+    <div class="bar"><strong>除臭抑菌 / 環境清潔</strong><div class="bar-track"><div class="bar-fill blue" style="width:20%"></div></div><span>10</span></div>
+    <div class="bar"><strong>洗護洗毛</strong><div class="bar-track"><div class="bar-fill alt" style="width:18%"></div></div><span>9</span></div>
+    <div class="bar"><strong>套組 / 其他</strong><div class="bar-track"><div class="bar-fill red" style="width:10%"></div></div><span>5</span></div>
+    <div class="bar"><strong>精緻保養 / 局部護理</strong><div class="bar-track"><div class="bar-fill" style="width:8%"></div></div><span>4</span></div>
+  </div>
+  <p class="note">這很重要，因為它代表毛天使不只是「有做驅蟲」，而是<strong>以驅蟲防護作為最強的營收與記憶點主軸</strong>，其他類別則往洗護、除臭、日常照護延伸。</p>
+</main></section>
+
+<section class="slide" data-title="Insectrepellent Stronghold"><main class="slide-content">
+  <div class="kicker">Hero category</div>
+  <div class="two">
+    <div class="grid">
+      <div class="card"><h3>防護線做得最完整</h3><p>首頁主推就是升級版防護噴霧，並往 4 入組、6 入組、補充瓶、夏日套組、防蚊凝膠一路展開。</p></div>
+      <div class="card"><h3>非常適合情境型行銷</h3><p>像散步、旅行、夏天蚊蟲季、多毛孩家庭、囤貨補充，都是可直接拆成廣告和內容的題材。</p></div>
+      <div class="card"><h3>建議</h3><p>這條線值得單獨拉成「明星系列專區」，把使用時機、搭配組合、實測回饋一起做厚。</p></div>
+    </div>
+    <div class="visual"><span class="caption">防蚤驅蟲系列</span><img src="assets/insect.png" alt="PetAngel 防蚤驅蟲頁"></div>
+  </div>
+</main></section>
+
+<section class="slide" data-title="Brand Promise"><main class="slide-content">
+  <div class="kicker">Brand promise</div>
+  <div class="two">
+    <div class="visual contain"><span class="caption">品牌故事頁</span><img src="assets/about.png" alt="品牌故事頁"></div>
+    <div class="grid">
+      <div class="card"><h3>品牌價值講得很完整</h3><p>品牌故事明講：<strong>純粹天然、只給毛孩最好的</strong>，而且補上長期使用、安全標準與環境友善，不是只有情緒訴求。</p></div>
+      <div class="card"><h3>工廠與研發能力有背書</h3><p>ISO 22716、ISO 9001、ECOCERT、USDA、有害物排除、產品責任險，這些都在加強信任厚度。</p></div>
+      <div class="card"><h3>與富盛豐製造力呼應</h3><p>毛天使雖然是 C 端品牌站，但其實背後一直能隱約看出富盛豐的研發與製造底盤，這是很珍貴的差異化優勢。</p></div>
+    </div>
+  </div>
+</main></section>
+
+<section class="slide" data-title="Trust Assets"><main class="slide-content">
+  <div class="kicker">Trust assets</div>
+  <h2>這個站最特別的一點，是它不只賣商品，還努力把<span class="accent">安心理由</span>做成頁面</h2>
+  <div class="grid c4">
+    <div class="card"><h3>EWG 安全認證</h3><p>把成分風險與國際資料庫概念講給消費者聽，強化「成分把關」認知。</p></div>
+    <div class="card"><h3>有機嚴選</h3><p>建立成分說明書邏輯，把原料來源與用途公開化。</p></div>
+    <div class="card"><h3>社群推薦</h3><p>補上 KOL / 飼主使用情境，降低第一次購買的陌生感。</p></div>
+    <div class="card"><h3>客服資訊完整</h3><p>電話、信箱、地址與公司資訊完整公開，增加真實品牌感。</p></div>
+  </div>
+  <div class="two">
+    <div class="card"><h3>我的判斷</h3><p>毛天使現在其實很接近「<strong>天然寵物護理知識品牌 + 商品品牌</strong>」的方向，這比只有促銷型商城更有長期價值。</p></div>
+    <div class="visual"><span class="caption">EWG 安全認證頁</span><img src="assets/ewg.png" alt="EWG 頁面"></div>
+  </div>
+</main></section>
+
+<section class="slide" data-title="Content SEO"><main class="slide-content">
+  <div class="kicker">Content & SEO</div>
+  <div class="two">
+    <div class="grid">
+      <div class="card"><h3>內容方向是對的</h3><p>部落格主題集中在乾洗、潔耳、洗毛、除臭、口臭等高需求問題詞，本身就具搜尋潛力。</p></div>
+      <div class="card"><h3>很適合做教育型銷售</h3><p>毛孩用品不像快消零食，很多飼主會先查知識再決定要不要買，所以文章能直接承接轉換。</p></div>
+      <div class="card"><h3>還能再加的地方</h3><p>每篇文章可更明確加入相關商品區塊、系列導覽與 FAQ，把內容流量收回商品頁。</p></div>
+    </div>
+    <div class="visual"><span class="caption">毛漲知識 / 部落格</span><img src="assets/blogs.png" alt="PetAngel blogs"></div>
+  </div>
+</main></section>
+
+<section class="slide" data-title="What Works"><main class="slide-content">
+  <div class="kicker">What already works</div>
+  <h2>我認為毛天使官網目前已經做對的 5 件事</h2>
+  <div class="timeline">
+    <div class="phase"><small>01</small><h3>品牌語氣一致</h3><p>天然、低敏、透明、友善家庭空間，整站語氣沒有跑掉。</p></div>
+    <div class="phase"><small>02</small><h3>明星賽道清楚</h3><p>防蚤驅蟲系列已形成非常明確的主力記憶點。</p></div>
+    <div class="phase"><small>03</small><h3>安心證據夠多</h3><p>品牌故事、EWG、有機嚴選、社群推薦與客服頁都在補信任。</p></div>
+    <div class="phase"><small>04</small><h3>內容有 SEO 潛力</h3><p>知識文章題目有需求、有搜尋量，也能直接連到商品需求。</p></div>
+  </div>
+  <div class="card"><h3>05｜品牌可持續擴張</h3><p>從防護、洗護到環境整理與精緻保養，毛天使已經具備繼續往「完整毛孩家庭照護品牌」擴大的空間。</p></div>
+</main></section>
+
+<section class="slide" data-title="Main Gaps"><main class="slide-content">
+  <div class="kicker">Main gaps</div>
+  <h2>如果要再往上拉，我會先補這 4 個點</h2>
+  <div class="grid c2">
+    <div class="card"><h3>1. 情境導購還能更深</h3><p>首頁有「依需求快速選購」，但分類頁還可以更完整接住「戶外防護 / 居家除臭 / 日常洗護 / 局部護理」。</p></div>
+    <div class="card"><h3>2. 商品頁與知識文串接可更緊</h3><p>目前內容與商品都有，但還能做得更像一條完整漏斗。</p></div>
+    <div class="card"><h3>3. 明星系列頁值得做厚</h3><p>防蚤驅蟲線應該有自己的品牌型 landing page，而不只是集合頁。</p></div>
+    <div class="card"><h3>4. 信任證據前置化</h3><p>把 EWG、透明成分、MIT、第三方檢驗更早放進首頁與商品購買區附近。</p></div>
+  </div>
+</main></section>
+
+<section class="slide" data-title="Action Plan"><main class="slide-content">
+  <div class="kicker">4-week action plan</div>
+  <h2>如果現在就要升級，我會這樣排</h2>
+  <div class="timeline">
+    <div class="phase"><small>W1</small><h3>首頁強化</h3><p>把安心標準、主力系列與情境導購再前置，強化第一屏說服力。</p></div>
+    <div class="phase"><small>W2</small><h3>明星系列頁</h3><p>為防蚤驅蟲系列補一頁完整 landing page，整合賣點、組合、FAQ、回饋。</p></div>
+    <div class="phase"><small>W3</small><h3>內容漏斗化</h3><p>每篇知識文補推薦商品與延伸閱讀，讓教育流量回到轉換頁。</p></div>
+    <div class="phase"><small>W4</small><h3>狗 / 貓 / 家庭場景分流</h3><p>把狗狗、貓咪、多毛孩家庭、新手飼主做成更清楚的入口頁。</p></div>
+  </div>
+</main></section>
+
+<section class="slide" data-title="Final Takeaway"><main class="slide-content">
+  <div class="kicker">Final takeaway</div>
+  <h2>一句話總結：PetAngel 現在不是普通寵物商城，而是很接近<span class="accent">天然寵物照護品牌官網</span>的完整雛形</h2>
+  <div class="grid c3">
+    <div class="card"><h3>品牌面</h3><p>天然低敏、成分透明、友善環境與安全把關，價值主軸清楚。</p></div>
+    <div class="card"><h3>商業面</h3><p>防蚤驅蟲線已是清楚主力，其它品類則形成延伸回購結構。</p></div>
+    <div class="card"><h3>成長面</h3><p>只要把情境頁、明星系列頁與內容導購再做厚，整站說服力還會明顯上升。</p></div>
+  </div>
+  <div class="card">
+    <p><strong>Web 版：</strong><a href="https://changclawbot.github.io/fsf-website-html-ppt/petangel-official-site-analysis/" target="_blank">https://changclawbot.github.io/fsf-website-html-ppt/petangel-official-site-analysis/</a></p>
+    <p><strong>HTML PPT 主列表：</strong><a href="https://changclawbot.github.io/fsf-website-html-ppt/ppt-catalog/" target="_blank">https://changclawbot.github.io/fsf-website-html-ppt/ppt-catalog/</a></p>
+    <p><strong>ZIP 下載：</strong><a href="https://drive.google.com/file/d/1DUGop8kvA3xXXF0jvZ1KCysk7RZLQehy/view?usp=drivesdk" target="_blank">https://drive.google.com/file/d/1DUGop8kvA3xXXF0jvZ1KCysk7RZLQehy/view?usp=drivesdk</a></p>
+  </div>
+  <p>資料來源：petangel.com.tw 首頁、關於毛天使、安全認證、有機嚴選、社群推薦、blogs、contact 與 zh-TW sitemap.xml。</p>
+</main></section>
+
+<div class="control-dock">
+  <div class="control-title" id="controlTitle">PetAngel 毛天使官網全站分析</div>
+  <div class="control-buttons">
+    <button class="control-btn" data-act="prev"><span class="glyph">←</span><span class="label">上一頁</span></button>
+    <button class="control-btn" data-act="next"><span class="glyph">→</span><span class="label">下一頁</span></button>
+    <button class="control-btn" data-act="overview"><span class="glyph">O</span><span class="label">總覽</span></button>
+    <button class="control-btn" data-act="focus"><span class="glyph">T</span><span class="label">重點</span></button>
+    <button class="control-btn" data-act="fullscreen"><span class="glyph">F</span><span class="label">全螢幕</span></button>
+  </div>
+</div>
+<div class="mobile-dock"><div class="mobile-buttons">
+  <button class="mobile-btn" data-act="prev"><span class="glyph">←</span><span class="label">上一頁</span></button>
+  <button class="mobile-btn" data-act="next"><span class="glyph">→</span><span class="label">下一頁</span></button>
+  <button class="mobile-btn" data-act="overview"><span class="glyph">O</span><span class="label">總覽</span></button>
+  <button class="mobile-btn" data-act="focus"><span class="glyph">T</span><span class="label">重點</span></button>
+  <button class="mobile-btn" data-act="fullscreen"><span class="glyph">F</span><span class="label">全螢幕</span></button>
+</div></div>
+<div class="overview-panel" id="overviewPanel"><div class="overview-grid" id="overviewGrid"></div></div>
+<div class="focus-toast" id="focusToast">重點模式已開啟：已壓低圖片存在感、凸顯文字與分析重點</div>
+
+<script>
+const slideMeta=[
+  {title:'封面｜PetAngel 官網全站分析',desc:'快速看懂這份簡報的範圍、品牌定位與主要分析角度。'},
+  {title:'執行摘要｜先看整站最重要結論',desc:'快速掌握毛天使官網目前最強、最值得放大的地方。'},
+  {title:'首頁首屏｜品牌如何第一眼說服人',desc:'拆首頁主敘事、情境切入與商業導購語言。'},
+  {title:'網站架構｜品類、信任、內容三層結構',desc:'整理毛天使目前對外的完整網站骨架。'},
+  {title:'品類分布｜49 個產品頁主要押在哪裡',desc:'用 sitemap 反推毛天使當前最重的產品賽道。'},
+  {title:'主力賽道｜防蚤驅蟲為什麼是核心主軸',desc:'說明這條產品線如何形成品牌記憶與營收主力。'},
+  {title:'品牌承諾｜天然、安全、透明的品牌論述',desc:'濃縮品牌故事頁與背後的製造 / 研發可信度。'},
+  {title:'信任資產｜EWG、有機、社群與客服資訊',desc:'整理哪些頁面正在建立消費者安心感。'},
+  {title:'內容 SEO｜毛漲知識如何承接需求流量',desc:'看部落格如何把寵物知識變成自然搜尋入口。'},
+  {title:'已做對的事｜目前站上最有價值的基礎',desc:'盤點毛天使官網已經建立完成的 5 個優勢。'},
+  {title:'主要缺口｜接下來最該補的 4 個點',desc:'列出整站往上升級最值得優先投入的位置。'},
+  {title:'4 週行動｜如果現在就開始升級',desc:'提供可直接執行的四週強化順序。'},
+  {title:'最終結論｜把毛天使推成天然照護品牌官網',desc:'總結毛天使從商城走向品牌平台的關鍵價值。'}
+];
+const slides=[...document.querySelectorAll('.slide')];
+const nav=document.getElementById('nav');
+const progress=document.getElementById('progress');
+const controlTitle=document.getElementById('controlTitle');
+const overviewPanel=document.getElementById('overviewPanel');
+const overviewGrid=document.getElementById('overviewGrid');
+const focusToast=document.getElementById('focusToast');
+let current=0; let textFocus=false;
+slides.forEach((slide,i)=>{const dot=document.createElement('button');dot.addEventListener('click',()=>go(i));nav.appendChild(dot);const card=document.createElement('div');card.className='overview-card';const meta=slideMeta[i]||{title:slide.dataset.title||'投影片',desc:'點擊後可直接跳到這一頁'};card.innerHTML=`<b>${String(i+1).padStart(2,'0')}</b><span>${meta.title}</span><p>${meta.desc}</p>`;card.addEventListener('click',()=>{go(i);toggleOverview(false);});overviewGrid.appendChild(card);});
+function update(){progress.style.width=((current+1)/slides.length*100)+'%';[...nav.children].forEach((b,i)=>b.classList.toggle('active',i===current));controlTitle.textContent=(slideMeta[current]?.title)||slides[current].dataset.title||'投影片';slides[current].scrollIntoView({behavior:'smooth',block:'start'});}
+function updateNavOnly(){progress.style.width=((current+1)/slides.length*100)+'%';[...nav.children].forEach((b,i)=>b.classList.toggle('active',i===current));controlTitle.textContent=(slideMeta[current]?.title)||slides[current].dataset.title||'投影片';}
+function go(i){current=Math.max(0,Math.min(slides.length-1,i));update();}
+function next(){go(current+1)} function prev(){go(current-1)}
+function isFullscreenActive(){return !!(document.fullscreenElement||document.webkitFullscreenElement||document.msFullscreenElement)}
+function enterFullscreen(){const el=document.documentElement;return el.requestFullscreen?.()||el.webkitRequestFullscreen?.()||el.msRequestFullscreen?.()}
+function exitFullscreen(){return document.exitFullscreen?.()||document.webkitExitFullscreen?.()||document.msExitFullscreen?.()}
+function syncFullscreenUi(){const active=isFullscreenActive();document.body.classList.toggle('fullscreen-mode',active);document.querySelectorAll('[data-act="fullscreen"]').forEach(el=>el.classList.toggle('is-active',active));if(focusToast){focusToast.textContent=active?'已進入全螢幕模式：控制列已暫時淡出':'已離開全螢幕模式';focusToast.classList.add('show');clearTimeout(window.__fsToastTimer);window.__fsToastTimer=setTimeout(()=>focusToast.classList.remove('show'),1200);}}
+function toggleOverview(force){const show=force ?? !overviewPanel.classList.contains('show');overviewPanel.classList.toggle('show',show)}
+function toggleFocus(){textFocus=!textFocus;document.body.classList.toggle('text-focus',textFocus);document.querySelectorAll('[data-act="focus"]').forEach(el=>el.classList.toggle('is-active',textFocus));if(focusToast){focusToast.textContent=textFocus?'重點模式已開啟：已壓低圖片存在感、凸顯文字與分析重點':'重點模式已關閉：恢復原始完整瀏覽';focusToast.classList.add('show');clearTimeout(window.__focusToastTimer);window.__focusToastTimer=setTimeout(()=>focusToast.classList.remove('show'),1300);}}
+function toggleFullscreen(){try{if(!isFullscreenActive()){const r=enterFullscreen();if(r&&typeof r.then==='function'){r.then(()=>setTimeout(syncFullscreenUi,80)).catch(()=>{if(focusToast){focusToast.textContent='這個瀏覽器目前不允許全螢幕';focusToast.classList.add('show');clearTimeout(window.__fsToastTimer);window.__fsToastTimer=setTimeout(()=>focusToast.classList.remove('show'),1400);}})}else{setTimeout(syncFullscreenUi,80)}}else{const r=exitFullscreen();if(r&&typeof r.then==='function'){r.then(()=>setTimeout(syncFullscreenUi,80))}else{setTimeout(syncFullscreenUi,80)}}}catch(e){if(focusToast){focusToast.textContent='全螢幕切換失敗，可能是瀏覽器限制';focusToast.classList.add('show');clearTimeout(window.__fsToastTimer);window.__fsToastTimer=setTimeout(()=>focusToast.classList.remove('show'),1400);}}}
+document.querySelectorAll('[data-act="next"]').forEach(el=>el.addEventListener('click',next));document.querySelectorAll('[data-act="prev"]').forEach(el=>el.addEventListener('click',prev));document.querySelectorAll('[data-act="overview"]').forEach(el=>el.addEventListener('click',()=>toggleOverview()));document.querySelectorAll('[data-act="focus"]').forEach(el=>el.addEventListener('click',toggleFocus));document.querySelectorAll('[data-act="fullscreen"]').forEach(el=>el.addEventListener('click',toggleFullscreen));overviewPanel.addEventListener('click',e=>{if(e.target===overviewPanel)toggleOverview(false)});document.addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();next();}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();prev();}if(e.key==='Home')go(0);if(e.key==='End')go(slides.length-1);if(e.key==='o'||e.key==='O')toggleOverview();if(e.key==='t'||e.key==='T')toggleFocus();if(e.key==='f'||e.key==='F')toggleFullscreen();if(e.key==='Escape')toggleOverview(false)});window.addEventListener('scroll',()=>{const idx=Math.round(window.scrollY/window.innerHeight);if(idx!==current&&idx>=0&&idx<slides.length){current=idx;updateNavOnly();}},{passive:true});['fullscreenchange','webkitfullscreenchange','msfullscreenchange'].forEach(evt=>document.addEventListener(evt,syncFullscreenUi));syncFullscreenUi();update();
+</script>
+</body>
+</html>
