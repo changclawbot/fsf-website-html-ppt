@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>毛天使 AI 廣告後台分析｜Google × 富盛豐產品關鍵字情報 HTML 圖文簡報</title>
+<meta name="description" content="分析毛天使 AI 廣告後台中與 Google、富盛豐、毛天使產品關鍵字相關的模組、資料訊號、風險控管與後續優化建議。" />
+<style>
+:root{--bg:#07131b;--bg2:#102532;--ink:#f6f3ea;--muted:#bfd0d8;--line:rgba(255,255,255,.16);--panel:rgba(255,255,255,.08);--panel2:rgba(9,20,28,.85);--mint:#6ef1d0;--green:#9deb67;--amber:#ffc276;--blue:#8fc5ff;--red:#ff857e;--shadow:0 24px 70px rgba(0,0,0,.32);--title:clamp(2rem,5vw,4.7rem);--h2:clamp(1.5rem,3vw,3rem);--body:clamp(.88rem,1.2vw,1.05rem);--pad:clamp(1rem,3vw,3rem)}
+*{box-sizing:border-box}html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC",sans-serif}html{scroll-snap-type:y mandatory;scroll-behavior:smooth}body{counter-reset:slide;overflow-x:hidden}a{color:var(--mint)}
+.slide{position:relative;width:100vw;height:100vh;height:100dvh;scroll-snap-align:start;display:flex;flex-direction:column;overflow:hidden;background:radial-gradient(circle at 18% 16%,rgba(110,241,208,.14),transparent 24%),radial-gradient(circle at 84% 82%,rgba(143,197,255,.1),transparent 28%),linear-gradient(135deg,var(--bg),var(--bg2) 52%,var(--bg))}.slide::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.78),transparent 82%)}.slide::after{counter-increment:slide;content:counter(slide,decimal-leading-zero);position:absolute;right:1.2rem;bottom:1rem;color:rgba(255,255,255,.22);font:600 .86rem ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em}
+.slide-content{position:relative;z-index:1;max-width:1240px;width:100%;margin:auto;padding:var(--pad);display:flex;flex-direction:column;gap:clamp(.8rem,1.8vw,1.35rem)}
+.kicker{color:var(--green);font:700 .82rem ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.16em;text-transform:uppercase}.tagrow,.pillrow{display:flex;flex-wrap:wrap;gap:.55rem}.tag,.pill{display:inline-flex;align-items:center;padding:.42rem .72rem;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.08);color:var(--ink);font-size:.82rem}
+h1,h2,h3,p{margin:0}h1{font-size:var(--title);line-height:.92;letter-spacing:-.06em}h2{font-size:var(--h2);line-height:1.03;letter-spacing:-.04em}h3{font-size:clamp(1rem,1.5vw,1.24rem)}p,li{font-size:var(--body);line-height:1.58;color:var(--muted)}strong{color:var(--ink)}.accent{color:var(--mint)}.warm{color:var(--amber)}.blue{color:var(--blue)}
+.grid{display:grid;gap:1rem}.grid.c2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid.c3{grid-template-columns:repeat(3,minmax(0,1fr))}.grid.c4{grid-template-columns:repeat(4,minmax(0,1fr))}.two{display:grid;grid-template-columns:1.02fr .98fr;gap:1.2rem;align-items:center}.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:.8rem;align-items:center}.arrow{font-size:2rem;color:var(--mint);text-align:center}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:1rem 1.08rem;backdrop-filter:blur(16px);box-shadow:var(--shadow)}.node{min-height:170px;background:var(--panel2);border:1px solid var(--line);border-radius:24px;padding:1rem}.metric b{display:block;font-size:clamp(1.8rem,4vw,3.2rem);line-height:1;color:var(--ink);letter-spacing:-.05em}.metric span{display:block;margin-top:.35rem}
+.visual{position:relative;background:linear-gradient(160deg,rgba(255,255,255,.14),rgba(255,255,255,.05));border:1px solid var(--line);border-radius:28px;padding:.8rem;overflow:hidden;box-shadow:var(--shadow)}.visual img{width:100%;height:min(56vh,520px);object-fit:cover;border-radius:18px;display:block;background:#fff}.visual.contain img{object-fit:contain;background:#f6f5ef}.caption{position:absolute;left:1.2rem;top:1rem;background:rgba(8,17,22,.78);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:.42rem .72rem;font-size:.78rem;color:var(--ink)}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}.phase{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:1rem;position:relative}.phase::before{content:"";display:block;width:16px;height:16px;border-radius:50%;background:var(--mint);box-shadow:0 0 18px var(--mint);margin-bottom:.7rem}.phase small{font:700 .75rem ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--green)}
+.bar-chart{display:flex;flex-direction:column;gap:.7rem}.bar{display:grid;grid-template-columns:220px 1fr auto;align-items:center;gap:.7rem}.bar-track{height:14px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}.bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--mint),var(--green))}.bar-fill.alt{background:linear-gradient(90deg,var(--amber),#ffd89b)}.bar-fill.blue{background:linear-gradient(90deg,var(--blue),#cde1ff)}.bar-fill.red{background:linear-gradient(90deg,var(--red),#ffb2ac)}
+.note{padding-left:1rem;border-left:4px solid var(--mint)}
+.control-dock{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 18px);transform:translateX(-50%);z-index:9999;display:flex;align-items:center;gap:.6rem;width:min(94vw,840px);padding:.54rem .62rem;border-radius:24px;background:rgba(255,255,255,.97);box-shadow:0 18px 55px rgba(0,0,0,.35);backdrop-filter:blur(18px);border:2px solid rgba(15,39,64,.12)}.control-title{flex:1 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:900;color:#12324a;font-size:clamp(.84rem,2vw,1.06rem)}.control-buttons{display:flex;gap:.42rem}.control-btn{min-width:72px;height:50px;padding:.24rem .56rem;border:0;border-radius:15px;background:#0f2740;color:#fff;font-weight:900;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.02;box-shadow:0 8px 18px rgba(15,39,64,.28)}.control-btn:hover{background:#1b4b74}.glyph{font-size:1.02rem}.label{margin-top:.16rem;font-size:.64rem}.control-btn.is-active,.mobile-btn.is-active{background:#1b6b57!important;box-shadow:0 0 0 2px rgba(104,240,209,.35),0 8px 18px rgba(15,39,64,.28)}
+.mobile-dock{display:none}.mobile-buttons{display:grid;grid-template-columns:repeat(5,1fr);gap:.15rem;width:100%}.mobile-btn{height:42px;border:0;border-radius:10px;background:#0f2740;color:#fff;font-weight:900;display:flex;flex-direction:column;align-items:center;justify-content:center}.mobile-btn .glyph{font-size:.76rem}.mobile-btn .label{font-size:.48rem;margin-top:.1rem}
+.nav{position:fixed;right:14px;top:50%;translate:0 -50%;display:flex;flex-direction:column;gap:8px;z-index:12}.nav button{width:9px;height:9px;border:0;border-radius:999px;background:rgba(255,255,255,.24);cursor:pointer}.nav button.active{height:24px;background:var(--mint)}.progress{position:fixed;left:0;top:0;height:4px;width:0;background:linear-gradient(90deg,var(--mint),var(--green),var(--amber));z-index:13}.hint{position:fixed;left:16px;bottom:14px;color:rgba(255,255,255,.46);font-size:.78rem;z-index:12}.overview-panel{position:fixed;inset:0;display:none;z-index:9998;background:rgba(4,10,14,.76);backdrop-filter:blur(14px);padding:clamp(1rem,4vw,3rem);overflow:auto}.overview-panel.show{display:block}.overview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1rem;max-width:1100px;margin:0 auto}.overview-card{min-height:120px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:1rem;color:#fff;cursor:pointer;box-shadow:0 20px 60px rgba(0,0,0,.25)}.overview-card b{display:block;color:var(--green);font:700 .76rem ui-monospace,SFMono-Regular,Menlo,monospace;margin-bottom:.45rem}.overview-card span{display:block;font-weight:800;line-height:1.28;margin-bottom:.45rem}.overview-card p{margin:0;color:rgba(255,255,255,.78);font-size:.88rem;line-height:1.5}.focus-toast{position:fixed;left:50%;top:18px;transform:translateX(-50%);z-index:2147483647;background:rgba(9,25,31,.92);color:#fff;padding:.62rem .9rem;border:1px solid rgba(104,240,209,.34);border-radius:999px;font-size:.84rem;box-shadow:0 18px 40px rgba(0,0,0,.28);opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease}.focus-toast.show{opacity:1;transform:translateX(-50%) translateY(0)} body.fullscreen-mode .control-dock,body.fullscreen-mode .mobile-dock,body.fullscreen-mode .nav,body.fullscreen-mode .hint{opacity:0;pointer-events:none} body.fullscreen-mode.fullscreen-controls-visible .control-dock,body.fullscreen-mode.fullscreen-controls-visible .mobile-dock{opacity:1;pointer-events:auto} body.fullscreen-mode .progress{height:6px}
+.text-focus img{filter:saturate(.35) brightness(.42);opacity:.22}.text-focus .visual{border-color:rgba(104,240,209,.45)!important}.text-focus .card,.text-focus .visual,.text-focus .node,.text-focus .phase,.text-focus .note{border-color:rgba(104,240,209,.55)!important;box-shadow:0 0 0 2px rgba(104,240,209,.14),var(--shadow)}.text-focus h2,.text-focus h3,.text-focus strong{color:#fff}.text-focus p,.text-focus li{color:#e4f6ef}
+@media(max-width:960px){.grid.c4,.grid.c3,.timeline{grid-template-columns:repeat(2,1fr)}.two,.flow{grid-template-columns:1fr}.arrow{display:none}}
+@media(max-width:640px){.grid.c4,.grid.c3,.grid.c2,.timeline{grid-template-columns:1fr}.hint,.nav,.control-dock{display:none}.mobile-dock{display:block;position:fixed;left:8px;right:8px;bottom:calc(env(safe-area-inset-bottom,0px) + 12px);z-index:9999;padding:.22rem;border-radius:16px;background:rgba(255,255,255,.97);box-shadow:0 18px 55px rgba(0,0,0,.35);backdrop-filter:blur(18px);border:2px solid rgba(15,39,64,.12)}.visual img{height:34vh}}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="nav" id="nav"></div>
+<div class="hint">← → / Space 換頁・可直接滑動</div>
+<section class="slide"><main class="slide-content">
+  <div class="kicker">GOOGLE KEYWORD INTELLIGENCE</div>
+  <h1>毛天使 AI 廣告後台分析｜<br><span class="accent">Google × 富盛豐產品關鍵字情報</span></h1>
+  <p>這份簡報整理 <strong>Jason 提供的關鍵字情報網址</strong> 中可見的全部核心資訊：系統模組、關鍵字資料量、Google Ads 監控、蝦皮銷售交叉驗證、AI 文案與禁用詞規則，並補出對富盛豐 / 毛天使後續投放與營運的建議。</p>
+  <div class="tagrow"><span class="tag">來源：petangel-ai-654624051514.asia-east1.run.app</span><span class="tag">用途：內部分析 / 簡報</span><span class="tag">版本：2026-05-16</span></div>
+  <div class="pillrow"><span class="pill">看關鍵字池</span><span class="pill">看投放邏輯</span><span class="pill">看法規風險</span><span class="pill">看可擴張方向</span></div>
+</main></section>
+<section class="slide"><main class="slide-content">
+  <div class="kicker">系統定位</div>
+  <div class="two">
+    <div class="grid">
+      <div class="card"><h3>這不是單一報表</h3><p>它比較像一個把 <strong>Search Console、Google Ads、Gemini、蝦皮銷售資料、合規規則</strong> 串在一起的「寵物品牌投放操作台」。</p></div>
+      <div class="card"><h3>首頁可見 7 個模組</h3><p>總覽、關鍵字分析、廣告監控、AI 文案、預算建議、蝦皮整合、禁用詞管理，已經接近一套小型廣告中台雛形。</p></div>
+      <div class="card"><h3>啟用門檻</h3><p>首次使用要求先填 Gemini API Key，再上傳 Search Console 匯出 ZIP / CSV；Google Ads API 憑證可以後補，代表目前設計為「先用資料分析，再逐步接自動化」。</p></div>
+      <div class="card"><h3>資料量訊號</h3><p>首頁顯示資料庫關鍵字數 <strong>4,631</strong>、AI 建議數 <strong>4,631</strong>，說明它不是只看少量詞，而是想做整池關鍵字分級。</p></div>
+    </div>
+    <div class="visual"><span class="caption">首頁與模組總覽</span><img src="assets/home.png" alt="毛天使 AI 廣告後台首頁"></div>
+  </div>
+</main></section>
+<section class="slide"><main class="slide-content">
+  <div class="kicker">一句話先講重點</div>
+  <h2>這個系統真正有價值的地方，不只是找字，<span class="accent">而是把「哪些字值得投、怎麼寫、會不會違規、能不能賺錢」放進同一個判斷流程</span></h2>
+  <div class="grid c4">
+    <div class="card metric"><b>4,631</b><span>首頁顯示的資料庫關鍵字總量，代表它想管理的是整池搜尋需求，而非單頁 Excel。</span></div>
+    <div class="card metric"><b>693</b><span>總覽儀表板中的本次分析關鍵字數，應是當前有效分析批次或已匯入主資料集。</span></div>
+    <div class="card metric"><b>199</b><span>可見總點擊數，代表目前至少已有真實 Search Console 成效資料進來。</span></div>
+    <div class="card metric"><b>4.72%</b><span>整體 CTR 不算差，但還不足以單獨判斷商業價值，必須接 ROI / 成交資料一起看。</span></div>
+  </div>
+  <div class="grid c3">
+    <div class="card"><h3>對營運的意義</h3><p>它試圖把 SEO 搜尋需求和廣告投放決策連接起來，避免只靠直覺買字。</p></div>
+    <div class="card"><h3>對老闆的意義</h3><p>可以快速知道哪些品牌字要防守、哪些產品字已被市場驗證、哪些字有法規風險。</p></div>
+    <div class="card"><h3>對團隊的意義</h3><p>能把投放、文案、品類與合規流程逐步做成 SOP，而不是分散在多人腦中。</p></div>
+  </div>
+</main></section>
+<section class="slide"><main class="slide-content">
+  <div class="kicker">總覽儀表板</div>
+  <div class="two">
+    <div class="visual"><span class="caption">總覽儀表板</span><img src="assets/overview.png" alt="總覽儀表板"></div>
+    <div class="grid">
+      <div class="card"><h3>目前摘要</h3><p>資料日期為 <strong>2026-05-16</strong>，可見 <strong>693 個關鍵字、199 次點擊、4,213 次曝光、CTR 4.72%</strong>。</p></div>
+      <div class="card"><h3>品牌防禦最明顯</h3><p>AI 本週待辦裡最值得注意的是 <strong>2 個品牌防禦字</strong>：<strong>petangel login</strong> 與 <strong>毛天使評價</strong>，系統明確判斷競品風險高、需要立即買回。</p></div>
+      <div class="card"><h3>高機會字與否定字暫時為 0</h3><p>這代表目前系統最急的不是擴大量，而是先防守品牌字與整理投放結構。</p></div>
+      <div class="card"><h3>我的判讀</h3><p>這組訊號很像是：目前自然搜尋已經有一定品牌需求，但品牌詞排名與聲量承接還不夠穩，容易被競品截走。</p></div>
+    </div>
+  </div>
+</main></section>
+<section class="slide"><main class="slide-content">
+  <div class="kicker">關鍵字池怎麼看</div>
+  <h2>從首頁與總覽交叉看，這套系統其實在做<span class="accent">兩層關鍵字管理</span></h2>
+  <div class="flow">
+    <div class="node"><h3>大池：4,631 字</h3><p>代表系統有一份累積的全量關鍵字資料庫，可供 AI 對每個字做買 / 不買 / 觀察 / 排除等建議。</p></div>
+    <div class="arrow">→</div>
+    <div class="node"><h3>當期：693 字</h3><p>代表這次儀表板正聚焦的有效分析集，應與本批 Search Console 匯入資料更直接相關。</p></div>
+    <div class="arrow">→</div>
+    <div class="node"><h3>行動層</h3><p>再把字分成品牌防禦、值得買、排除、蝦皮驗證、法規敏感等可執行類別。</p></div>
+  </div>
+  <div class="grid c2">
+    <div class="card"><h3>優點</h3><p>比單看 Search Console 更進一步，因為它有機會把字從「流量資料」轉成「投放決策」。</p></div>
+    <div class="card"><h3>目前缺口</h3><p>「關鍵字分析」頁本次可見內容偏空，表示操作端最重要的明細表還需要再確認：是需要先上傳檔案、還是前端載入狀態尚未完成。</p></div>
+  </div>
+</main></section>
+<section class="slide"><main class="slide-content">
+  <div class="kicker">蝦皮 × Search Console</div>
+  <div class="two">
+    <div class="grid">
+      <div class="card"><h3>這一頁是全系統最有商業價值的模組之一</h3><p>因為它不是只問「有人搜」，而是直接問：<strong>這些字有沒有帶來真實成交</strong>。</p></div>
+      <div class="card"><h3>可見核心數字</h3><p>蝦皮關鍵字 <strong>67</strong>、已成交字 <strong>11</strong>、雙驗證字 <strong>24</strong>、蝦皮新發現 <strong>43</strong>、累積銷售額 <strong>NT$ 11,179</strong>。</p></div>
+      <div class="card"><h3>分類邏輯很對</h3><p>它把字分成：<strong>必投（高 ROAS 黃金字）</strong>、<strong>必投（蝦皮已驗證成交）</strong>、<strong>Google 有流量但蝦皮無互動</strong>、<strong>蝦皮新發現</strong>、<strong>雙重曝光待轉換</strong>、<strong>觀察</strong>。</p></div>
+      <div class="card"><h3>可見產品意圖範例</h3><p>例如：<strong>寵物驅蚊噴霧、貓用乾洗澡、毛天使除蚤噴霧、狗狗除蚤噴霧、寵物防蚊、寵物尿臭</strong>。這些已能直接反映品類需求輪廓。</p></div>
+    </div>
+    <div class="visual"><span class="caption">蝦皮整合與 ROAS 線索</span><img src="assets/shopee.png" alt="蝦皮整合分析"></div>
+  </div>
+</main></section>
+<section class="slide"><main class="slide-content">
+  <div class="kicker">從蝦皮整合往下挖</div>
+  <h2>如果我是富盛豐營運，我會把這頁當成<span class="warm">產品優先級排序器</span></h2>
+  <div class="bar-chart card">
+    <div class="bar"><strong>防蚤 / 驅蚊 / 外出防護</strong><div class="bar-track"><div class="bar-fill" style="width:92%"></div></div><span>最明確的高意圖品類</span></div>
+    <div class="bar"><strong>除臭 / 尿臭處理</strong><div class="bar-track"><div class="bar-fill blue" style="width:77%"></div></div><span>居家日常問題型需求</span></div>
+    <div class="bar"><strong>乾洗澡 / 免水洗</strong><div class="bar-track"><div class="bar-fill alt" style="width:70%"></div></div><span>便利型照護需求</span></div>
+    <div class="bar"><strong>品牌詞 / 評價詞</strong><div class="bar-track"><div class="bar-fill red" style="width:82%"></div></div><span>競品攔截風險高</span></div>
+  </div>
+  <div class="grid c3">
+    <div class="card"><h3>對毛天使</h3><p>說明主力投放應優先押在 <strong>防蚤驅蚊、除臭、乾洗澡</strong> 等有明確使用情境的字，而不是太空泛的品牌敘事。</p></div>
+    <div class="card"><h3>對富盛豐產品線</h3><p>說明「問題解法型關鍵字」比品牌自說自話更接近成交，例如異味、蚊蟲、散步外出、毛孩清潔保養。</p></div>
+    <div class="card"><h3>對後續商品策略</h3><p>可以反推哪些產品該做成主打組合、哪些關鍵字適合拿去做官網 SEO 與廣告頁面標題。</p></div>
+  </div>
+</main></section>
+<section class="slide"><main class="slide-content">
+  <div class="kicker">預算分配模組</div>
+  <div class="two">
+    <div class="visual"><span class="caption">預算分配與活動效率</span><img src="assets/budget.png" alt="預算分配建議"></div>
+    <div class="grid">
+      <div class="card"><h3>表面上顯示「無建議調整」</h3><p>系統顯示廣告活動數 <strong>12</strong>、近 30 日總花費 <strong>NT$ 8,755</strong>、AI 建議數 <strong>0</strong>，並寫目前活動效率良好。</p></div>
+      <div class="card"><h3>但細看其實有訊號</h3><p>畫面裡多數活動的轉換為 <strong>0</strong>，而明日預算分配邏輯又回到「每活動至少 NT$100 保底」，表示現階段自動建議很保守，甚至可能還不夠聰明。</p></div>
+      <div class="card"><h3>可見活動問題</h3><p>例如部分活動目前日預算偏高，但若轉換仍為 0，後台應該更明確地提醒 <strong>降載、停投或重整素材</strong>，而不是只說整體良好。</p></div>
+      <div class="card"><h3>我會怎麼補強</h3><p>把「0 轉換但高花費」列成紅燈清單，並加上 <strong>連續天數、搜尋字詞品質、素材版本、著陸頁類別</strong>，才會更有實戰價值。</p></div>
+    </div>
+  </div>
+</main></section>
+<section class="slide"><main class="slide-content">
+  <div class="kicker">AI 文案 + 合規</div>
+  <div class="two">
+    <div class="visual"><span class="caption">AI 文案產生器</span><img src="assets/copy.png" alt="AI 文案產生器"></div>
+    <div class="grid">
+      <div class="card"><h3>功能定位很清楚</h3><p>以關鍵字、對應產品、語氣為輸入，讓 Gemini 產出符合 <strong>Google Ads 字數限制</strong> 的標題與描述。</p></div>
+      <div class="card"><h3>不只是生文案</h3><p>它有單一關鍵字、批次產生、歷史文案庫，代表是把 <strong>文案生成 → 留存 → 審核</strong> 做成流程，而不是一次性工具。</p></div>
+      <div class="card"><h3>可見示例很實用</h3><p>歷史文案已包含 <strong>寵物防蚤、貓咪乾洗澡、寵物驅蚊噴霧</strong> 等字，說明這套系統已開始貼近毛天使實際商品需求。</p></div>
+      <div class="card"><h3>對富盛豐延伸意義</h3><p>這一套之後不只可用於毛天使，也可改成富盛豐 OEM 詢價廣告、居家清潔產品廣告、品牌詞保護文案模板。</p></div>
+    </div>
+  </div>
+</main></section>
+<section class="slide"><main class="slide-content">
+  <div class="kicker">禁用詞治理</div>
+  <div class="two">
+    <div class="grid">
+      <div class="card"><h3>這頁是整體風險控制核心</h3><p>可見禁用詞總數 <strong>144</strong>、替代表達 <strong>15</strong>、狀態已啟用，代表系統不是只管投放效率，也開始管 <strong>法規與平台拒登風險</strong>。</p></div>
+      <div class="card"><h3>敏感詞覆蓋範圍夠實際</h3><p>包括：<strong>促進癒合、傷口修復、免疫調節、口服驅蟲藥、改善皮膚病、抗發炎</strong> 等，已對準寵物保健 / 洗護常見高風險詞。</p></div>
+      <div class="card"><h3>替代表達很有操作價值</h3><p>例如把 <strong>殺蟲 / 滅蟲</strong> 改成「減少蚊蟲干擾」、把 <strong>治療 / 止癢 / 消炎</strong> 改成「日常清潔保養」，這對毛天使與富盛豐都很關鍵。</p></div>
+      <div class="card"><h3>我的建議</h3><p>把這套禁用詞治理再往外延伸到：官網商品頁、Meta 廣告、LINE 客服話術、蝦皮商品標題，做成全渠道共用規範。</p></div>
+    </div>
+    <div class="visual"><span class="caption">禁用詞與替代表達</span><img src="assets/banwords.png" alt="禁用詞管理"></div>
+  </div>
+</main></section>
+<section class="slide"><main class="slide-content">
+  <div class="kicker">目前看得到的缺口</div>
+  <h2>這個後台方向是對的，但若要真正成為<span class="accent">富盛豐 / 毛天使的投放決策中心</span>，還有 4 個地方要補強</h2>
+  <div class="timeline">
+    <div class="phase"><small>01</small><h3>關鍵字明細可視性不足</h3><p>本次「關鍵字分析」頁可見資訊偏空，操作者最需要的買 / 不買清單、分數、理由，應更穩定地直接展示。</p></div>
+    <div class="phase"><small>02</small><h3>廣告監控模組太輕</h3><p>目前「廣告監控」頁幾乎只看到時間控制，異常警報、活動表現、失速活動、CTR / CPC / CPA 趨勢應更完整。</p></div>
+    <div class="phase"><small>03</small><h3>預算建議太保守</h3><p>當前多數活動零轉換卻仍顯示「效率良好」，需要更嚴格的紅黃綠燈判準與停損建議。</p></div>
+    <div class="phase"><small>04</small><h3>富盛豐產品線連動還不夠深</h3><p>目前前台語言仍偏毛天使電商，如果要服務富盛豐全體產品，需再納入 OEM / 居家清潔 / 除甲醛等產品線分類與詞庫。</p></div>
+  </div>
+</main></section>
+<section class="slide"><main class="slide-content">
+  <div class="kicker">我會怎麼建議下一步</div>
+  <h2>給 Jason / 張董 / 營運團隊的<span class="warm">實戰建議</span></h2>
+  <div class="grid c2">
+    <div class="card"><h3>1. 先把品牌防禦字做成固定活動</h3><p>把 <strong>毛天使評價、PetAngel 品牌詞、品牌 + 商品詞</strong> 獨立成品牌防禦活動，不和一般品類字混投。</p></div>
+    <div class="card"><h3>2. 用蝦皮成交字反推 Google Ads 主力字</h3><p>先從蝦皮已驗證成交與高 ROAS 字切出一份「必投清單」，讓 Google Ads 先打最可能賺錢的字。</p></div>
+    <div class="card"><h3>3. 用禁用詞系統做全渠道合規</h3><p>不要只守 Google Ads，應同步用於官網、蝦皮、Meta、客服與業務簡報，避免不同渠道口徑互相打架。</p></div>
+    <div class="card"><h3>4. 擴成富盛豐總關鍵字中台</h3><p>在現有毛天使基礎上，新增 <strong>富盛豐商城產品線</strong> 與 <strong>OEM 詢價線</strong> 專屬分類、分數模型與文案模板。</p></div>
+    <div class="card"><h3>5. 加入停損與機會雙清單</h3><p>每天自動輸出兩份名單：<strong>該停的活動 / 該加碼的字</strong>，讓營運每天只做最重要的決策。</p></div>
+    <div class="card"><h3>6. 把資料落到頁面與商品策略</h3><p>把高意圖字直接反映在商品命名、SEO 標題、FAQ、組合頁、著陸頁與季節活動，讓廣告與網站敘事真正對齊。</p></div>
+  </div>
+</main></section>
+<section class="slide"><main class="slide-content">
+  <div class="kicker">最後總結</div>
+  <h2>這個網址裡最值得珍惜的，不是某張圖，而是它已經隱約長成一套<span class="accent">從關鍵字 → 廣告 → 銷售 → 合規</span> 的決策骨架</h2>
+  <div class="grid c3">
+    <div class="card"><h3>對毛天使</h3><p>最適合先把防蚤驅蚊、除臭、乾洗澡等高意圖品類做深，讓廣告、文案與蝦皮成交字同步。</p></div>
+    <div class="card"><h3>對富盛豐</h3><p>可直接把這套系統延伸成多產品線關鍵字中台，支援商城零售、品牌防禦與 OEM 線索開發。</p></div>
+    <div class="card"><h3>對團隊</h3><p>真正的升級不是只多一個後台，而是把資料、判斷、文案與法規變成可交接、可重複、可放大的流程。</p></div>
+  </div>
+  <div class="card">
+    <p><strong>內部提醒：</strong>本簡報之對外路徑、下載位置與內部整理入口不直接展示於頁面中；如需存取，請由內部指定管理窗口統一控管。</p>
+  </div>
+  <p>資料來源：Jason 提供網址 `petangel-ai-654624051514.asia-east1.run.app` 於 2026-05-16 可見前台內容、各模組截圖與頁面文字；本簡報分析以當時可見資料為準。</p>
+</main></section>
+<div class="control-dock"><div class="control-title" id="controlTitle">毛天使 AI 廣告後台分析</div><div class="control-buttons"><button class="control-btn" data-act="prev"><span class="glyph">←</span><span class="label">上一頁</span></button><button class="control-btn" data-act="next"><span class="glyph">→</span><span class="label">下一頁</span></button><button class="control-btn" data-act="overview"><span class="glyph">O</span><span class="label">總覽</span></button><button class="control-btn" data-act="focus"><span class="glyph">T</span><span class="label">重點</span></button><button class="control-btn" data-act="fullscreen"><span class="glyph">F</span><span class="label">全螢幕</span></button></div></div>
+<div class="mobile-dock"><div class="mobile-buttons"><button class="mobile-btn" data-act="prev"><span class="glyph">←</span><span class="label">上一頁</span></button><button class="mobile-btn" data-act="next"><span class="glyph">→</span><span class="label">下一頁</span></button><button class="mobile-btn" data-act="overview"><span class="glyph">O</span><span class="label">總覽</span></button><button class="mobile-btn" data-act="focus"><span class="glyph">T</span><span class="label">重點</span></button><button class="mobile-btn" data-act="fullscreen"><span class="glyph">F</span><span class="label">全螢幕</span></button></div></div>
+<div class="overview-panel" id="overviewPanel"><div class="overview-grid" id="overviewGrid"></div></div>
+<div class="focus-toast" id="focusToast">重點模式已開啟：已壓低圖片存在感、凸顯文字與分析重點</div>
+<script>
+const slideMeta=[
+{title:'封面｜毛天使 AI 廣告後台分析',desc:'整理 Jason 提供網址中的 Google × 富盛豐產品關鍵字情報。'},
+{title:'系統定位｜這個網址到底是什麼',desc:'先看它實際包含哪些模組與資料入口。'},
+{title:'一句話重點｜這套系統的商業價值',desc:'把整個工具的決策意義先講清楚。'},
+{title:'總覽儀表板｜目前最直接的數字訊號',desc:'從日期、關鍵字數、點擊、曝光與品牌防禦待辦切入。'},
+{title:'關鍵字池｜4,631 與 693 代表什麼',desc:'拆開看整體關鍵字庫與當期有效分析集。'},
+{title:'蝦皮整合｜最接近成交的一頁',desc:'從蝦皮銷售資料反推哪些字最值得投。'},
+{title:'產品意圖｜從字看品類優先順序',desc:'把蝦皮整合頁轉成品類與投放決策。'},
+{title:'預算分配｜模組現在還有哪些限制',desc:'看 12 個活動與保守的 AI 預算建議。'},
+{title:'AI 文案｜這套系統如何放大產能',desc:'看 Gemini 如何接上關鍵字與品牌調性。'},
+{title:'禁用詞治理｜為什麼這塊很重要',desc:'看合規模組如何降低 Google 拒登與法規風險。'},
+{title:'缺口｜要成為決策中心還差什麼',desc:'整理目前頁面可見的 4 個主要缺口。'},
+{title:'建議｜接下來最值得做的 6 件事',desc:'直接給 Jason / 張董 / 團隊可執行方向。'},
+{title:'總結｜把這套工具升級成關鍵字中台',desc:'收斂成對毛天使、富盛豐與團隊的意義。'}
+];
+const slides=[...document.querySelectorAll('.slide')],nav=document.getElementById('nav'),progress=document.getElementById('progress'),controlTitle=document.getElementById('controlTitle'),overviewPanel=document.getElementById('overviewPanel'),overviewGrid=document.getElementById('overviewGrid'),focusToast=document.getElementById('focusToast');let current=0,textFocus=false;slides.forEach((slide,i)=>{const dot=document.createElement('button');dot.addEventListener('click',()=>go(i));nav.appendChild(dot);const card=document.createElement('div');card.className='overview-card';const meta=slideMeta[i]||{title:'投影片',desc:'點擊後可直接跳到這一頁'};card.innerHTML=`<b>${String(i+1).padStart(2,'0')}</b><span>${meta.title}</span><p>${meta.desc}</p>`;card.addEventListener('click',()=>{go(i);toggleOverview(false)});overviewGrid.appendChild(card)});function update(){progress.style.width=((current+1)/slides.length*100)+'%';[...nav.children].forEach((b,i)=>b.classList.toggle('active',i===current));controlTitle.textContent=(slideMeta[current]?.title)||'投影片';slides[current].scrollIntoView({behavior:'smooth',block:'start'})}function updateNavOnly(){progress.style.width=((current+1)/slides.length*100)+'%';[...nav.children].forEach((b,i)=>b.classList.toggle('active',i===current));controlTitle.textContent=(slideMeta[current]?.title)||'投影片'}function go(i){current=Math.max(0,Math.min(slides.length-1,i));update()}function next(){go(current+1)}function prev(){go(current-1)}function isFullscreenActive(){return !!(document.fullscreenElement||document.webkitFullscreenElement||document.msFullscreenElement)}function enterFullscreen(){const el=document.documentElement;return el.requestFullscreen?.()||el.webkitRequestFullscreen?.()||el.msRequestFullscreen?.()}let fullscreenControlsVisible=false;function setFullscreenControlsVisible(visible){fullscreenControlsVisible=!!visible;document.body.classList.toggle('fullscreen-controls-visible',fullscreenControlsVisible);}function toggleFullscreenControls(force){if(!isFullscreenActive())return;const next=typeof force==='boolean'?force:!fullscreenControlsVisible;setFullscreenControlsVisible(next);}function exitFullscreen(){return document.exitFullscreen?.()||document.webkitExitFullscreen?.()||document.msExitFullscreen?.()}function syncFullscreenUi(){const active=isFullscreenActive();document.body.classList.toggle('fullscreen-mode',active);setFullscreenControlsVisible(false);document.querySelectorAll('[data-act="fullscreen"]').forEach(el=>el.classList.toggle('is-active',active));if(focusToast){focusToast.textContent=active?'已進入全螢幕模式：控制列已暫時淡出':'已離開全螢幕模式';focusToast.classList.add('show');clearTimeout(window.__fsToastTimer);window.__fsToastTimer=setTimeout(()=>focusToast.classList.remove('show'),1200)}}function toggleOverview(force){const show=force ?? !overviewPanel.classList.contains('show');overviewPanel.classList.toggle('show',show)}function toggleFocus(){textFocus=!textFocus;document.body.classList.toggle('text-focus',textFocus);document.querySelectorAll('[data-act="focus"]').forEach(el=>el.classList.toggle('is-active',textFocus));if(focusToast){focusToast.textContent=textFocus?'重點模式已開啟：已壓低圖片存在感、凸顯文字與分析重點':'重點模式已關閉：恢復原始完整瀏覽';focusToast.classList.add('show');clearTimeout(window.__focusToastTimer);window.__focusToastTimer=setTimeout(()=>focusToast.classList.remove('show'),1300)}}function toggleFullscreen(){try{if(!isFullscreenActive()){const r=enterFullscreen();if(r&&typeof r.then==='function'){r.then(()=>setTimeout(syncFullscreenUi,80)).catch(()=>{if(focusToast){focusToast.textContent='這個瀏覽器目前不允許全螢幕';focusToast.classList.add('show');clearTimeout(window.__fsToastTimer);window.__fsToastTimer=setTimeout(()=>focusToast.classList.remove('show'),1400)}})}else{setTimeout(syncFullscreenUi,80)}}else{const r=exitFullscreen();if(r&&typeof r.then==='function'){r.then(()=>setTimeout(syncFullscreenUi,80))}else{setTimeout(syncFullscreenUi,80)}}}catch(e){if(focusToast){focusToast.textContent='全螢幕切換失敗，可能是瀏覽器限制';focusToast.classList.add('show');clearTimeout(window.__fsToastTimer);window.__fsToastTimer=setTimeout(()=>focusToast.classList.remove('show'),1400)}}}document.querySelectorAll('[data-act="next"]').forEach(el=>el.addEventListener('click',next));document.querySelectorAll('[data-act="prev"]').forEach(el=>el.addEventListener('click',prev));document.querySelectorAll('[data-act="overview"]').forEach(el=>el.addEventListener('click',()=>toggleOverview()));document.querySelectorAll('[data-act="focus"]').forEach(el=>el.addEventListener('click',toggleFocus));document.querySelectorAll('[data-act="fullscreen"]').forEach(el=>el.addEventListener('click',toggleFullscreen));overviewPanel.addEventListener('click',e=>{if(e.target===overviewPanel)toggleOverview(false)});document.addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();next()}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();prev()}if(e.key==='Home')go(0);if(e.key==='End')go(slides.length-1);if(e.key==='o'||e.key==='O')toggleOverview();if(e.key==='t'||e.key==='T')toggleFocus();if(e.key==='f'||e.key==='F')toggleFullscreen();if(e.key==='Escape')toggleOverview(false)});window.addEventListener('scroll',()=>{const idx=Math.round(window.scrollY/window.innerHeight);if(idx!==current&&idx>=0&&idx<slides.length){current=idx;updateNavOnly()}},{passive:true});document.addEventListener('click',e=>{if(!isFullscreenActive())return;if(e.target.closest('[data-act="fullscreen"]'))return;if(e.target.closest('.control-dock,.mobile-dock'))return;setFullscreenControlsVisible(true);});['fullscreenchange','webkitfullscreenchange','msfullscreenchange'].forEach(evt=>document.addEventListener(evt,syncFullscreenUi));syncFullscreenUi();update();
+</script>
+</body>
+</html>
