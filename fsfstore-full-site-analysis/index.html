@@ -322,7 +322,7 @@ window.addEventListener('scroll',()=>{
   const idx=Math.round(window.scrollY/window.innerHeight);
   if(idx!==current && idx>=0 && idx<slides.length){current=idx;updateNavOnly();}
 },{passive:true});
-document.addEventListener('click',e=>{if(!isFullscreenActive())return;if(e.target.closest('[data-act="fullscreen"],#fullscreenBtn'))return;if(e.target.closest('.control-dock,.mobile-dock'))return;toggleFullscreenControls();});
+document.addEventListener('click',e=>{if(!isFullscreenActive())return;if(e.target.closest('[data-act="fullscreen"],#fullscreenBtn'))return;if(e.target.closest('.control-dock,.mobile-dock'))return;setFullscreenControlsVisible(true);});
 ['fullscreenchange','webkitfullscreenchange','msfullscreenchange'].forEach(evt=>document.addEventListener(evt,syncFullscreenUi));
 syncFullscreenUi();
 update();
