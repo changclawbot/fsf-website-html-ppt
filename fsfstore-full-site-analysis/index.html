@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>富盛豐生活植萃館全站分析｜HTML 圖文簡報</title>
+<meta name="description" content="針對 fsfstore.com 的站位、品類、內容、信任模組與轉換動線進行完整分析，並提出可直接執行的優化方向。" />
+<style>
+:root{
+  --bg:#061216;--bg2:#0f222a;--ink:#f7f3e8;--muted:#b7c7c0;--line:rgba(255,255,255,.16);--panel:rgba(255,255,255,.08);--panel-strong:rgba(9,25,31,.82);
+  --mint:#65f2d0;--green:#9ceb62;--amber:#ffbe6c;--red:#ff7c74;--blue:#86bfff;
+  --shadow:0 26px 80px rgba(0,0,0,.35);--radius:24px;--pad:clamp(1rem,3vw,3rem);
+  --title:clamp(2rem,5vw,5rem);--h2:clamp(1.45rem,3vw,3rem);--body:clamp(.86rem,1.25vw,1.05rem);
+}
+*{box-sizing:border-box}html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC",sans-serif}html{scroll-snap-type:y mandatory;scroll-behavior:smooth}body{counter-reset:slide;overflow-x:hidden}
+a{color:var(--mint)}
+.slide{position:relative;width:100vw;height:100vh;height:100dvh;scroll-snap-align:start;display:flex;flex-direction:column;overflow:hidden;background:radial-gradient(circle at 15% 15%,rgba(101,242,208,.14),transparent 24%),radial-gradient(circle at 82% 80%,rgba(156,235,98,.11),transparent 30%),linear-gradient(135deg,var(--bg),var(--bg2) 50%,var(--bg))}
+.slide::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.75),transparent 82%)}
+.slide::after{counter-increment:slide;content:counter(slide,decimal-leading-zero);position:absolute;right:1.2rem;bottom:1rem;color:rgba(255,255,255,.22);font:600 .86rem ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em}
+.slide-content{position:relative;z-index:1;max-width:1240px;width:100%;margin:auto;padding:var(--pad);display:flex;flex-direction:column;gap:clamp(.8rem,1.8vw,1.4rem)}
+.kicker{color:var(--green);font:700 .82rem ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.16em;text-transform:uppercase}.big-kicker{display:flex;gap:.5rem;flex-wrap:wrap}.tag{display:inline-flex;align-items:center;gap:.35rem;padding:.42rem .7rem;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.08);font-size:.82rem;color:var(--ink)}
+h1,h2,h3,p,ul{margin:0}h1{font-size:var(--title);line-height:.92;letter-spacing:-.06em}h2{font-size:var(--h2);line-height:1.03;letter-spacing:-.04em}h3{font-size:clamp(1rem,1.5vw,1.28rem)}p,li{font-size:var(--body);line-height:1.58;color:var(--muted)}strong{color:var(--ink)}
+.accent{color:var(--mint)}.warm{color:var(--amber)}.danger{color:var(--red)}.blue{color:var(--blue)}
+.grid{display:grid;gap:1rem}.grid.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.grid.cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:1rem 1.08rem;backdrop-filter:blur(16px);box-shadow:var(--shadow)}
+.metric b{display:block;font-size:clamp(1.85rem,4vw,3.3rem);line-height:1;color:var(--ink);letter-spacing:-.05em}.metric span{display:block;margin-top:.35rem;color:var(--muted)}
+.two{display:grid;grid-template-columns:1.02fr .98fr;gap:1.2rem;align-items:center}.visual{position:relative;background:linear-gradient(160deg,rgba(255,255,255,.14),rgba(255,255,255,.05));border:1px solid var(--line);border-radius:28px;padding:.8rem;overflow:hidden;box-shadow:var(--shadow)}.visual img{width:100%;height:min(56vh,520px);object-fit:cover;border-radius:18px;display:block;background:#fff}.visual.contain img{object-fit:contain;background:#f6f5ef}.caption{position:absolute;left:1.2rem;top:1.1rem;background:rgba(6,18,22,.76);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:.42rem .72rem;font-size:.78rem;color:var(--ink)}
+.list{display:flex;flex-direction:column;gap:.8rem}.list .card p{font-size:.95rem}.bar-chart{display:flex;flex-direction:column;gap:.7rem}.bar{display:grid;grid-template-columns:180px 1fr auto;align-items:center;gap:.7rem}.bar-track{height:14px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}.bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--mint),var(--green))}.bar-fill.alt{background:linear-gradient(90deg,var(--amber),#ffd89b)}.bar-fill.blue{background:linear-gradient(90deg,var(--blue),#cde1ff)}.bar-fill.red{background:linear-gradient(90deg,var(--red),#ffb2ac)}
+.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:.8rem;align-items:center}.node{min-height:170px;background:var(--panel-strong);border:1px solid var(--line);border-radius:24px;padding:1rem}.arrow{font-size:2rem;color:var(--mint);text-align:center}.pillrow{display:flex;flex-wrap:wrap;gap:.55rem}.pill{padding:.45rem .7rem;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.08);font-size:.82rem;color:var(--ink)}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}.phase{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:1rem;position:relative}.phase::before{content:"";display:block;width:16px;height:16px;border-radius:50%;background:var(--mint);box-shadow:0 0 18px var(--mint);margin-bottom:.7rem}.phase small{font:700 .75rem ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--green)}
+.quote{font-size:clamp(1.4rem,2.7vw,2.5rem);line-height:1.18;letter-spacing:-.03em;color:var(--ink);max-width:980px}.note{padding-left:1rem;border-left:4px solid var(--mint)}
+.control-dock{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 74px);transform:translateX(-50%);z-index:9999;display:flex;align-items:center;gap:.6rem;width:min(94vw,840px);padding:.62rem .7rem;border-radius:24px;background:rgba(255,255,255,.97);box-shadow:0 18px 55px rgba(0,0,0,.35);backdrop-filter:blur(18px);border:2px solid rgba(15,39,64,.12)}
+.control-title{flex:1 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:900;color:#12324a;font-size:clamp(.84rem,2vw,1.06rem)}.control-buttons{display:flex;gap:.42rem}.control-btn{min-width:70px;height:52px;padding:.28rem .62rem;border:0;border-radius:15px;background:#0f2740;color:#fff;font-weight:900;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.02;box-shadow:0 8px 18px rgba(15,39,64,.28)}.control-btn:hover{background:#1b4b74}.glyph{font-size:1.05rem}.label{margin-top:.18rem;font-size:.68rem}
+.mobile-dock{display:none}.mobile-buttons{display:grid;grid-template-columns:repeat(5,1fr);gap:.15rem;width:100%}.mobile-btn{height:40px;border:0;border-radius:10px;background:#0f2740;color:#fff;font-weight:900;display:flex;flex-direction:column;align-items:center;justify-content:center}.mobile-btn .glyph{font-size:.76rem}.mobile-btn .label{font-size:.42rem;margin-top:.1rem}
+.nav{position:fixed;right:14px;top:50%;translate:0 -50%;display:flex;flex-direction:column;gap:8px;z-index:12}.nav button{width:9px;height:9px;border:0;border-radius:999px;background:rgba(255,255,255,.24);cursor:pointer}.nav button.active{height:24px;background:var(--mint)}.progress{position:fixed;left:0;top:0;height:4px;width:0;background:linear-gradient(90deg,var(--mint),var(--green),var(--amber));z-index:13}.hint{position:fixed;left:16px;bottom:14px;color:rgba(255,255,255,.46);font-size:.78rem;z-index:12}.overview-panel{position:fixed;inset:0;display:none;z-index:9998;background:rgba(4,10,14,.76);backdrop-filter:blur(14px);padding:clamp(1rem,4vw,3rem);overflow:auto}.overview-panel.show{display:block}.overview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1rem;max-width:1100px;margin:0 auto}.overview-card{min-height:120px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:1rem;color:#fff;cursor:pointer;box-shadow:0 20px 60px rgba(0,0,0,.25)}.overview-card b{display:block;color:var(--green);font:700 .76rem ui-monospace,SFMono-Regular,Menlo,monospace;margin-bottom:.45rem}.overview-card span{font-weight:800;line-height:1.28}
+.text-focus img{filter:saturate(.7) brightness(.74)}.text-focus .card,.text-focus .visual,.text-focus .node,.text-focus .phase{border-color:rgba(101,242,208,.34)!important}
+@media(max-width:960px){.grid.cols-4,.grid.cols-3,.timeline{grid-template-columns:repeat(2,1fr)}.two,.flow{grid-template-columns:1fr}.arrow{display:none}}
+@media(max-width:640px){.grid.cols-4,.grid.cols-3,.grid.cols-2,.timeline{grid-template-columns:1fr}.hint,.nav,.control-dock{display:none}.mobile-dock{display:block;position:fixed;left:8px;right:8px;bottom:calc(env(safe-area-inset-bottom,0px) + 82px);z-index:9999;padding:.22rem;border-radius:16px;background:rgba(255,255,255,.97);box-shadow:0 18px 55px rgba(0,0,0,.35);backdrop-filter:blur(18px);border:2px solid rgba(15,39,64,.12)}.visual img{height:34vh}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="nav" id="nav"></div>
+<div class="hint">← → / Space 換頁・可直接滑動</div>
+
+<section class="slide" data-title="Cover"><main class="slide-content">
+  <div class="kicker">FSFSTORE.COM FULL SITE REVIEW</div>
+  <h1>富盛豐生活植萃館<br><span class="accent">全站分析</span>與<span class="warm">HTML 圖文簡報</span></h1>
+  <p>針對 <strong>首頁敘事</strong>、<strong>商品分類</strong>、<strong>品牌故事</strong>、<strong>信任模組</strong>、<strong>內容 SEO</strong> 與 <strong>轉換動線</strong> 做一輪完整拆解，最後收斂成可執行的優化方向。</p>
+  <div class="big-kicker">
+    <span class="tag">網站：fsfstore.com</span>
+    <span class="tag">分析日期：2026-05-16</span>
+    <span class="tag">定位：天然植萃生活品牌商城</span>
+  </div>
+  <div class="pillrow">
+    <span class="pill">除甲醛／TVOC</span><span class="pill">居家防蟲</span><span class="pill">家居清潔</span><span class="pill">PetAngel 寵物護理</span><span class="pill">衣物洗護</span>
+  </div>
+  <p class="note">這次不是只看文案，而是把 <strong>站內結構 + 內容資產 + 商品分布 + 轉換設計</strong> 一起看，判斷它目前最強的地方與最該補的地方。</p>
+</main></section>
+
+<section class="slide" data-title="Executive Summary"><main class="slide-content">
+  <div class="kicker">Executive summary</div>
+  <h2>先講結論：這個站的骨架其實不弱，問題比較像是<span class="accent">訊息太分散</span>，沒有把強項一口氣推到前面</h2>
+  <div class="grid cols-4">
+    <div class="card metric"><b>90</b><span>產品 sitemap 節點，代表 SKU 廣度已經不小</span></div>
+    <div class="card metric"><b>33</b><span>collections，分類做得細，但也提高了理解門檻</span></div>
+    <div class="card metric"><b>15</b><span>資訊／制度頁，包含檢驗、FAQ、會員、公益、創辦人等</span></div>
+    <div class="card metric"><b>12</b><span>blog 節點，已經開始累積內容型 SEO 資產</span></div>
+  </div>
+  <div class="grid cols-3">
+    <div class="card"><h3>現在最強</h3><p><strong>品類完整</strong>、<strong>品牌價值一致</strong>、<strong>信任頁面夠多</strong>，而且有會員／優惠／LINE 這些轉換元件。</p></div>
+    <div class="card"><h3>現在最可惜</h3><p>首頁沒把「<strong>為什麼富盛豐值得信</strong>」和「<strong>你該從哪個品類開始買</strong>」講得夠快。</p></div>
+    <div class="card"><h3>這站最值得押注</h3><p>把它從一般商城，再往前推成一個<strong>天然植萃生活解決方案入口</strong>，不只是賣單品。</p></div>
+  </div>
+</main></section>
+
+<section class="slide" data-title="Home & Hero"><main class="slide-content">
+  <div class="kicker">Homepage read</div>
+  <div class="two">
+    <div class="visual"><span class="caption">首頁首屏與導覽</span><img src="assets/home.png" alt="fsfstore 首頁截圖"></div>
+    <div class="list">
+      <div class="card"><h3>首頁第一印象</h3><p>開頭就把站定位成 <strong>天然植萃清潔、防蟲與寵物洗護品牌</strong>，方向是對的，因為一開始就把主要賽道講出來了。</p></div>
+      <div class="card"><h3>促銷與會員訊號很多</h3><p>新會員折扣、點數、免運、滿額折扣、LINE 好友限定都已經放出來，表示站方知道<strong>轉換不是只靠品牌感，還要靠誘因</strong>。</p></div>
+      <div class="card"><h3>但首屏還能更狠一點</h3><p>目前比較像「把很多好處都講了」，但還少一個一句話把富盛豐釘死的主張，例如：<strong>天然植萃居家環境解決方案</strong>。</p></div>
+    </div>
+  </div>
+</main></section>
+
+<section class="slide" data-title="Site Architecture"><main class="slide-content">
+  <div class="kicker">Architecture</div>
+  <h2>這個站不是單一路徑商城，而是<span class="accent">5 大商品主軸 + 4 種信任支撐 + 3 種轉換入口</span></h2>
+  <div class="flow">
+    <div class="node"><h3>5 大商品主軸</h3><p>除甲醛／防蟲／清潔／寵物護理／衣物洗護，幾乎把「家裡會遇到的環境照護問題」都切出去了。</p></div>
+    <div class="arrow">→</div>
+    <div class="node"><h3>4 種信任支撐</h3><p>品牌故事、檢驗報告、企業認證、顧客回饋，證明站方不只在賣東西，也在補「為什麼可信」。</p></div>
+    <div class="arrow">→</div>
+    <div class="node"><h3>3 種轉換入口</h3><p>立即購買、會員優惠、LINE 導流。也就是商品、制度、私域三條一起推。</p></div>
+  </div>
+  <div class="grid cols-3">
+    <div class="card"><h3>優點</h3><p>架構完整，表示產品策略不是臨時拼的，而是有長期整理。</p></div>
+    <div class="card"><h3>風險</h3><p>分類很細時，首頁如果沒有做更強的「選購導覽」，新客容易眼花。</p></div>
+    <div class="card"><h3>機會</h3><p>把它改造成「問題導向」導覽，例如：新家除醛、夏季防蟲、毛孩除臭、浴室去霉。</p></div>
+  </div>
+</main></section>
+
+<section class="slide" data-title="Category Mix"><main class="slide-content">
+  <div class="kicker">Category mix from sitemap</div>
+  <h2>從 product sitemap 看，站內目前最重的其實是<span class="warm">PetAngel 寵物護理線</span></h2>
+  <div class="bar-chart card">
+    <div class="bar"><strong>寵物洗護／除臭</strong><div class="bar-track"><div class="bar-fill" style="width:41%"></div></div><span>37</span></div>
+    <div class="bar"><strong>除甲醛／空氣淨化</strong><div class="bar-track"><div class="bar-fill blue" style="width:26%"></div></div><span>23</span></div>
+    <div class="bar"><strong>防蟲／驅蟲</strong><div class="bar-track"><div class="bar-fill alt" style="width:20%"></div></div><span>18</span></div>
+    <div class="bar"><strong>居家清潔／抑菌</strong><div class="bar-track"><div class="bar-fill red" style="width:10%"></div></div><span>9</span></div>
+    <div class="bar"><strong>其他／特殊洗護</strong><div class="bar-track"><div class="bar-fill" style="width:3%"></div></div><span>3</span></div>
+  </div>
+  <div class="grid cols-2">
+    <div class="card"><h3>代表什麼</h3><p>表面看起來像全品類生活商城，但 SKU 分布其實已經明顯往 <strong>毛天使 PetAngel</strong> 傾斜，這是一個很重要的經營訊號。</p></div>
+    <div class="card"><h3>我的判斷</h3><p>如果站方後續要衝成長，PetAngel 很可能是最有機會做出<strong>內容、回購與品牌黏性</strong>的重點引擎。</p></div>
+  </div>
+</main></section>
+
+<section class="slide" data-title="PetAngel Momentum"><main class="slide-content">
+  <div class="kicker">Momentum</div>
+  <div class="two">
+    <div class="list">
+      <div class="card"><h3>最近更新最密集</h3><p>產品 sitemap 最近一批更新，幾乎清一色集中在 <strong>2026-05-14 的毛天使商品</strong>：洗毛、除臭、防蚤、口腔、足底、器皿、地板清潔都有。</p></div>
+      <div class="card"><h3>這不是單品線，是完整照護線</h3><p>這代表 PetAngel 已經從「寵物洗毛」往「居家＋皮膚＋除臭＋環境防護」擴成系統型品類。</p></div>
+      <div class="card"><h3>建議</h3><p>首頁值得把 <strong>毛孩家庭專區</strong> 做更前面，甚至把「除臭、防蚤、清潔、皮膚照護」整合成一套場景式入口。</p></div>
+    </div>
+    <div class="visual"><span class="caption">PetAngel collection</span><img src="assets/petangel.png" alt="PetAngel 截圖"></div>
+  </div>
+</main></section>
+
+<section class="slide" data-title="Brand Story"><main class="slide-content">
+  <div class="kicker">Brand narrative</div>
+  <div class="two">
+    <div class="visual contain"><span class="caption">品牌故事頁</span><img src="assets/about.png" alt="品牌故事頁截圖"></div>
+    <div class="list">
+      <div class="card"><h3>品牌核心講得一致</h3><p>品牌故事頁持續強調 <strong>真正天然、安全無毒、環保永續</strong>，這跟整站商品描述沒有打架，這點很好。</p></div>
+      <div class="card"><h3>優勢不是只有情感</h3><p>它不是只講「愛地球」，而是把天然、低刺激、家人與毛孩可共用的生活情境綁在一起，所以比較有商業說服力。</p></div>
+      <div class="card"><h3>還可以再補</h3><p>如果把創辦人、研發經驗、工廠／檢驗／低碳成果再更模組化串回品牌頁，<strong>品牌可信度會再上去一層</strong>。</p></div>
+    </div>
+  </div>
+  <p class="quote">「家的美好，源於自然的純粹」這句話有方向，但網站前段還可以更直接把它翻成：<span class="accent">天然植萃家庭環境照護系統</span>。</p>
+</main></section>
+
+<section class="slide" data-title="Trust System"><main class="slide-content">
+  <div class="kicker">Trust assets</div>
+  <h2>這個站其實已經悄悄堆了不少<span class="accent">信任資產</span></h2>
+  <div class="grid cols-4">
+    <div class="card"><h3>檢驗報告</h3><p>產品檢驗報告頁，能承接「天然／安全」主張。</p></div>
+    <div class="card"><h3>企業認證</h3><p>企業認證專區，補的是公司層級可信度。</p></div>
+    <div class="card"><h3>顧客回饋</h3><p>用戶真實回饋頁，幫助降低新客的不安。</p></div>
+    <div class="card"><h3>FAQ / 會員制度</h3><p>制度面頁面完整，對降低客服摩擦也有幫助。</p></div>
+  </div>
+  <div class="two">
+    <div class="card"><h3>我最在意的一點</h3><p>很多品牌有價值觀，但沒有證據；富盛豐反而是<strong>證據頁有了，卻沒有在首頁和分類頁前置得夠明顯</strong>。</p></div>
+    <div class="visual"><span class="caption">企業認證頁</span><img src="assets/certs.png" alt="企業認證頁截圖"></div>
+  </div>
+</main></section>
+
+<section class="slide" data-title="Content & SEO"><main class="slide-content">
+  <div class="kicker">Content & SEO</div>
+  <div class="two">
+    <div class="list">
+      <div class="card"><h3>已有內容型 SEO 雛形</h3><p>目前 blog 節點包含：<strong>居家清潔小技巧、天然知識樹、植萃成分解密、寵物安全指南、公益活動、news</strong>。</p></div>
+      <div class="card"><h3>題目方向是對的</h3><p>像「洗衣機槽細菌超標」、「天然 vs 合成界面活性劑」這類題，都是有搜尋機會且能接回商品的內容。</p></div>
+      <div class="card"><h3>還差什麼</h3><p>還差更明確的內容矩陣：<strong>問題詞</strong>、<strong>成分詞</strong>、<strong>情境詞</strong>、<strong>產品詞</strong> 各自對應哪一條品類漏斗。</p></div>
+    </div>
+    <div class="visual"><span class="caption">優惠／內容頁</span><img src="assets/discounts.png" alt="會員優惠頁截圖"></div>
+  </div>
+  <p class="note">建議未來每條內容都明確回答一件事：<strong>這篇文要幫哪個品類導流，最後要把人帶去哪裡</strong>。</p>
+</main></section>
+
+<section class="slide" data-title="What Works"><main class="slide-content">
+  <div class="kicker">What already works</div>
+  <h2>我認為目前站上已經做對的 5 件事</h2>
+  <div class="timeline">
+    <div class="phase"><small>01</small><h3>主張一致</h3><p>天然植萃、健康無毒、友善家人與毛孩，幾乎全站一致。</p></div>
+    <div class="phase"><small>02</small><h3>品類夠寬</h3><p>從空氣、地板、衣物到寵物，已接近完整生活系統。</p></div>
+    <div class="phase"><small>03</small><h3>轉換元件有了</h3><p>會員、折扣、滿額、免運、LINE，好用的槓桿都在。</p></div>
+    <div class="phase"><small>04</small><h3>信任頁完整</h3><p>檢驗、FAQ、企業認證、回饋頁讓站不會太空。</p></div>
+  </div>
+  <div class="card"><h3>05｜品牌可延展性高</h3><p>這套敘事天然能往 B 端代工、C 端零售、毛孩線、空氣淨化線延展，不是只能賣某一個爆品。</p></div>
+</main></section>
+
+<section class="slide" data-title="Main Gaps"><main class="slide-content">
+  <div class="kicker">Main gaps</div>
+  <h2>現在最該補的，不是再加更多頁，而是把<span class="accent">選購理解速度</span>和<span class="warm">信任前置程度</span>再拉高</h2>
+  <div class="grid cols-2">
+    <div class="card"><h3>1. 首屏訊息還不夠一槍斃命</h3><p>品牌與品類都有，但還缺一個讓人秒懂的主標：你到底在幫家庭解決什麼問題。</p></div>
+    <div class="card"><h3>2. 分類很多，但導購還不夠問題導向</h3><p>新客可能知道有很多類，卻不知道自己應該先點哪個。</p></div>
+    <div class="card"><h3>3. 信任證據藏得比較深</h3><p>既然已經有檢驗與認證，應該把它前置到首頁模組、分類頁與商品頁附近。</p></div>
+    <div class="card"><h3>4. 內容和商品的漏斗關係還不夠清楚</h3><p>blog 題目是對的，但 CTA、關聯商品、推薦集合頁可以再更明確。</p></div>
+    <div class="card"><h3>5. PetAngel 優勢還沒完全被做成主戰場</h3><p>SKU 與更新頻率都已經很強，值得更高權重露出。</p></div>
+    <div class="card"><h3>6. B 端／C 端故事仍可互相借力</h3><p>如果能適度連到 OEM 能力或製造實力，C 端信任感還會更高。</p></div>
+  </div>
+</main></section>
+
+<section class="slide" data-title="Action Plan"><main class="slide-content">
+  <div class="kicker">4-week action plan</div>
+  <h2>如果要快速升級，我會先這樣做</h2>
+  <div class="timeline">
+    <div class="phase"><small>W1</small><h3>首頁重組</h3><p>重寫首屏一句話、補 3 個信任證據、做 5 大場景導覽入口。</p></div>
+    <div class="phase"><small>W2</small><h3>分類頁模板化</h3><p>每個主分類補「問題 → 解法 → 商品 → 信任證據 → FAQ」。</p></div>
+    <div class="phase"><small>W3</small><h3>內容漏斗化</h3><p>把 blog 按導流目標分組，導回對應集合頁與主推商品。</p></div>
+    <div class="phase"><small>W4</small><h3>PetAngel 專區升級</h3><p>做毛孩家庭入口頁，把除臭、防蚤、清潔、皮膚護理打成一套。</p></div>
+  </div>
+  <div class="card"><p><strong>優先順序建議：</strong>先處理首頁與分類頁，因為這兩個地方最直接影響新客理解與購物決策；SEO 與內容則接著補，讓自然流量接得住。</p></div>
+</main></section>
+
+<section class="slide" data-title="Final Takeaway"><main class="slide-content">
+  <div class="kicker">Final takeaway</div>
+  <h2>一句話總結：富盛豐生活植萃館不是普通商城，已經很接近<span class="accent">天然植萃家庭環境解決方案平台</span></h2>
+  <div class="grid cols-3">
+    <div class="card"><h3>現在的底子</h3><p>品類寬、價值觀一致、信任頁完整、PetAngel 動能強。</p></div>
+    <div class="card"><h3>最值得補的位置</h3><p>首頁主張、問題導購、信任前置、內容漏斗、毛孩專區升級。</p></div>
+    <div class="card"><h3>做完後的效果</h3><p>整站會從「看起來品很多」變成「我知道該從哪裡開始買，而且我信它」。</p></div>
+  </div>
+  <div class="card">
+    <p><strong>Web 版：</strong><a href="https://changclawbot.github.io/fsf-website-html-ppt/fsfstore-full-site-analysis/" target="_blank">https://changclawbot.github.io/fsf-website-html-ppt/fsfstore-full-site-analysis/</a></p>
+    <p><strong>HTML PPT 主要列表：</strong><a href="https://changclawbot.github.io/fsf-website-html-ppt/ppt-catalog/" target="_blank">https://changclawbot.github.io/fsf-website-html-ppt/ppt-catalog/</a></p>
+    <p><strong>ZIP 下載：</strong><a href="https://drive.google.com/file/d/1f4xq7vXn8EnFHBn5DXiB0dhBSR8ub4dc/view?usp=drivesdk" target="_blank">https://drive.google.com/file/d/1f4xq7vXn8EnFHBn5DXiB0dhBSR8ub4dc/view?usp=drivesdk</a></p>
+  </div>
+  <p>資料來源：fsfstore.com 首頁、品牌故事、分類頁、企業認證頁、會員／news 頁面、sitemap_products.xml、sitemap_pages.xml、sitemap_collections.xml、sitemap_blogs.xml。</p>
+</main></section>
+
+<div class="control-dock">
+  <div class="control-title" id="controlTitle">富盛豐生活植萃館全站分析</div>
+  <div class="control-buttons">
+    <button class="control-btn" data-act="prev"><span class="glyph">←</span><span class="label">上一頁</span></button>
+    <button class="control-btn" data-act="next"><span class="glyph">→</span><span class="label">下一頁</span></button>
+    <button class="control-btn" data-act="overview"><span class="glyph">O</span><span class="label">總覽</span></button>
+    <button class="control-btn" data-act="focus"><span class="glyph">T</span><span class="label">重點</span></button>
+    <button class="control-btn" data-act="fullscreen"><span class="glyph">F</span><span class="label">全螢幕</span></button>
+  </div>
+</div>
+<div class="mobile-dock">
+  <div class="mobile-buttons">
+    <button class="mobile-btn" data-act="prev"><span class="glyph">←</span><span class="label">上</span></button>
+    <button class="mobile-btn" data-act="next"><span class="glyph">→</span><span class="label">下</span></button>
+    <button class="mobile-btn" data-act="overview"><span class="glyph">O</span><span class="label">總</span></button>
+    <button class="mobile-btn" data-act="focus"><span class="glyph">T</span><span class="label">重</span></button>
+    <button class="mobile-btn" data-act="fullscreen"><span class="glyph">F</span><span class="label">全</span></button>
+  </div>
+</div>
+<div class="overview-panel" id="overviewPanel"><div class="overview-grid" id="overviewGrid"></div></div>
+
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+const nav=document.getElementById('nav');
+const progress=document.getElementById('progress');
+const controlTitle=document.getElementById('controlTitle');
+const overviewPanel=document.getElementById('overviewPanel');
+const overviewGrid=document.getElementById('overviewGrid');
+let current=0; let textFocus=false;
+slides.forEach((slide,i)=>{
+  const dot=document.createElement('button');
+  dot.addEventListener('click',()=>go(i));
+  nav.appendChild(dot);
+  const card=document.createElement('div');
+  card.className='overview-card';
+  card.innerHTML=`<b>${String(i+1).padStart(2,'0')}</b><span>${slide.dataset.title||'Slide'}</span>`;
+  card.addEventListener('click',()=>{go(i);toggleOverview(false);});
+  overviewGrid.appendChild(card);
+});
+function update(){
+  progress.style.width=((current+1)/slides.length*100)+'%';
+  [...nav.children].forEach((b,i)=>b.classList.toggle('active',i===current));
+  controlTitle.textContent=slides[current].dataset.title||'投影片';
+  slides[current].scrollIntoView({behavior:'smooth',block:'start'});
+}
+function updateNavOnly(){
+  progress.style.width=((current+1)/slides.length*100)+'%';
+  [...nav.children].forEach((b,i)=>b.classList.toggle('active',i===current));
+  controlTitle.textContent=slides[current].dataset.title||'投影片';
+}
+function go(i){current=Math.max(0,Math.min(slides.length-1,i));update();}
+function next(){go(current+1)}
+function prev(){go(current-1)}
+function toggleOverview(force){const show=force ?? !overviewPanel.classList.contains('show');overviewPanel.classList.toggle('show',show)}
+function toggleFocus(){textFocus=!textFocus;document.body.classList.toggle('text-focus',textFocus)}
+function toggleFullscreen(){if(!document.fullscreenElement){document.documentElement.requestFullscreen?.()}else{document.exitFullscreen?.()}}
+document.querySelectorAll('[data-act="next"]').forEach(el=>el.addEventListener('click',next));
+document.querySelectorAll('[data-act="prev"]').forEach(el=>el.addEventListener('click',prev));
+document.querySelectorAll('[data-act="overview"]').forEach(el=>el.addEventListener('click',()=>toggleOverview()));
+document.querySelectorAll('[data-act="focus"]').forEach(el=>el.addEventListener('click',toggleFocus));
+document.querySelectorAll('[data-act="fullscreen"]').forEach(el=>el.addEventListener('click',toggleFullscreen));
+overviewPanel.addEventListener('click',e=>{if(e.target===overviewPanel)toggleOverview(false)});
+document.addEventListener('keydown',e=>{
+  if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();next();}
+  if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();prev();}
+  if(e.key==='Home')go(0); if(e.key==='End')go(slides.length-1);
+  if(e.key==='o'||e.key==='O')toggleOverview();
+  if(e.key==='t'||e.key==='T')toggleFocus();
+  if(e.key==='f'||e.key==='F')toggleFullscreen();
+  if(e.key==='Escape')toggleOverview(false);
+});
+window.addEventListener('scroll',()=>{
+  const idx=Math.round(window.scrollY/window.innerHeight);
+  if(idx!==current && idx>=0 && idx<slides.length){current=idx;updateNavOnly();}
+},{passive:true});
+update();
+</script>
+</body>
+</html>

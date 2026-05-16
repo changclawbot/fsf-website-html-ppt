@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>富盛豐 HTML PPT 主要列表</title>
+<meta name="description" content="富盛豐相關 HTML PPT / Web 簡報總表，集中查看公開 Web 版與 ZIP 下載。" />
+<style>
+:root{--bg:#071217;--panel:#102028;--ink:#f5f2e8;--muted:#b2c0ba;--line:rgba(255,255,255,.14);--mint:#66f1cf;--green:#9deb63;--amber:#ffbd70;--shadow:0 24px 60px rgba(0,0,0,.28)}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top left,rgba(102,241,207,.12),transparent 25%),linear-gradient(135deg,#071217,#0e2128 60%,#071217);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC",sans-serif}a{color:var(--mint)}
+.wrap{max-width:1180px;margin:0 auto;padding:clamp(1rem,3vw,2.5rem)}
+.hero{display:grid;gap:1rem;padding:1rem 0 1.6rem}.kicker{font:700 .82rem ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.15em;text-transform:uppercase;color:var(--green)}h1,h2,p{margin:0}h1{font-size:clamp(2rem,4vw,3.8rem);line-height:.95;letter-spacing:-.05em}p{line-height:1.6;color:var(--muted)}
+.toolbar{display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;margin:1.1rem 0 1.4rem}input,select{appearance:none;border:1px solid var(--line);background:rgba(255,255,255,.08);color:var(--ink);padding:.8rem .95rem;border-radius:14px;font-size:.95rem}.stat{padding:.75rem .95rem;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.08);color:var(--ink);font-size:.9rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem}.card{background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:24px;padding:1rem 1rem 1.1rem;box-shadow:var(--shadow);backdrop-filter:blur(14px)}.meta{display:flex;justify-content:space-between;gap:.5rem;flex-wrap:wrap;margin-bottom:.8rem}.badge{display:inline-flex;align-items:center;padding:.35rem .65rem;border-radius:999px;background:rgba(102,241,207,.12);border:1px solid rgba(102,241,207,.2);color:var(--ink);font-size:.82rem}time{font-size:.84rem;color:var(--muted)}h2{font-size:1.2rem;line-height:1.3;margin-bottom:.7rem}.source{margin-top:.8rem;font-size:.9rem}.links{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem}.btn{display:inline-flex;align-items:center;justify-content:center;padding:.72rem .95rem;border-radius:14px;text-decoration:none;font-weight:800;border:1px solid transparent}.btn.primary{background:#13324a;color:#fff}.btn.secondary{background:rgba(255,255,255,.08);border-color:var(--line);color:var(--ink)}.btn.disabled{opacity:.45;pointer-events:none}
+.footer{margin-top:1.5rem;padding:1rem 0 2rem;color:var(--muted);font-size:.88rem}
+@media(max-width:640px){.toolbar{flex-direction:column;align-items:stretch}input,select{width:100%}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <div class="kicker">FSF HTML PPT Catalog</div>
+    <h1>富盛豐 HTML PPT<br>主要列表</h1>
+    <p>這頁固定收錄富盛豐相關的 HTML 圖文簡報，方便直接打開 Web 版，也保留 ZIP 下載入口。之後新增簡報會持續補到這裡，不另外分散。</p>
+    <div class="toolbar">
+      <input id="search" type="search" placeholder="搜尋名稱、描述、來源…" />
+      <select id="categoryFilter"><option value="">全部分類</option></select>
+      <div class="stat" id="countStat">共 0 份</div>
+      <div class="stat" id="updatedStat">最後更新：2026-05-16</div>
+    </div>
+  </section>
+  <section class="grid" id="grid"></section>
+  <div class="footer">固定總表用途：集中查看 Web 版、ZIP 下載與資料來源。公開頁面不放機密資料。</div>
+</div>
+<script>
+const items = [
+  {
+    slug: 'root-dual-website-analysis',
+    name: '富盛豐網站內容分析｜OEM 官網 × 品牌商城雙站版',
+    desc: '2026-05-15 建立的雙站圖文簡報，整理 FSF BIO OEM 官網與富盛豐生活植萃館的定位、品類與雙站敘事。',
+    source: 'https://www.fsf-alexandra.com/ + https://www.fsfstore.com/ 可見頁面與結構化資料',
+    date: '2026-05-15',
+    category: '品牌分析',
+    url: 'https://changclawbot.github.io/fsf-website-html-ppt/',
+    zip_url: ''
+  },
+  {
+    slug: 'fsfstore-full-site-analysis',
+    name: '富盛豐生活植萃館全站分析｜結構、品類、信任資產與轉換動線',
+    desc: '完整拆解 fsfstore.com 的首頁敘事、商品架構、品牌故事、信任模組、內容 SEO 與 4 週優化方向。',
+    source: 'https://www.fsfstore.com/ 首頁、品牌故事、企業認證頁、優惠內容頁與 sitemap_products/pages/collections/blogs.xml',
+    date: '2026-05-16',
+    category: '品牌分析',
+    url: 'https://changclawbot.github.io/fsf-website-html-ppt/fsfstore-full-site-analysis/',
+    zip_url: 'https://drive.google.com/file/d/1f4xq7vXn8EnFHBn5DXiB0dhBSR8ub4dc/view?usp=drivesdk'
+  }
+];
+const grid=document.getElementById('grid');
+const search=document.getElementById('search');
+const filter=document.getElementById('categoryFilter');
+const countStat=document.getElementById('countStat');
+const categories=[...new Set(items.map(i=>i.category).filter(Boolean))];
+categories.forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;filter.appendChild(o);});
+function render(){
+  const q=search.value.trim().toLowerCase();
+  const cat=filter.value;
+  const filtered=items.filter(item=>{
+    const blob=[item.name,item.desc,item.source,item.category,item.date].join(' ').toLowerCase();
+    return (!q || blob.includes(q)) && (!cat || item.category===cat);
+  });
+  grid.innerHTML='';
+  filtered.forEach(item=>{
+    const article=document.createElement('article');
+    article.className='card';
+    const zipBtn=item.zip_url && !item.zip_url.includes('__ZIP_URL__')
+      ? `<a class="btn secondary" href="${item.zip_url}" target="_blank" rel="noopener">ZIP 下載</a>`
+      : `<span class="btn secondary disabled">ZIP 待補</span>`;
+    article.innerHTML=`
+      <div class="meta"><span class="badge">${item.category}</span><time>${item.date}</time></div>
+      <h2>${item.name}</h2>
+      <p>${item.desc}</p>
+      <p class="source"><strong>資料來源：</strong>${item.source}</p>
+      <div class="links">
+        <a class="btn primary" href="${item.url}" target="_blank" rel="noopener">打開 HTML PPT</a>
+        ${zipBtn}
+      </div>`;
+    grid.appendChild(article);
+  });
+  countStat.textContent=`共 ${filtered.length} 份`;
+}
+search.addEventListener('input',render);
+filter.addEventListener('change',render);
+render();
+</script>
+</body>
+</html>

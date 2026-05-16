@@ -1,0 +1,22 @@
+[
+  {
+    "slug": "root-dual-website-analysis",
+    "name": "富盛豐網站內容分析｜OEM 官網 × 品牌商城雙站版",
+    "desc": "2026-05-15 建立的雙站圖文簡報，整理 FSF BIO OEM 官網與富盛豐生活植萃館的定位、品類與雙站敘事。",
+    "source": "https://www.fsf-alexandra.com/ + https://www.fsfstore.com/ 可見頁面與結構化資料",
+    "date": "2026-05-15",
+    "category": "品牌分析",
+    "url": "https://changclawbot.github.io/fsf-website-html-ppt/",
+    "zip_url": ""
+  },
+  {
+    "slug": "fsfstore-full-site-analysis",
+    "name": "富盛豐生活植萃館全站分析｜結構、品類、信任資產與轉換動線",
+    "desc": "完整拆解 fsfstore.com 的首頁敘事、商品架構、品牌故事、信任模組、內容 SEO 與 4 週優化方向。",
+    "source": "https://www.fsfstore.com/ 首頁、品牌故事、企業認證頁、優惠內容頁與 sitemap_products/pages/collections/blogs.xml",
+    "date": "2026-05-16",
+    "category": "品牌分析",
+    "url": "https://changclawbot.github.io/fsf-website-html-ppt/fsfstore-full-site-analysis/",
+    "zip_url": "https://drive.google.com/file/d/1f4xq7vXn8EnFHBn5DXiB0dhBSR8ub4dc/view?usp=drivesdk"
+  }
+]
