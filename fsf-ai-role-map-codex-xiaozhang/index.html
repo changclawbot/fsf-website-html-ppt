@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>富盛豐 AI 角色分工地圖｜Codex × 小張可扮演什麼角色 HTML 圖文簡報</title>
+<meta name="description" content="把張董給 Codex 做的文件，延伸成富盛豐 AI 角色分工地圖：Codex 擅長什麼、小張已完成什麼、下一步最適合往哪裡延伸。" />
+<style>
+:root{--bg:#071217;--bg2:#0e2128;--ink:#f5f2e8;--muted:#b8c7c1;--line:rgba(255,255,255,.14);--panel:rgba(255,255,255,.08);--panel2:rgba(10,20,26,.9);--mint:#66f1cf;--green:#9deb63;--amber:#ffbd70;--blue:#8ec8ff;--red:#ff8e86;--shadow:0 24px 70px rgba(0,0,0,.30);--title:clamp(2rem,5vw,4.5rem);--h2:clamp(1.5rem,3vw,2.9rem);--body:clamp(.9rem,1.2vw,1.05rem);--pad:clamp(1rem,3vw,3rem)}
+*{box-sizing:border-box}html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC",sans-serif}html{scroll-snap-type:y mandatory;scroll-behavior:smooth}body{counter-reset:slide;overflow-x:hidden}a{color:var(--mint)}
+.slide{position:relative;width:100vw;height:100vh;height:100dvh;scroll-snap-align:start;display:flex;flex-direction:column;overflow:hidden;background:radial-gradient(circle at 18% 16%,rgba(102,241,207,.12),transparent 24%),radial-gradient(circle at 84% 82%,rgba(142,200,255,.09),transparent 28%),linear-gradient(135deg,var(--bg),var(--bg2) 52%,var(--bg))}.slide::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.78),transparent 82%)}.slide::after{counter-increment:slide;content:counter(slide,decimal-leading-zero);position:absolute;right:1.2rem;bottom:1rem;color:rgba(255,255,255,.22);font:600 .86rem ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em}
+.slide-content{position:relative;z-index:1;max-width:1240px;width:100%;margin:auto;padding:var(--pad);display:flex;flex-direction:column;gap:clamp(.8rem,1.8vw,1.35rem)}
+.kicker{color:var(--green);font:700 .82rem ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.16em;text-transform:uppercase}.tagrow,.pillrow{display:flex;flex-wrap:wrap;gap:.55rem}.tag,.pill{display:inline-flex;align-items:center;padding:.42rem .72rem;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.08);color:var(--ink);font-size:.82rem}
+h1,h2,h3,p{margin:0}h1{font-size:var(--title);line-height:.92;letter-spacing:-.06em}h2{font-size:var(--h2);line-height:1.03;letter-spacing:-.04em}h3{font-size:clamp(1rem,1.55vw,1.24rem)}p,li{font-size:var(--body);line-height:1.6;color:var(--muted)}strong{color:var(--ink)}.accent{color:var(--mint)}.warm{color:var(--amber)}.blue{color:var(--blue)}.red{color:var(--red)}
+.grid{display:grid;gap:1rem}.grid.c2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid.c3{grid-template-columns:repeat(3,minmax(0,1fr))}.grid.c4{grid-template-columns:repeat(4,minmax(0,1fr))}.two{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;align-items:start}.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:.8rem;align-items:center}.arrow{font-size:2rem;color:var(--mint);text-align:center}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:1rem 1.08rem;backdrop-filter:blur(16px);box-shadow:var(--shadow)}.node{min-height:170px;background:var(--panel2);border:1px solid var(--line);border-radius:24px;padding:1rem}.metric b{display:block;font-size:clamp(1.8rem,4vw,3.2rem);line-height:1;color:var(--ink);letter-spacing:-.05em}.metric span{display:block;margin-top:.35rem}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.compare .col{background:var(--panel2);border:1px solid var(--line);border-radius:24px;padding:1rem}.compare ul,.card ul,.node ul{margin:.2rem 0 0 1rem;padding:0}.compare li,.card li,.node li{margin:.35rem 0}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}.phase{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:1rem;position:relative}.phase::before{content:"";display:block;width:16px;height:16px;border-radius:50%;background:var(--mint);box-shadow:0 0 18px var(--mint);margin-bottom:.7rem}.phase small{font:700 .75rem ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--green)}
+.matrix{display:grid;grid-template-columns:1.1fr .9fr .9fr;gap:.8rem}.matrix .head{font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:var(--green)}.matrix .cell{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:.85rem}.matrix .cell strong{display:block;margin-bottom:.28rem}
+.control-dock{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 18px);transform:translateX(-50%);z-index:9999;display:flex;align-items:center;gap:.6rem;width:min(94vw,840px);padding:.54rem .62rem;border-radius:24px;background:rgba(255,255,255,.97);box-shadow:0 18px 55px rgba(0,0,0,.35);backdrop-filter:blur(18px);border:2px solid rgba(15,39,64,.12)}.control-title{flex:1 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:900;color:#12324a;font-size:clamp(.84rem,2vw,1.06rem)}.control-buttons{display:flex;gap:.42rem}.control-btn{min-width:72px;height:50px;padding:.24rem .56rem;border:0;border-radius:15px;background:#0f2740;color:#fff;font-weight:900;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.02;box-shadow:0 8px 18px rgba(15,39,64,.28)}.control-btn:hover{background:#1b4b74}.glyph{font-size:1.02rem}.label{margin-top:.16rem;font-size:.64rem}.control-btn.is-active,.mobile-btn.is-active{background:#1b6b57!important;box-shadow:0 0 0 2px rgba(104,240,209,.35),0 8px 18px rgba(15,39,64,.28)}
+.mobile-dock{display:none}.mobile-buttons{display:grid;grid-template-columns:repeat(5,1fr);gap:.15rem;width:100%}.mobile-btn{height:42px;border:0;border-radius:10px;background:#0f2740;color:#fff;font-weight:900;display:flex;flex-direction:column;align-items:center;justify-content:center}.mobile-btn .glyph{font-size:.76rem}.mobile-btn .label{font-size:.48rem;margin-top:.1rem}
+.nav{position:fixed;right:14px;top:50%;translate:0 -50%;display:flex;flex-direction:column;gap:8px;z-index:12}.nav button{width:9px;height:9px;border:0;border-radius:999px;background:rgba(255,255,255,.24);cursor:pointer}.nav button.active{height:24px;background:var(--mint)}.progress{position:fixed;left:0;top:0;height:4px;width:0;background:linear-gradient(90deg,var(--mint),var(--green),var(--amber));z-index:13}.hint{position:fixed;left:16px;bottom:14px;color:rgba(255,255,255,.46);font-size:.78rem;z-index:12}.overview-panel{position:fixed;inset:0;display:none;z-index:9998;background:rgba(4,10,14,.76);backdrop-filter:blur(14px);padding:clamp(1rem,4vw,3rem);overflow:auto}.overview-panel.show{display:block}.overview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1rem;max-width:1100px;margin:0 auto}.overview-card{min-height:120px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:1rem;color:#fff;cursor:pointer;box-shadow:0 20px 60px rgba(0,0,0,.25)}.overview-card b{display:block;color:var(--green);font:700 .76rem ui-monospace,SFMono-Regular,Menlo,monospace;margin-bottom:.45rem}.overview-card span{display:block;font-weight:800;line-height:1.28;margin-bottom:.45rem}.overview-card p{margin:0;color:rgba(255,255,255,.78);font-size:.88rem;line-height:1.5}.focus-toast{position:fixed;left:50%;top:18px;transform:translateX(-50%);z-index:2147483647;background:rgba(9,25,31,.92);color:#fff;padding:.62rem .9rem;border:1px solid rgba(104,240,209,.34);border-radius:999px;font-size:.84rem;box-shadow:0 18px 40px rgba(0,0,0,.28);opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease}.focus-toast.show{opacity:1;transform:translateX(-50%) translateY(0)} body.fullscreen-mode .control-dock,body.fullscreen-mode .mobile-dock,body.fullscreen-mode .nav,body.fullscreen-mode .hint{opacity:0;pointer-events:none} body.fullscreen-mode.fullscreen-controls-visible .control-dock,body.fullscreen-mode.fullscreen-controls-visible .mobile-dock{opacity:1;pointer-events:auto} body.fullscreen-mode .progress{height:6px}
+.text-focus .card,.text-focus .node,.text-focus .phase,.text-focus .compare .col,.text-focus .matrix .cell{border-color:rgba(104,240,209,.55)!important;box-shadow:0 0 0 2px rgba(104,240,209,.14),var(--shadow)}.text-focus h2,.text-focus h3,.text-focus strong{color:#fff}.text-focus p,.text-focus li{color:#e4f6ef}
+@media(max-width:960px){.grid.c4,.grid.c3,.timeline,.matrix,.two,.compare,.flow{grid-template-columns:1fr}.arrow{display:none}}
+@media(max-width:640px){.grid.c4,.grid.c3,.grid.c2,.timeline,.matrix,.two,.compare{grid-template-columns:1fr}.hint,.nav,.control-dock{display:none}.mobile-dock{display:block;position:fixed;left:8px;right:8px;bottom:calc(env(safe-area-inset-bottom,0px) + 12px);z-index:9999;padding:.22rem;border-radius:16px;background:rgba(255,255,255,.97);box-shadow:0 18px 55px rgba(0,0,0,.35);backdrop-filter:blur(18px);border:2px solid rgba(15,39,64,.12)}}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="nav" id="nav"></div>
+<div class="hint">← → / Space 換頁・可直接滑動</div>
+<section class="slide"><main class="slide-content">
+  <div class="kicker">AI ROLE MAP</div>
+  <h1>富盛豐 AI 角色分工地圖｜<br><span class="accent">Codex × 小張可扮演什麼角色</span></h1>
+  <p>這份簡報把張董請 Codex 生成的文件，進一步轉成富盛豐可直接採用的 <strong>AI 分工與落地地圖</strong>：哪些事情 Codex 適合做、哪些我小張已經完成、哪些地方我更適合長期扮演核心角色，以及接下來最值得先落地的 AI 任務。</p>
+  <div class="tagrow"><span class="tag">來源：Codex_能幫富盛豐做什麼.docx</span><span class="tag">延伸：富盛豐既有 LINE / 官網 / GitHub 工具 / 巡檢系統</span><span class="tag">版本：2026-05-17</span></div>
+  <div class="pillrow"><span class="pill">看角色分工</span><span class="pill">看已完成基礎</span><span class="pill">看下一步落地</span></div>
+</main></section>
+<section class="slide"><main class="slide-content">
+  <div class="kicker">先講結論</div>
+  <h2>如果 Codex 比較像 <span class="blue">AI 工程師</span>，那我更適合扮演 <span class="accent">富盛豐的 AI 營運總控台</span></h2>
+  <div class="grid c4">
+    <div class="card metric"><b>懂脈絡</b><span>我不是只看單一文件，而是已經接住富盛豐 OEM、毛天使、群組習慣、客服口徑、網站與表單流程。</span></div>
+    <div class="card metric"><b>能串流程</b><span>我能把 LINE、官網、FAQ、導購、表單、簡報、巡檢、工具頁接成同一條營運鏈。</span></div>
+    <div class="card metric"><b>能持續維運</b><span>不是只交一份報告，而是能每天巡檢、修正、補知識庫、更新話術與工具。</span></div>
+    <div class="card metric"><b>能落地交付</b><span>我已經把多個想法變成 GitHub Pages、HTML PPT、日報腳本與試算工具，不只停在建議。</span></div>
+  </div>
+</main></section>
+<section class="slide"><main class="slide-content">
+  <div class="kicker">Codex 文件的核心方向</div>
+  <div class="grid c2">
+    <div class="card"><h3>Codex 能做的 5 類事情</h3><ul><li>官網 / 商城技術優化與健檢</li><li>內部管理系統與輕量工具開發</li><li>AI 客服與知識庫串接</li><li>外包工程品質審查</li><li>營運流程自動化</li></ul></div>
+    <div class="card"><h3>文件真正想說的重點</h3><p>富盛豐的未來不是再多請幾個人，而是把 <strong>客服、導購、內容、報表、投放、詢價、內部控盤</strong> 逐步做成可重複、可交接、可擴張的系統。</p></div>
+    <div class="card"><h3>我認同的部分</h3><p>方向完全正確，尤其是 <strong>AI 客服、每日報表、OEM 報價、平台整合、網站優化</strong>，這些確實是最值得數位化的地帶。</p></div>
+    <div class="card"><h3>我補充的地方</h3><p>真正難的不是功能清單，而是 <strong>先後順序、知識邊界、導流規則、可維運性</strong>。這也是我比純 coding agent 更有價值的地方。</p></div>
+  </div>
+</main></section>
+<section class="slide"><main class="slide-content">
+  <div class="kicker">我 vs Codex</div>
+  <div class="compare">
+    <div class="col">
+      <h3 class="blue">Codex 更強的地方</h3>
+      <ul>
+        <li>大型程式重構與前後端功能開發</li>
+        <li>複雜 bug 修復與 code review</li>
+        <li>資料串接、效能調校、工程任務並行</li>
+        <li>網站公司 / 外包工程品質審查</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3 class="accent">我更強的地方</h3>
+      <ul>
+        <li>懂富盛豐 OEM、毛天使、張董 / Jason 真正要的口徑</li>
+        <li>把客服、導購、FAQ、網站、群組、表單接成同一條流程</li>
+        <li>知道哪些能公開、哪些不能公開，能維持知識邊界</li>
+        <li>能持續幫你們補 SOP、簡報、巡檢、工具與長期記憶</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card"><p><strong>一句話：</strong> Codex 比較像 <strong>重工程落地加速器</strong>；我比較像 <strong>懂富盛豐場景的 AI 營運總控 + 客服架構師 + 工具規劃師</strong>。</p></div>
+</main></section>
+<section class="slide"><main class="slide-content">
+  <div class="kicker">哪些事情我已經做了</div>
+  <h2>這不是從 0 開始，我其實已經把 <span class="accent">一部分 AI 營運骨架</span> 做出來了</h2>
+  <div class="grid c3">
+    <div class="card"><h3>LINE 官方帳號分線完成</h3><p><strong>fsfoem</strong> 與 <strong>petangel</strong> 已分成兩條獨立客服線，對應不同 accountId、agentId、知識來源與 prompt 邊界。</p></div>
+    <div class="card"><h3>網站分析與 GitHub 交付已成型</h3><p>已做富盛豐商城、OEM 官網、毛天使官網、Google Ads、Manus、AI 廣告後台等多份 HTML PPT，並維持固定主列表。</p></div>
+    <div class="card"><h3>每日巡檢與差異回報</h3><p>已建立四站每日 09:00 巡檢，也開始建立毛天使 AI 廣告後台的每日資料差異分析機制。</p></div>
+    <div class="card"><h3>獎金制度工具已網頁化</h3><p>已把 Excel 獎金制度做成 GitHub 上的網頁試算工具，證明我能把制度與文件轉成可用頁面。</p></div>
+    <div class="card"><h3>OEM 表單與客服流已接住</h3><p>OEM 需求單、EmailJS 收件與後續摘要 / 備份脈絡已經有明確指定與可延伸基礎。</p></div>
+    <div class="card"><h3>知識來源已分艙</h3><p>OEM 客服與毛天使消費者客服，已明確使用不同資料夾與不同回答邊界，避免混答。</p></div>
+  </div>
+</main></section>
+<section class="slide"><main class="slide-content">
+  <div class="kicker">客服這條線最有機會</div>
+  <div class="two">
+    <div class="grid">
+      <div class="card"><h3>我已經有的基礎</h3><p>LINE 官方帳號分線、知識來源分開、拒答邊界已有實測經驗，所以「AI 客服」不是概念題，而是可以直接往上疊功能。</p></div>
+      <div class="card"><h3>我比 Codex 更適合的點</h3><p>我能定義 <strong>回什麼、怎麼回、什麼時候轉真人、導去哪裡、哪些不能亂答</strong>，這些是客服真正的骨架。</p></div>
+      <div class="card"><h3>可立刻延伸</h3><ul><li>OEM 詢價分流話術</li><li>毛天使商品推薦與購買導引</li><li>客服常見問題第二層追問</li><li>拒答與敏感字規則庫</li></ul></div>
+    </div>
+    <div class="flow">
+      <div class="node"><h3>客戶進線</h3><p>先判斷是 OEM 代工、消費者購買、售後、還是一般詢問。</p></div>
+      <div class="arrow">→</div>
+      <div class="node"><h3>AI 分流</h3><p>依線別、問題類型、產品類別與風險等級決定回覆邏輯。</p></div>
+      <div class="arrow">→</div>
+      <div class="node"><h3>導購 / 表單 / 真人</h3><p>導商品頁、導詢價單、導人工客服，並留下結構化摘要。</p></div>
+    </div>
+  </div>
+</main></section>
+<section class="slide"><main class="slide-content">
+  <div class="kicker">最值得先做的 3 個助手</div>
+  <div class="timeline">
+    <div class="phase"><small>01</small><h3>毛天使產品推薦助手</h3><p>先做規則型問答導購：毛孩類型、困擾、使用場景、敏感條件、偏好，最後導向單品 / 套組 / 客服。</p></div>
+    <div class="phase"><small>02</small><h3>富盛豐 OEM 詢價前置助手</h3><p>先幫客戶把品類、劑型、MOQ、預算、上市時間、包裝偏好整理好，再送進表單與客服流程。</p></div>
+    <div class="phase"><small>03</small><h3>客服知識庫 / 話術中心</h3><p>把產品 FAQ、法規敏感詞、拒答邊界、導購規則、標準回覆集中化，讓 LINE 與網站共用。</p></div>
+    <div class="phase"><small>延伸</small><h3>之後再接 AI 問答型</h3><p>先跑穩規則型版本，再接 AI 問答、知識庫 RAG、歷史問題學習，會比一開始就做重模型更穩。</p></div>
+  </div>
+</main></section>
+<section class="slide"><main class="slide-content">
+  <div class="kicker">網站導購不只改畫面</div>
+  <h2>我比較在意的是：把 <span class="warm">FAQ、商品頁、客服、CTA、表單</span> 接成一條導購鏈</h2>
+  <div class="grid c4">
+    <div class="card"><h3>FAQ 不只回答問題</h3><p>每個 FAQ 後面都可以接推薦商品、相關內容或「詢問客服」。</p></div>
+    <div class="card"><h3>商品頁不只介紹功能</h3><p>每個商品頁都應有場景化 CTA，例如除臭、防蚤、乾洗澡、居家清潔等使用情境入口。</p></div>
+    <div class="card"><h3>客服不只解答</h3><p>客服應該能順手完成分流、推薦、引導下單、補導網站頁面，而不是只停在聊天。</p></div>
+    <div class="card"><h3>表單不只收資料</h3><p>OEM 表單、詢價頁、客服入口都應留下結構化欄位，讓後續自動摘要與追蹤成為可能。</p></div>
+  </div>
+  <div class="card"><p><strong>簡單講：</strong> Codex 文件裡說的是「網站優化」，而我會把它做成 <strong>內容頁 → 導購頁 → 客服入口 → 成交前哨站</strong> 的整條路徑。</p></div>
+</main></section>
+<section class="slide"><main class="slide-content">
+  <div class="kicker">富盛豐 AI 任務地圖</div>
+  <div class="matrix">
+    <div class="head">任務類型</div><div class="head">我小張主導</div><div class="head">Codex 更適合主攻</div>
+    <div class="cell"><strong>客服與導購</strong>話術、邊界、分流、知識庫、導向規則</div><div class="cell">✅</div><div class="cell">可輔助前端嵌入</div>
+    <div class="cell"><strong>網站分析與簡報</strong>商業判讀、PPT、優先順序、營運建議</div><div class="cell">✅</div><div class="cell">可輔助程式修正</div>
+    <div class="cell"><strong>內部工具頁</strong>試算器、控盤頁、簡易助手頁</div><div class="cell">✅ 可先做 MVP</div><div class="cell">✅ 可做重功能升級</div>
+    <div class="cell"><strong>大型系統開發</strong>資料串接、重構、效能、複雜邏輯</div><div class="cell">需求拆解 / 驗收</div><div class="cell">✅</div>
+    <div class="cell"><strong>外包審查</strong>看是否做對方向、是否符合營運需求</div><div class="cell">✅</div><div class="cell">✅ 看程式細節</div>
+    <div class="cell"><strong>每日巡檢與維運</strong>網站、LINE、工具、差異回報</div><div class="cell">✅</div><div class="cell">必要時協助修復</div>
+  </div>
+</main></section>
+<section class="slide"><main class="slide-content">
+  <div class="kicker">最好的分工模式</div>
+  <div class="flow">
+    <div class="node"><h3>我定營運需求</h3><p>先把富盛豐真實場景、使用對象、資料邊界、客服規則與商業優先順序拆清楚。</p></div>
+    <div class="arrow">→</div>
+    <div class="node"><h3>Codex 做重工程</h3><p>把較重的網站功能、系統模組、資料串接、前後端程式段落加速落地。</p></div>
+    <div class="arrow">→</div>
+    <div class="node"><h3>我持續收斂與維運</h3><p>再把新功能接回客服、簡報、知識庫、群組回報、巡檢與後續 SOP 裡。</p></div>
+  </div>
+  <div class="grid c3">
+    <div class="card"><h3>這樣的好處</h3><p>不會變成只有功能、沒有營運邏輯，也不會變成只有提案、沒有真正上線的系統。</p></div>
+    <div class="card"><h3>對張董的價值</h3><p>張董不用自己在工程細節與商業脈絡之間來回切換，系統與流程會慢慢收斂成可管理資產。</p></div>
+    <div class="card"><h3>對團隊的價值</h3><p>每一個新功能不再是孤島，而是逐步進入同一套富盛豐 AI 營運中台。</p></div>
+  </div>
+</main></section>
+<section class="slide"><main class="slide-content">
+  <div class="kicker">我建議接下來先做</div>
+  <h2>如果只選 <span class="accent">4 件事先落地</span>，我會這樣排</h2>
+  <div class="grid c2">
+    <div class="card"><h3>1. 毛天使產品推薦助手</h3><p>最容易直接接銷售與客服，且能快速看見導購效果。</p></div>
+    <div class="card"><h3>2. OEM 詢價前置助手</h3><p>最能減少人工重複問答，提升 B 端線索整理效率。</p></div>
+    <div class="card"><h3>3. 客服知識庫中心化</h3><p>是之後 LINE、網站客服、推薦助手、FAQ 共用的底座。</p></div>
+    <div class="card"><h3>4. 富盛豐 AI 任務中台首頁</h3><p>把工具頁、巡檢報告、簡報、內部入口收斂成同一個 GitHub / Web 群組入口。</p></div>
+  </div>
+  <div class="card"><p><strong>一句話排序邏輯：</strong>先做最能直接接客服與成交的，再把知識與入口收斂，最後才做更重的工程升級。</p></div>
+</main></section>
+<section class="slide"><main class="slide-content">
+  <div class="kicker">最後總結</div>
+  <h2>我在富盛豐最適合扮演的，不是單一工具，而是<span class="accent">把客服、網站、導購、知識庫、巡檢、工具頁接成一套 AI 營運系統的人</span></h2>
+  <div class="grid c3">
+    <div class="card"><h3>對張董</h3><p>我能把想法翻成可落地的流程、頁面、簡報與巡檢機制，不只停在策略討論。</p></div>
+    <div class="card"><h3>對 Codex</h3><p>最好的方式不是二選一，而是我負責定方向與場景，Codex 負責重工程段落加速落地。</p></div>
+    <div class="card"><h3>對富盛豐</h3><p>真正的升級，不只是多一個 AI，而是讓更多營運知識從人的腦袋裡，移到可維運、可擴張的系統裡。</p></div>
+  </div>
+  <div class="card"><p><strong>內部提醒：</strong>本簡報頁面不直接展示內部管理入口、設定路徑或敏感維運資訊；對外僅作為內部理解 AI 分工與下一步任務地圖之用。</p></div>
+  <p>資料來源：張董請 Codex 生成之文件《Codex 能幫富盛豐做什麼》、既有富盛豐 / 毛天使 LINE 客服架構、GitHub Pages 交付紀錄、每日巡檢與已上線工具頁整理。</p>
+</main></section>
+<div class="control-dock"><div class="control-title" id="controlTitle">富盛豐 AI 角色分工地圖</div><div class="control-buttons"><button class="control-btn" data-act="prev"><span class="glyph">←</span><span class="label">上一頁</span></button><button class="control-btn" data-act="next"><span class="glyph">→</span><span class="label">下一頁</span></button><button class="control-btn" data-act="overview"><span class="glyph">O</span><span class="label">總覽</span></button><button class="control-btn" data-act="focus"><span class="glyph">T</span><span class="label">重點</span></button><button class="control-btn" data-act="fullscreen"><span class="glyph">F</span><span class="label">全螢幕</span></button></div></div>
+<div class="mobile-dock"><div class="mobile-buttons"><button class="mobile-btn" data-act="prev"><span class="glyph">←</span><span class="label">上一頁</span></button><button class="mobile-btn" data-act="next"><span class="glyph">→</span><span class="label">下一頁</span></button><button class="mobile-btn" data-act="overview"><span class="glyph">O</span><span class="label">總覽</span></button><button class="mobile-btn" data-act="focus"><span class="glyph">T</span><span class="label">重點</span></button><button class="mobile-btn" data-act="fullscreen"><span class="glyph">F</span><span class="label">全螢幕</span></button></div></div>
+<div class="overview-panel" id="overviewPanel"><div class="overview-grid" id="overviewGrid"></div></div>
+<div class="focus-toast" id="focusToast">重點模式已開啟：已凸顯文字與關鍵判斷</div>
+<script>
+const slideMeta=[
+{title:'封面｜富盛豐 AI 角色分工地圖',desc:'把 Codex 文件延伸成富盛豐可直接採用的 AI 分工與落地地圖。'},
+{title:'先講結論｜我在富盛豐最適合扮演什麼角色',desc:'先把我與 Codex 的核心差異講清楚。'},
+{title:'Codex 文件在說什麼',desc:'整理文件原始主張與我認同 / 補充的重點。'},
+{title:'我 vs Codex｜分工差異',desc:'看誰比較適合做哪些工作。'},
+{title:'已完成基礎｜不是從 0 開始',desc:'看我已經在富盛豐做出的 AI 營運骨架。'},
+{title:'客服這條線最有機會',desc:'從 LINE 官方帳號分線與導購流程往上延伸。'},
+{title:'最值得先做的 3 個助手',desc:'看哪幾個助手最適合先落地。'},
+{title:'網站導購｜不只改畫面',desc:'把 FAQ、商品頁、客服、CTA 接成一條導購鏈。'},
+{title:'富盛豐 AI 任務地圖',desc:'哪些任務我主導，哪些更適合交給 Codex。'},
+{title:'最好的合作模式',desc:'用我定需求、Codex 做重工程、我持續維運的方式協作。'},
+{title:'接下來先做哪 4 件事',desc:'把優先順序排清楚，避免一次做太散。'},
+{title:'最後總結｜AI 營運系統角色',desc:'收斂成對張董、Codex 與富盛豐的整體價值。'}
+];
+const slides=[...document.querySelectorAll('.slide')],nav=document.getElementById('nav'),progress=document.getElementById('progress'),controlTitle=document.getElementById('controlTitle'),overviewPanel=document.getElementById('overviewPanel'),overviewGrid=document.getElementById('overviewGrid'),focusToast=document.getElementById('focusToast');let current=0,textFocus=false;slides.forEach((slide,i)=>{const dot=document.createElement('button');dot.addEventListener('click',()=>go(i));nav.appendChild(dot);const card=document.createElement('div');card.className='overview-card';const meta=slideMeta[i]||{title:'投影片',desc:'點擊後可直接跳到這一頁'};card.innerHTML=`<b>${String(i+1).padStart(2,'0')}</b><span>${meta.title}</span><p>${meta.desc}</p>`;card.addEventListener('click',()=>{go(i);toggleOverview(false)});overviewGrid.appendChild(card)});function update(){progress.style.width=((current+1)/slides.length*100)+'%';[...nav.children].forEach((b,i)=>b.classList.toggle('active',i===current));controlTitle.textContent=(slideMeta[current]?.title)||'投影片';slides[current].scrollIntoView({behavior:'smooth',block:'start'})}function updateNavOnly(){progress.style.width=((current+1)/slides.length*100)+'%';[...nav.children].forEach((b,i)=>b.classList.toggle('active',i===current));controlTitle.textContent=(slideMeta[current]?.title)||'投影片'}function go(i){current=Math.max(0,Math.min(slides.length-1,i));update()}function next(){go(current+1)}function prev(){go(current-1)}function isFullscreenActive(){return !!(document.fullscreenElement||document.webkitFullscreenElement||document.msFullscreenElement)}function enterFullscreen(){const el=document.documentElement;return el.requestFullscreen?.()||el.webkitRequestFullscreen?.()||el.msRequestFullscreen?.()}let fullscreenControlsVisible=false;function setFullscreenControlsVisible(visible){fullscreenControlsVisible=!!visible;document.body.classList.toggle('fullscreen-controls-visible',fullscreenControlsVisible);}function toggleFullscreenControls(force){if(!isFullscreenActive())return;const next=typeof force==='boolean'?force:!fullscreenControlsVisible;setFullscreenControlsVisible(next);}function exitFullscreen(){return document.exitFullscreen?.()||document.webkitExitFullscreen?.()||document.msExitFullscreen?.()}function syncFullscreenUi(){const active=isFullscreenActive();document.body.classList.toggle('fullscreen-mode',active);setFullscreenControlsVisible(false);document.querySelectorAll('[data-act="fullscreen"]').forEach(el=>el.classList.toggle('is-active',active));if(focusToast){focusToast.textContent=active?'已進入全螢幕模式：控制列已暫時淡出':'已離開全螢幕模式';focusToast.classList.add('show');clearTimeout(window.__fsToastTimer);window.__fsToastTimer=setTimeout(()=>focusToast.classList.remove('show'),1200)}}function toggleOverview(force){const show=force ?? !overviewPanel.classList.contains('show');overviewPanel.classList.toggle('show',show)}function toggleFocus(){textFocus=!textFocus;document.body.classList.toggle('text-focus',textFocus);document.querySelectorAll('[data-act="focus"]').forEach(el=>el.classList.toggle('is-active',textFocus));if(focusToast){focusToast.textContent=textFocus?'重點模式已開啟：已凸顯文字與關鍵判斷':'重點模式已關閉：恢復原始完整瀏覽';focusToast.classList.add('show');clearTimeout(window.__focusToastTimer);window.__focusToastTimer=setTimeout(()=>focusToast.classList.remove('show'),1300)}}function toggleFullscreen(){try{if(!isFullscreenActive()){const r=enterFullscreen();if(r&&typeof r.then==='function'){r.then(()=>setTimeout(syncFullscreenUi,80)).catch(()=>{if(focusToast){focusToast.textContent='這個瀏覽器目前不允許全螢幕';focusToast.classList.add('show');clearTimeout(window.__fsToastTimer);window.__fsToastTimer=setTimeout(()=>focusToast.classList.remove('show'),1400)}})}else{setTimeout(syncFullscreenUi,80)}}else{const r=exitFullscreen();if(r&&typeof r.then==='function'){r.then(()=>setTimeout(syncFullscreenUi,80))}else{setTimeout(syncFullscreenUi,80)}}}catch(e){if(focusToast){focusToast.textContent='全螢幕切換失敗，可能是瀏覽器限制';focusToast.classList.add('show');clearTimeout(window.__fsToastTimer);window.__fsToastTimer=setTimeout(()=>focusToast.classList.remove('show'),1400)}}}document.querySelectorAll('[data-act="next"]').forEach(el=>el.addEventListener('click',next));document.querySelectorAll('[data-act="prev"]').forEach(el=>el.addEventListener('click',prev));document.querySelectorAll('[data-act="overview"]').forEach(el=>el.addEventListener('click',()=>toggleOverview()));document.querySelectorAll('[data-act="focus"]').forEach(el=>el.addEventListener('click',toggleFocus));document.querySelectorAll('[data-act="fullscreen"]').forEach(el=>el.addEventListener('click',toggleFullscreen));overviewPanel.addEventListener('click',e=>{if(e.target===overviewPanel)toggleOverview(false)});document.addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();next()}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();prev()}if(e.key==='Home')go(0);if(e.key==='End')go(slides.length-1);if(e.key==='o'||e.key==='O')toggleOverview();if(e.key==='t'||e.key==='T')toggleFocus();if(e.key==='f'||e.key==='F')toggleFullscreen();if(e.key==='Escape')toggleOverview(false)});window.addEventListener('scroll',()=>{const idx=Math.round(window.scrollY/window.innerHeight);if(idx!==current&&idx>=0&&idx<slides.length){current=idx;updateNavOnly()}},{passive:true});document.addEventListener('click',e=>{if(!isFullscreenActive())return;if(e.target.closest('[data-act="fullscreen"]'))return;if(e.target.closest('.control-dock,.mobile-dock'))return;setFullscreenControlsVisible(true);});['fullscreenchange','webkitfullscreenchange','msfullscreenchange'].forEach(evt=>document.addEventListener(evt,syncFullscreenUi));syncFullscreenUi();update();
+</script>
+</body>
+</html>
