@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Manus 最新介紹與使用教學｜給張董與員工的 HTML 圖文簡報</title>
+<meta name="description" content="整合官方文件、官方部落格與教學文章，快速看懂 Manus 是什麼、適合誰、怎麼開始用，以及企業導入時該注意什麼。" />
+<style>
+:root{--bg:#07131b;--bg2:#102532;--ink:#f6f3ea;--muted:#bfd0d8;--line:rgba(255,255,255,.16);--panel:rgba(255,255,255,.08);--panel2:rgba(9,20,28,.85);--mint:#6ef1d0;--green:#9deb67;--amber:#ffc276;--blue:#8fc5ff;--red:#ff857e;--shadow:0 24px 70px rgba(0,0,0,.32);--title:clamp(2rem,5vw,4.7rem);--h2:clamp(1.5rem,3vw,3rem);--body:clamp(.88rem,1.2vw,1.05rem);--pad:clamp(1rem,3vw,3rem)}
+*{box-sizing:border-box}html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC",sans-serif}html{scroll-snap-type:y mandatory;scroll-behavior:smooth}body{counter-reset:slide;overflow-x:hidden}a{color:var(--mint)}
+.slide{position:relative;width:100vw;height:100vh;height:100dvh;scroll-snap-align:start;display:flex;flex-direction:column;overflow:hidden;background:radial-gradient(circle at 18% 16%,rgba(110,241,208,.14),transparent 24%),radial-gradient(circle at 84% 82%,rgba(143,197,255,.1),transparent 28%),linear-gradient(135deg,var(--bg),var(--bg2) 52%,var(--bg))}.slide::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.78),transparent 82%)}.slide::after{counter-increment:slide;content:counter(slide,decimal-leading-zero);position:absolute;right:1.2rem;bottom:1rem;color:rgba(255,255,255,.22);font:600 .86rem ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em}
+.slide-content{position:relative;z-index:1;max-width:1240px;width:100%;margin:auto;padding:var(--pad);display:flex;flex-direction:column;gap:clamp(.8rem,1.8vw,1.35rem)}
+.kicker{color:var(--green);font:700 .82rem ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.16em;text-transform:uppercase}.tagrow,.pillrow{display:flex;flex-wrap:wrap;gap:.55rem}.tag,.pill{display:inline-flex;align-items:center;padding:.42rem .72rem;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.08);color:var(--ink);font-size:.82rem}
+h1,h2,h3,p{margin:0}h1{font-size:var(--title);line-height:.92;letter-spacing:-.06em}h2{font-size:var(--h2);line-height:1.03;letter-spacing:-.04em}h3{font-size:clamp(1rem,1.5vw,1.24rem)}p,li{font-size:var(--body);line-height:1.58;color:var(--muted)}strong{color:var(--ink)}.accent{color:var(--mint)}.warm{color:var(--amber)}.blue{color:var(--blue)}
+.grid{display:grid;gap:1rem}.grid.c2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid.c3{grid-template-columns:repeat(3,minmax(0,1fr))}.grid.c4{grid-template-columns:repeat(4,minmax(0,1fr))}.two{display:grid;grid-template-columns:1.02fr .98fr;gap:1.2rem;align-items:center}.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:.8rem;align-items:center}.arrow{font-size:2rem;color:var(--mint);text-align:center}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:1rem 1.08rem;backdrop-filter:blur(16px);box-shadow:var(--shadow)}.node{min-height:170px;background:var(--panel2);border:1px solid var(--line);border-radius:24px;padding:1rem}.metric b{display:block;font-size:clamp(1.8rem,4vw,3.2rem);line-height:1;color:var(--ink);letter-spacing:-.05em}.metric span{display:block;margin-top:.35rem}
+.visual{position:relative;background:linear-gradient(160deg,rgba(255,255,255,.14),rgba(255,255,255,.05));border:1px solid var(--line);border-radius:28px;padding:.8rem;overflow:hidden;box-shadow:var(--shadow)}.visual img{width:100%;height:min(56vh,520px);object-fit:cover;border-radius:18px;display:block;background:#fff}.visual.contain img{object-fit:contain;background:#f6f5ef}.caption{position:absolute;left:1.2rem;top:1rem;background:rgba(8,17,22,.78);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:.42rem .72rem;font-size:.78rem;color:var(--ink)}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}.phase{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:1rem;position:relative}.phase::before{content:"";display:block;width:16px;height:16px;border-radius:50%;background:var(--mint);box-shadow:0 0 18px var(--mint);margin-bottom:.7rem}.phase small{font:700 .75rem ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--green)}
+.bar-chart{display:flex;flex-direction:column;gap:.7rem}.bar{display:grid;grid-template-columns:180px 1fr auto;align-items:center;gap:.7rem}.bar-track{height:14px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}.bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--mint),var(--green))}.bar-fill.alt{background:linear-gradient(90deg,var(--amber),#ffd89b)}.bar-fill.blue{background:linear-gradient(90deg,var(--blue),#cde1ff)}.bar-fill.red{background:linear-gradient(90deg,var(--red),#ffb2ac)}
+.note{padding-left:1rem;border-left:4px solid var(--mint)}
+.control-dock{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 18px);transform:translateX(-50%);z-index:9999;display:flex;align-items:center;gap:.6rem;width:min(94vw,840px);padding:.54rem .62rem;border-radius:24px;background:rgba(255,255,255,.97);box-shadow:0 18px 55px rgba(0,0,0,.35);backdrop-filter:blur(18px);border:2px solid rgba(15,39,64,.12)}.control-title{flex:1 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:900;color:#12324a;font-size:clamp(.84rem,2vw,1.06rem)}.control-buttons{display:flex;gap:.42rem}.control-btn{min-width:72px;height:50px;padding:.24rem .56rem;border:0;border-radius:15px;background:#0f2740;color:#fff;font-weight:900;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.02;box-shadow:0 8px 18px rgba(15,39,64,.28)}.control-btn:hover{background:#1b4b74}.glyph{font-size:1.02rem}.label{margin-top:.16rem;font-size:.64rem}.control-btn.is-active,.mobile-btn.is-active{background:#1b6b57!important;box-shadow:0 0 0 2px rgba(104,240,209,.35),0 8px 18px rgba(15,39,64,.28)}
+.mobile-dock{display:none}.mobile-buttons{display:grid;grid-template-columns:repeat(5,1fr);gap:.15rem;width:100%}.mobile-btn{height:42px;border:0;border-radius:10px;background:#0f2740;color:#fff;font-weight:900;display:flex;flex-direction:column;align-items:center;justify-content:center}.mobile-btn .glyph{font-size:.76rem}.mobile-btn .label{font-size:.48rem;margin-top:.1rem}
+.nav{position:fixed;right:14px;top:50%;translate:0 -50%;display:flex;flex-direction:column;gap:8px;z-index:12}.nav button{width:9px;height:9px;border:0;border-radius:999px;background:rgba(255,255,255,.24);cursor:pointer}.nav button.active{height:24px;background:var(--mint)}.progress{position:fixed;left:0;top:0;height:4px;width:0;background:linear-gradient(90deg,var(--mint),var(--green),var(--amber));z-index:13}.hint{position:fixed;left:16px;bottom:14px;color:rgba(255,255,255,.46);font-size:.78rem;z-index:12}.overview-panel{position:fixed;inset:0;display:none;z-index:9998;background:rgba(4,10,14,.76);backdrop-filter:blur(14px);padding:clamp(1rem,4vw,3rem);overflow:auto}.overview-panel.show{display:block}.overview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1rem;max-width:1100px;margin:0 auto}.overview-card{min-height:120px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:1rem;color:#fff;cursor:pointer;box-shadow:0 20px 60px rgba(0,0,0,.25)}.overview-card b{display:block;color:var(--green);font:700 .76rem ui-monospace,SFMono-Regular,Menlo,monospace;margin-bottom:.45rem}.overview-card span{display:block;font-weight:800;line-height:1.28;margin-bottom:.45rem}.overview-card p{margin:0;color:rgba(255,255,255,.78);font-size:.88rem;line-height:1.5}.focus-toast{position:fixed;left:50%;top:18px;transform:translateX(-50%);z-index:2147483647;background:rgba(9,25,31,.92);color:#fff;padding:.62rem .9rem;border:1px solid rgba(104,240,209,.34);border-radius:999px;font-size:.84rem;box-shadow:0 18px 40px rgba(0,0,0,.28);opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease}.focus-toast.show{opacity:1;transform:translateX(-50%) translateY(0)} body.fullscreen-mode .control-dock,body.fullscreen-mode .mobile-dock,body.fullscreen-mode .nav,body.fullscreen-mode .hint{opacity:0;pointer-events:none} body.fullscreen-mode .progress{height:6px}
+.text-focus img{filter:saturate(.35) brightness(.42);opacity:.22}.text-focus .visual{border-color:rgba(104,240,209,.45)!important}.text-focus .card,.text-focus .visual,.text-focus .node,.text-focus .phase,.text-focus .note{border-color:rgba(104,240,209,.55)!important;box-shadow:0 0 0 2px rgba(104,240,209,.14),var(--shadow)}.text-focus h2,.text-focus h3,.text-focus strong{color:#fff}.text-focus p,.text-focus li{color:#e4f6ef}
+@media(max-width:960px){.grid.c4,.grid.c3,.timeline{grid-template-columns:repeat(2,1fr)}.two,.flow{grid-template-columns:1fr}.arrow{display:none}}
+@media(max-width:640px){.grid.c4,.grid.c3,.grid.c2,.timeline{grid-template-columns:1fr}.hint,.nav,.control-dock{display:none}.mobile-dock{display:block;position:fixed;left:8px;right:8px;bottom:calc(env(safe-area-inset-bottom,0px) + 12px);z-index:9999;padding:.22rem;border-radius:16px;background:rgba(255,255,255,.97);box-shadow:0 18px 55px rgba(0,0,0,.35);backdrop-filter:blur(18px);border:2px solid rgba(15,39,64,.12)}.visual img{height:34vh}}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="nav" id="nav"></div>
+<div class="hint">← → / Space 換頁・可直接滑動</div>
+
+<section class="slide"><main class="slide-content">
+  <div class="kicker">MANUS AI EXECUTIVE GUIDE</div>
+  <h1>Manus 最新介紹與<br><span class="accent">使用教學</span></h1>
+  <p>這份是給 <strong>張董與內部員工</strong> 的快速版本：幫大家用最短時間看懂 Manus 是什麼、能幫公司做什麼、怎麼開始用，以及導入時要注意哪些風險與邊界。</p>
+  <div class="tagrow"><span class="tag">主題：Manus 通用 AI Agent</span><span class="tag">版本：2026-05 整理</span><span class="tag">形式：HTML 圖文簡報</span></div>
+  <div class="pillrow"><span class="pill">給主管看趨勢</span><span class="pill">給員工看用法</span><span class="pill">給團隊看落地流程</span></div>
+</main></section>
+
+<section class="slide"><main class="slide-content">
+  <div class="kicker">先看結論</div>
+  <h2>一句話：Manus 不是只會回答問題的聊天 AI，<span class="accent">它更像會自己做事的數位員工</span></h2>
+  <div class="grid c4">
+    <div class="card metric"><b>1</b><span>給它目標，不是只問答案；它會自己拆步驟、執行、交付成果。</span></div>
+    <div class="card metric"><b>3</b><span>核心概念很好記：規劃、執行、驗證。</span></div>
+    <div class="card metric"><b>2</b><span>最適合兩種工作：重複型知識工作、跨工具多步驟任務。</span></div>
+    <div class="card metric"><b>1st</b><span>導入重點不是先追最炫功能，而是先找出公司最耗時的固定流程。</span></div>
+  </div>
+  <div class="grid c3">
+    <div class="card"><h3>主管視角</h3><p>它最有價值的地方不是寫文案，而是把研究、整理、簡報、彙整、追蹤這種流程型工作縮短。</p></div>
+    <div class="card"><h3>員工視角</h3><p>它不是取代你，而是先接掉「找資料、整理、轉格式、做初稿」這些耗時動作。</p></div>
+    <div class="card"><h3>公司視角</h3><p>如果用得對，Manus 更像內部流程加速器；如果用得亂，就會變成成本高又不穩的玩具。</p></div>
+  </div>
+</main></section>
+
+<section class="slide"><main class="slide-content">
+  <div class="kicker">來源基礎</div>
+  <div class="two">
+    <div class="visual"><span class="caption">你指定的 ADBest 文章</span><img src="assets/adbest-manus.png" alt="ADBest Manus 文章截圖"></div>
+    <div class="grid">
+      <div class="card"><h3>本次資料怎麼組</h3><p>這份簡報不是只摘錄單一文章，而是把 <strong>你指定的 ADBest 介紹</strong>、<strong>Manus 官方文件</strong>、<strong>官方 blog / pricing / Slack 整合資訊</strong>，以及外部教學文一起整合。</p></div>
+      <div class="card"><h3>資料角色分工</h3><p>外部教學文幫我們抓市場上常見說法與使用情境；官方文件則用來校正「產品能力、方案、整合方向」這些比較需要準確的資訊。</p></div>
+      <div class="card"><h3>我的取徑</h3><p>這份內容優先站在「公司真的要用時，大家該怎麼理解與上手」的角度，不做單純工具吹捧。</p></div>
+    </div>
+  </div>
+</main></section>
+
+<section class="slide"><main class="slide-content">
+  <div class="kicker">產品定位</div>
+  <h2>Manus 的本質，是把「問 AI」往前推成「<span class="warm">委派 AI 完成一整段工作</span>」</h2>
+  <div class="flow">
+    <div class="node"><h3>傳統聊天 AI</h3><p>你問一步，它答一步。你還是得自己整理資訊、做決定、轉格式、交成果。</p></div>
+    <div class="arrow">→</div>
+    <div class="node"><h3>Manus</h3><p>你給一個目標，它會自己上網、整理、跑工具、彙整結果，最後給你接近可直接用的成品。</p></div>
+    <div class="arrow">→</div>
+    <div class="node"><h3>實際意義</h3><p>它比較像「執行型助手」，而不是只會陪你討論的 AI 顧問。</p></div>
+  </div>
+  <p class="note">官方文件的說法很直接：Manus 是一個在沙盒虛擬電腦中運作、可存取網路與檔案系統、能獨立完成長任務的通用 AI Agent。</p>
+</main></section>
+
+<section class="slide"><main class="slide-content">
+  <div class="kicker">運作邏輯</div>
+  <h2>理解 Manus，先記住這個最簡單模型：<span class="accent">規劃 → 執行 → 驗證</span></h2>
+  <div class="grid c3">
+    <div class="card"><h3>Planner／規劃者</h3><p>先把你一句模糊需求拆成可執行任務，例如先找資料、再比較、再輸出簡報。</p></div>
+    <div class="card"><h3>Executor／執行者</h3><p>去操作網站、處理檔案、執行程式、分析資料，把每個步驟真的做出來。</p></div>
+    <div class="card"><h3>Verifier／驗證者</h3><p>檢查內容是否偏題、格式是否正確、結果是否可交付，必要時退回重做。</p></div>
+  </div>
+  <div class="card"><h3>為什麼這很重要</h3><p>因為大家在使用 Manus 時，不要把它當成「一次問完就一定全對」的黑盒子；更正確的用法是：把它當成會做事的助理，但你仍要設定目標、標準與驗收點。</p></div>
+</main></section>
+
+<section class="slide"><main class="slide-content">
+  <div class="kicker">最新能力與方向</div>
+  <div class="two">
+    <div class="grid">
+      <div class="card"><h3>官方文件確認的核心能力</h3><p>具備完整沙盒環境、可背景執行長任務、可處理多步驟工作，且有 API 可程式化建立與管理 agent 任務。</p></div>
+      <div class="card"><h3>近期公開方向</h3><p>官方 zh-tw blog 已明講 Slack 連接器上線，且 Manus 持續面向企業與團隊協作場景發展。</p></div>
+      <div class="card"><h3>市場觀察到的重點</h3><p>外部教學文普遍把它定位為：市場研究、簡報整理、任務彙整、專案追蹤、內容流程自動化工具。</p></div>
+    </div>
+    <div class="visual"><span class="caption">官方 Slack 連接器文章</span><img src="assets/manus-slack.png" alt="Manus Slack connector"></div>
+  </div>
+</main></section>
+
+<section class="slide"><main class="slide-content">
+  <div class="kicker">適合富盛豐 / 團隊的用法</div>
+  <h2>如果放到張董與員工的工作場景，Manus 最值得先試的不是 100 個玩法，而是這 5 種</h2>
+  <div class="bar-chart card">
+    <div class="bar"><strong>市場 / 競品研究</strong><div class="bar-track"><div class="bar-fill" style="width:92%"></div></div><span>最適合</span></div>
+    <div class="bar"><strong>簡報 / 報告初稿</strong><div class="bar-track"><div class="bar-fill blue" style="width:88%"></div></div><span>高價值</span></div>
+    <div class="bar"><strong>會議整理 / 待辦彙整</strong><div class="bar-track"><div class="bar-fill alt" style="width:82%"></div></div><span>快見效</span></div>
+    <div class="bar"><strong>內容企劃 / 文案支援</strong><div class="bar-track"><div class="bar-fill" style="width:74%"></div></div><span>可輔助</span></div>
+    <div class="bar"><strong>跨工具標準流程</strong><div class="bar-track"><div class="bar-fill red" style="width:68%"></div></div><span>要慢慢導</span></div>
+  </div>
+  <div class="grid c2">
+    <div class="card"><h3>主管最直接的感受</h3><p>要一份競品整理、網站分析、簡報骨架、會議摘要，速度會明顯變快。</p></div>
+    <div class="card"><h3>員工最直接的感受</h3><p>那些原本需要反覆複製貼上、找資料、排格式的工作，能先丟給 Manus 做第一輪。</p></div>
+  </div>
+</main></section>
+
+<section class="slide"><main class="slide-content">
+  <div class="kicker">新手操作教學</div>
+  <h2>第一次用 Manus，建議照這 5 步走，不要一開始就丟太大太亂的任務</h2>
+  <div class="timeline">
+    <div class="phase"><small>STEP 1</small><h3>先定義成果</h3><p>不要只說「幫我研究 Manus」，而要說清楚要什麼輸出：簡報、表格、摘要、待辦清單。</p></div>
+    <div class="phase"><small>STEP 2</small><h3>補背景與限制</h3><p>交代對象、語氣、格式、期限、來源要求，例如要繁中、給主管看、不可用不明來源。</p></div>
+    <div class="phase"><small>STEP 3</small><h3>讓它先做第一版</h3><p>先拿到骨架與初稿，不要一開始就追求完美，先看方向有沒有對。</p></div>
+    <div class="phase"><small>STEP 4</small><h3>人工驗收修正</h3><p>確認事實、數字、品牌語氣、敏感資訊與是否真的能交付。</p></div>
+  </div>
+  <div class="card"><h3>STEP 5｜把有效做法變成固定模板</h3><p>當某種提示詞 / 任務格式有效，就把它保存成公司內部標準，這樣第二次、第三次才會越來越快。</p></div>
+</main></section>
+
+<section class="slide"><main class="slide-content">
+  <div class="kicker">提示詞寫法</div>
+  <div class="two">
+    <div class="visual contain"><span class="caption">官方 welcome / docs</span><img src="assets/manus-docs-welcome.png" alt="Manus docs welcome"></div>
+    <div class="grid">
+      <div class="card"><h3>好提示詞 = 目標 + 對象 + 輸出 + 規則</h3><p>這是 Manus 最吃重的一點。你越明確，它越不容易亂跑，點數也比較不會白白燒掉。</p></div>
+      <div class="card"><h3>推薦結構</h3><p><strong>請幫我完成 X；對象是 Y；輸出格式是 Z；資料來源優先 A；語氣用 B；最後請提供摘要 + 完整附件清單。</strong></p></div>
+      <div class="card"><h3>實用範例</h3><p>「請整理 5 家競品的網站定位與主力產品，做成給張董看的 8 頁繁中簡報大綱，附比較表與後續建議，來源以官網與公開頁面為主。」</p></div>
+    </div>
+  </div>
+</main></section>
+
+<section class="slide"><main class="slide-content">
+  <div class="kicker">常見應用</div>
+  <div class="two">
+    <div class="grid">
+      <div class="card"><h3>外部教學文最常提的用法</h3><p>內容排程、競品研究、廣告文案變體、客服 FAQ、合作提案、B2B 名單、設計需求書整理。</p></div>
+      <div class="card"><h3>我比較推薦先做的</h3><p>先用在「資料收集＋整理＋初稿」型工作，成功率最高，也最容易證明價值。</p></div>
+      <div class="card"><h3>不要一開始就做的</h3><p>不要一開始就把最敏感的財務、法務、未公開戰略資料大量丟進去，也不要直接無審核自動外發。</p></div>
+    </div>
+    <div class="visual"><span class="caption">外部教學文常見應用</span><img src="assets/manus-hotspot.png" alt="Hotspot Manus 教學"></div>
+  </div>
+</main></section>
+
+<section class="slide"><main class="slide-content">
+  <div class="kicker">費用與導入判斷</div>
+  <div class="two">
+    <div class="visual contain"><span class="caption">官方 Plans & Pricing 文件</span><img src="assets/manus-plans.png" alt="Manus plans"></div>
+    <div class="grid">
+      <div class="card"><h3>官方方案邏輯</h3><p>官方文件目前明確是 <strong>credit-based</strong>，也就是依任務複雜度耗點。核心分 Free、Pro、Team，Team 有共享點數池與管理能力。</p></div>
+      <div class="card"><h3>這代表什麼</h3><p>如果公司只是偶爾試用，可以先用低門檻方案驗證；若要多人協作、做流程化，才有 Team / API / Slack 整合的必要。</p></div>
+      <div class="card"><h3>判斷標準</h3><p>不是看它單月費多少，而是看它能不能真的替團隊省下研究、整理、初稿、彙整的工時。</p></div>
+    </div>
+  </div>
+</main></section>
+
+<section class="slide"><main class="slide-content">
+  <div class="kicker">風險與邊界</div>
+  <h2>Manus 很強，但公司導入前一定要先講清楚這 4 條邊界</h2>
+  <div class="grid c2">
+    <div class="card"><h3>1. 不要把 AI 當全自動真相機</h3><p>它可以大幅加速，但不是所有資料都天然正確，重要結論仍需人工驗證。</p></div>
+    <div class="card"><h3>2. 敏感資料要分級</h3><p>財務、客戶名單、尚未公開的戰略文件，不應該先無條件整包上傳。</p></div>
+    <div class="card"><h3>3. 成本控制要靠 prompt 與流程</h3><p>任務太模糊，點數會燒得更快；任務結構清楚，效率才會高。</p></div>
+    <div class="card"><h3>4. 先從輔助決策開始</h3><p>比較穩的做法，是先讓它做研究、整理、初稿，而不是直接替公司做最終決策或對外承諾。</p></div>
+  </div>
+</main></section>
+
+<section class="slide"><main class="slide-content">
+  <div class="kicker">內部導入建議</div>
+  <h2>如果張董現在要公司開始試，我建議用這個 4 週最小導入法</h2>
+  <div class="timeline">
+    <div class="phase"><small>W1</small><h3>選 2 個固定場景</h3><p>例如競品研究、會議摘要，不要一開始什麼都做。</p></div>
+    <div class="phase"><small>W2</small><h3>建立提示詞模板</h3><p>把輸出格式、來源要求、語氣、對象標準化。</p></div>
+    <div class="phase"><small>W3</small><h3>比較人工 vs Manus</h3><p>看省多少時間、初稿品質如何、修稿成本高不高。</p></div>
+    <div class="phase"><small>W4</small><h3>決定是否擴大</h3><p>若真有價值，再往 Slack / Team / API / 固定流程延伸。</p></div>
+  </div>
+  <div class="card"><h3>一句建議</h3><p>先把 Manus 當成「部門內最會整理資料的初稿助理」，先跑出確定有感的場景，再談更深的企業級導入。</p></div>
+</main></section>
+
+<section class="slide"><main class="slide-content">
+  <div class="kicker">最後總結</div>
+  <h2>Manus 的價值，不在於它有多像科幻，而在於它能不能幫團隊<span class="accent">更快把事情做完</span></h2>
+  <div class="grid c3">
+    <div class="card"><h3>對張董</h3><p>它是值得關注的 AI Agent 類型，但導入應以「流程效率」而不是「話題熱度」為主。</p></div>
+    <div class="card"><h3>對員工</h3><p>先把它當成幫你做研究、整理、初稿、彙整的工作夥伴，而不是全自動替身。</p></div>
+    <div class="card"><h3>對公司</h3><p>真正的關鍵，是把有效用法沉澱成標準流程，變成可複製的內部能力。</p></div>
+  </div>
+  <div class="card">
+    <p><strong>Web 版：</strong><a href="https://changclawbot.github.io/fsf-website-html-ppt/manus-latest-intro-training/" target="_blank">https://changclawbot.github.io/fsf-website-html-ppt/manus-latest-intro-training/</a></p>
+    <p><strong>HTML PPT 主列表：</strong><a href="https://changclawbot.github.io/fsf-website-html-ppt/ppt-catalog/" target="_blank">https://changclawbot.github.io/fsf-website-html-ppt/ppt-catalog/</a></p>
+    <p><strong>ZIP 下載：</strong><a href="https://drive.google.com/file/d/1fFkbKIVMRqoTy51kVS-jnr03R_mFJ8eH/view?usp=drivesdk" target="_blank">https://drive.google.com/file/d/1fFkbKIVMRqoTy51kVS-jnr03R_mFJ8eH/view?usp=drivesdk</a></p>
+  </div>
+  <p>資料來源：ADBest Manus 介紹、Manus 官方 welcome / plans 文件、Manus 官方 zh-tw blog（Slack connector、Meta 相關公告）、Leadion 與 Hotspot 教學整理。</p>
+</main></section>
+
+<div class="control-dock">
+  <div class="control-title" id="controlTitle">Manus 最新介紹與使用教學</div>
+  <div class="control-buttons">
+    <button class="control-btn" data-act="prev"><span class="glyph">←</span><span class="label">上一頁</span></button>
+    <button class="control-btn" data-act="next"><span class="glyph">→</span><span class="label">下一頁</span></button>
+    <button class="control-btn" data-act="overview"><span class="glyph">O</span><span class="label">總覽</span></button>
+    <button class="control-btn" data-act="focus"><span class="glyph">T</span><span class="label">重點</span></button>
+    <button class="control-btn" data-act="fullscreen"><span class="glyph">F</span><span class="label">全螢幕</span></button>
+  </div>
+</div>
+<div class="mobile-dock"><div class="mobile-buttons">
+  <button class="mobile-btn" data-act="prev"><span class="glyph">←</span><span class="label">上一頁</span></button>
+  <button class="mobile-btn" data-act="next"><span class="glyph">→</span><span class="label">下一頁</span></button>
+  <button class="mobile-btn" data-act="overview"><span class="glyph">O</span><span class="label">總覽</span></button>
+  <button class="mobile-btn" data-act="focus"><span class="glyph">T</span><span class="label">重點</span></button>
+  <button class="mobile-btn" data-act="fullscreen"><span class="glyph">F</span><span class="label">全螢幕</span></button>
+</div></div>
+<div class="overview-panel" id="overviewPanel"><div class="overview-grid" id="overviewGrid"></div></div>
+<div class="focus-toast" id="focusToast">重點模式已開啟：已壓低圖片存在感、凸顯文字與分析重點</div>
+<script>
+const slideMeta=[
+{title:'封面｜Manus 最新介紹與使用教學',desc:'這份簡報是給張董與員工看的快速理解版。'},
+{title:'結論先看｜為什麼現在值得認識 Manus',desc:'先看最重要的三個判斷，避免陷入工具炫技。'},
+{title:'資料來源｜這份簡報怎麼整理出來',desc:'說明本次內容整合了指定文章、官方文件與外部教學。'},
+{title:'產品定位｜Manus 與聊天 AI 差在哪',desc:'理解它為何更像執行型助手而不是純聊天工具。'},
+{title:'運作邏輯｜規劃、執行、驗證三件事',desc:'用最簡單方式理解 Manus 背後工作模型。'},
+{title:'最新能力｜官方現在往哪個方向走',desc:'聚焦官方文件、Slack 整合與產品方向。'},
+{title:'公司應用｜哪些場景最值得先試',desc:'針對張董與員工的工作情境給出優先級建議。'},
+{title:'新手教學｜第一次用 Manus 怎麼下手',desc:'用五步驟建立比較不容易失控的入門方式。'},
+{title:'提示詞寫法｜怎樣寫比較不會浪費點數',desc:'整理一個對企業內部最好用的 prompt 結構。'},
+{title:'常見應用｜市場上的 Manus 教學在教什麼',desc:'統整外部教學最常見的高頻用法與判斷。'},
+{title:'費用判斷｜何時該小試、何時該升級',desc:'從 credit-based 與團隊方案角度看導入。'},
+{title:'風險與邊界｜公司使用前一定要先講清楚',desc:'整理四條最需要先建立的內部規則。'},
+{title:'導入建議｜四週最小可行試用法',desc:'如果要真的開始試，建議先這樣推。'},
+{title:'總結｜對主管、員工、公司的最終提醒',desc:'把這次簡報最重要的三句話留在最後。'}
+];
+const slides=[...document.querySelectorAll('.slide')];const nav=document.getElementById('nav');const progress=document.getElementById('progress');const controlTitle=document.getElementById('controlTitle');const overviewPanel=document.getElementById('overviewPanel');const overviewGrid=document.getElementById('overviewGrid');const focusToast=document.getElementById('focusToast');let current=0,textFocus=false;
+slides.forEach((slide,i)=>{const dot=document.createElement('button');dot.addEventListener('click',()=>go(i));nav.appendChild(dot);const card=document.createElement('div');card.className='overview-card';const meta=slideMeta[i]||{title:'投影片',desc:'點擊後可直接跳到這一頁'};card.innerHTML=`<b>${String(i+1).padStart(2,'0')}</b><span>${meta.title}</span><p>${meta.desc}</p>`;card.addEventListener('click',()=>{go(i);toggleOverview(false);});overviewGrid.appendChild(card);});
+function update(){progress.style.width=((current+1)/slides.length*100)+'%';[...nav.children].forEach((b,i)=>b.classList.toggle('active',i===current));controlTitle.textContent=(slideMeta[current]?.title)||'投影片';slides[current].scrollIntoView({behavior:'smooth',block:'start'});}
+function updateNavOnly(){progress.style.width=((current+1)/slides.length*100)+'%';[...nav.children].forEach((b,i)=>b.classList.toggle('active',i===current));controlTitle.textContent=(slideMeta[current]?.title)||'投影片';}
+function go(i){current=Math.max(0,Math.min(slides.length-1,i));update();}
+function next(){go(current+1)}function prev(){go(current-1)}
+function isFullscreenActive(){return !!(document.fullscreenElement||document.webkitFullscreenElement||document.msFullscreenElement)}
+function enterFullscreen(){const el=document.documentElement;return el.requestFullscreen?.()||el.webkitRequestFullscreen?.()||el.msRequestFullscreen?.()}
+function exitFullscreen(){return document.exitFullscreen?.()||document.webkitExitFullscreen?.()||document.msExitFullscreen?.()}
+function syncFullscreenUi(){const active=isFullscreenActive();document.body.classList.toggle('fullscreen-mode',active);document.querySelectorAll('[data-act="fullscreen"]').forEach(el=>el.classList.toggle('is-active',active));if(focusToast){focusToast.textContent=active?'已進入全螢幕模式：控制列已暫時淡出':'已離開全螢幕模式';focusToast.classList.add('show');clearTimeout(window.__fsToastTimer);window.__fsToastTimer=setTimeout(()=>focusToast.classList.remove('show'),1200);}}
+function toggleOverview(force){const show=force ?? !overviewPanel.classList.contains('show');overviewPanel.classList.toggle('show',show)}
+function toggleFocus(){textFocus=!textFocus;document.body.classList.toggle('text-focus',textFocus);document.querySelectorAll('[data-act="focus"]').forEach(el=>el.classList.toggle('is-active',textFocus));if(focusToast){focusToast.textContent=textFocus?'重點模式已開啟：已壓低圖片存在感、凸顯文字與分析重點':'重點模式已關閉：恢復原始完整瀏覽';focusToast.classList.add('show');clearTimeout(window.__focusToastTimer);window.__focusToastTimer=setTimeout(()=>focusToast.classList.remove('show'),1300);}}
+function toggleFullscreen(){try{if(!isFullscreenActive()){const r=enterFullscreen();if(r&&typeof r.then==='function'){r.then(()=>setTimeout(syncFullscreenUi,80)).catch(()=>{if(focusToast){focusToast.textContent='這個瀏覽器目前不允許全螢幕';focusToast.classList.add('show');clearTimeout(window.__fsToastTimer);window.__fsToastTimer=setTimeout(()=>focusToast.classList.remove('show'),1400);}})}else{setTimeout(syncFullscreenUi,80)}}else{const r=exitFullscreen();if(r&&typeof r.then==='function'){r.then(()=>setTimeout(syncFullscreenUi,80))}else{setTimeout(syncFullscreenUi,80)}}}catch(e){if(focusToast){focusToast.textContent='全螢幕切換失敗，可能是瀏覽器限制';focusToast.classList.add('show');clearTimeout(window.__fsToastTimer);window.__fsToastTimer=setTimeout(()=>focusToast.classList.remove('show'),1400);}}}
+document.querySelectorAll('[data-act="next"]').forEach(el=>el.addEventListener('click',next));document.querySelectorAll('[data-act="prev"]').forEach(el=>el.addEventListener('click',prev));document.querySelectorAll('[data-act="overview"]').forEach(el=>el.addEventListener('click',()=>toggleOverview()));document.querySelectorAll('[data-act="focus"]').forEach(el=>el.addEventListener('click',toggleFocus));document.querySelectorAll('[data-act="fullscreen"]').forEach(el=>el.addEventListener('click',toggleFullscreen));overviewPanel.addEventListener('click',e=>{if(e.target===overviewPanel)toggleOverview(false)});document.addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();next();}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();prev();}if(e.key==='Home')go(0);if(e.key==='End')go(slides.length-1);if(e.key==='o'||e.key==='O')toggleOverview();if(e.key==='t'||e.key==='T')toggleFocus();if(e.key==='f'||e.key==='F')toggleFullscreen();if(e.key==='Escape')toggleOverview(false)});window.addEventListener('scroll',()=>{const idx=Math.round(window.scrollY/window.innerHeight);if(idx!==current&&idx>=0&&idx<slides.length){current=idx;updateNavOnly();}},{passive:true});['fullscreenchange','webkitfullscreenchange','msfullscreenchange'].forEach(evt=>document.addEventListener(evt,syncFullscreenUi));syncFullscreenUi();update();
+</script>
+</body>
+</html>

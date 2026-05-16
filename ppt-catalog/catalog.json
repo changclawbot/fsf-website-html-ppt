@@ -28,5 +28,15 @@
     "category": "品牌分析",
     "url": "https://changclawbot.github.io/fsf-website-html-ppt/petangel-official-site-analysis/",
     "zip_url": "https://drive.google.com/file/d/1DUGop8kvA3xXXF0jvZ1KCysk7RZLQehy/view?usp=drivesdk"
+  },
+  {
+    "slug": "manus-latest-intro-training",
+    "name": "Manus 最新介紹與使用教學｜給張董與員工的 AI Agent 圖文簡報",
+    "desc": "整合指定的 ADBest 文章、Manus 官方文件與外部教學，快速看懂 Manus 是什麼、怎麼用、適合哪些工作場景，以及公司導入時的邊界與建議。",
+    "source": "https://adbest.com.tw/blog/what-is-manus/、Manus 官方 welcome / plans 文件、官方 zh-tw blog（Slack connector / Meta）與外部教學整理",
+    "date": "2026-05-16",
+    "category": "AI 工具教學",
+    "url": "https://changclawbot.github.io/fsf-website-html-ppt/manus-latest-intro-training/",
+    "zip_url": "https://drive.google.com/file/d/1fFkbKIVMRqoTy51kVS-jnr03R_mFJ8eH/view?usp=drivesdk"
   }
 ]
