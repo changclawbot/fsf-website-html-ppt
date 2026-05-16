@@ -90,7 +90,7 @@ const items = [
     date: '2026-05-16',
     category: 'AI / 廣告分析',
     url: 'https://changclawbot.github.io/fsf-website-html-ppt/petangel-ai-google-keyword-intelligence/',
-    zip_url: ''
+    zip_url: 'https://drive.google.com/file/d/1gvutad5bodJHqFnDyn713gyuRJ_w_n5f/view?usp=drivesdk'
   }
 ];
 const grid=document.getElementById('grid');
@@ -110,7 +110,9 @@ function render(){
   filtered.forEach(item=>{
     const article=document.createElement('article');
     article.className='card';
-    const zipBtn=`<span class="btn secondary disabled">ZIP 內部控管</span>`;
+    const zipBtn=item.zip_url
+      ? `<a class="btn secondary" href="${item.zip_url}" target="_blank" rel="noopener">下載 ZIP</a>`
+      : `<span class="btn secondary disabled">ZIP 內部控管</span>`;
     article.innerHTML=`
       <div class="meta"><span class="badge">${item.category}</span><time>${item.date}</time></div>
       <h2>${item.name}</h2>
