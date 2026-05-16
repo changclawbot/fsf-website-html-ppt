@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>富盛豐業務獎金試算工具</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --ink: #172033;
+      --sub: #5b6477;
+      --line: #d9dfec;
+      --brand: #2257f3;
+      --brand-2: #eaf0ff;
+      --good: #1f8f55;
+      --warn: #d38a12;
+      --danger: #cc4455;
+      --shadow: 0 18px 40px rgba(27, 39, 94, 0.08);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans TC", sans-serif;
+      background: linear-gradient(180deg, #eff4ff 0%, var(--bg) 180px);
+      color: var(--ink);
+    }
+    .wrap { max-width: 1400px; margin: 0 auto; padding: 28px 18px 60px; }
+    .hero {
+      background: linear-gradient(135deg, #173388 0%, #2257f3 55%, #6d8fff 100%);
+      color: #fff;
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      margin-bottom: 22px;
+    }
+    .hero h1 { margin: 0 0 10px; font-size: clamp(28px, 3vw, 42px); }
+    .hero p { margin: 6px 0; color: rgba(255,255,255,.88); line-height: 1.65; }
+    .grid { display: grid; gap: 18px; }
+    .top-grid { grid-template-columns: 1.2fr .8fr; }
+    .card {
+      background: var(--card);
+      border: 1px solid rgba(217,223,236,.9);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+    .card h2, .card h3 { margin: 0 0 14px; }
+    .muted { color: var(--sub); }
+    .params { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .field label { display: block; font-size: 13px; color: var(--sub); margin-bottom: 6px; }
+    .field input {
+      width: 100%; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px;
+      font-size: 15px; color: var(--ink); background: #fff;
+    }
+    .field small { display: block; margin-top: 6px; color: #7a8499; }
+    .kpis { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+    .kpi {
+      background: #f8faff; border: 1px solid #e3e9f7; border-radius: 16px; padding: 14px;
+    }
+    .kpi .label { color: var(--sub); font-size: 13px; margin-bottom: 8px; }
+    .kpi .value { font-size: 28px; font-weight: 800; letter-spacing: -.02em; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 6px; padding: 7px 11px; border-radius: 999px;
+      font-size: 13px; font-weight: 700; white-space: nowrap;
+    }
+    .pill.good { color: var(--good); background: rgba(31,143,85,.12); }
+    .pill.warn { color: var(--warn); background: rgba(211,138,18,.12); }
+    .pill.danger { color: var(--danger); background: rgba(204,68,85,.12); }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+    button {
+      appearance: none; border: 0; border-radius: 12px; padding: 12px 16px; font-weight: 700; cursor: pointer;
+      background: var(--brand); color: #fff; font-size: 14px;
+    }
+    button.secondary { background: #eef3ff; color: var(--brand); }
+    button.ghost { background: #fff; color: var(--ink); border: 1px solid var(--line); }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 12px 10px; border-bottom: 1px solid #ebeff8; text-align: left; vertical-align: middle; }
+    th { font-size: 13px; color: var(--sub); background: #f8faff; position: sticky; top: 0; }
+    td input {
+      width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; font-size: 14px;
+    }
+    .table-wrap { overflow: auto; border: 1px solid #ebeff8; border-radius: 16px; }
+    .right { text-align: right; }
+    .summary-grid { grid-template-columns: repeat(4, minmax(0,1fr)); }
+    .note-list { margin: 0; padding-left: 18px; color: var(--sub); line-height: 1.75; }
+    .footer-note { margin-top: 12px; font-size: 13px; color: #768199; }
+    @media (max-width: 980px) {
+      .top-grid, .summary-grid { grid-template-columns: 1fr; }
+      .params, .kpis { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>富盛豐業務獎金試算工具</h1>
+      <p>把原本 Excel 版制度做成網頁版。張董可直接從瀏覽器輸入每位業務的新客 / 舊客年度業績，立即看到個人獎金、團隊總獎金、有效獎金率與風險警示。</p>
+      <p>目前先依照 Excel 原版規則製作：月門檻 200 萬、年度化門檻 2,400 萬、新客 8%、舊客 3%、門檻依新舊客占比分攤。</p>
+    </section>
+
+    <section class="grid top-grid">
+      <div class="card">
+        <h2>制度參數</h2>
+        <div class="params">
+          <div class="field">
+            <label>每月基本門檻（元）</label>
+            <input id="monthlyThreshold" type="number" value="2000000" min="0" step="10000" />
+            <small>年度試算會自動乘以 12</small>
+          </div>
+          <div class="field">
+            <label>新客抽成率</label>
+            <input id="newRate" type="number" value="8" min="0" step="0.1" />
+            <small>輸入百分比，例如 8 代表 8%</small>
+          </div>
+          <div class="field">
+            <label>舊客抽成率</label>
+            <input id="oldRate" type="number" value="3" min="0" step="0.1" />
+            <small>輸入百分比，例如 3 代表 3%</small>
+          </div>
+          <div class="field">
+            <label>激勵懸崖警示帶</label>
+            <input id="cliffBand" type="number" value="10" min="0" step="1" />
+            <small>門檻上方幾 % 內視為臨界區</small>
+          </div>
+          <div class="field">
+            <label>單人年度獎金警戒線（元）</label>
+            <input id="alertLine" type="number" value="600000" min="0" step="10000" />
+            <small>超過就顯示預算警戒</small>
+          </div>
+          <div class="field">
+            <label>邊際增量測試（元）</label>
+            <input id="marginalStep" type="number" value="100000" min="0" step="10000" />
+            <small>測試多做一筆業績時，獎金會多多少</small>
+          </div>
+        </div>
+        <div class="actions">
+          <button id="sampleBtn" class="secondary">載入 Excel 範例名冊</button>
+          <button id="clearBtn" class="ghost">清空名冊</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>管理層摘要</h2>
+        <div class="kpis">
+          <div class="kpi"><div class="label">年度化門檻</div><div id="annualThresholdKpi" class="value">24,000,000</div></div>
+          <div class="kpi"><div class="label">團隊總獎金</div><div id="teamBonusKpi" class="value">0</div></div>
+          <div class="kpi"><div class="label">平均有效獎金率</div><div id="avgRateKpi" class="value">0%</div></div>
+          <div class="kpi"><div class="label">風險概況</div><div id="riskKpi" class="value" style="font-size:18px; line-height:1.4;">尚無資料</div></div>
+        </div>
+        <p class="footer-note">說明：此版本是先把現有 Excel 制度搬上網頁，後續若要改成漸進式門檻、回款制或毛利版，也可以在這一版再升級。</p>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:18px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:14px;">
+        <div>
+          <h2>業務名冊試算</h2>
+          <p class="muted" style="margin:6px 0 0;">逐列輸入每位業務的新客 / 舊客年度業績，系統會自動依照目前制度規則計算獎金。</p>
+        </div>
+        <button id="addRowBtn">新增業務</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="min-width:120px;">業務人員</th>
+              <th class="right" style="min-width:140px;">新客年度業績</th>
+              <th class="right" style="min-width:140px;">舊客年度業績</th>
+              <th class="right">年度總業績</th>
+              <th class="right">新客占比</th>
+              <th class="right">舊客占比</th>
+              <th class="right">新客獎金</th>
+              <th class="right">舊客獎金</th>
+              <th class="right">年度總獎金</th>
+              <th class="right">有效獎金率</th>
+              <th>風險提示</th>
+              <th class="right">新客 +10萬 邊際</th>
+              <th class="right">舊客 +10萬 邊際</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody id="repTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="grid summary-grid" style="margin-top:18px;">
+      <div class="card"><h3>團隊新客總業績</h3><div id="sumNew" class="value" style="font-size:32px; font-weight:800;">0</div></div>
+      <div class="card"><h3>團隊舊客總業績</h3><div id="sumOld" class="value" style="font-size:32px; font-weight:800;">0</div></div>
+      <div class="card"><h3>團隊總業績</h3><div id="sumTotal" class="value" style="font-size:32px; font-weight:800;">0</div></div>
+      <div class="card"><h3>團隊總獎金</h3><div id="sumBonus" class="value" style="font-size:32px; font-weight:800;">0</div></div>
+    </section>
+
+    <section class="grid top-grid" style="margin-top:18px;">
+      <div class="card">
+        <h2>規則說明</h2>
+        <ul class="note-list">
+          <li>年度門檻 = 每月基本門檻 × 12。</li>
+          <li>若業務年度總業績低於年度門檻，年度獎金為 0。</li>
+          <li>門檻會依新客 / 舊客業績占比分攤，再分別算出新客與舊客可抽成基礎。</li>
+          <li>新客與舊客獎金 = 各自可抽成基礎 × 對應抽成率。</li>
+          <li>若總業績落在門檻上方警示帶內，顯示「激勵懸崖」；若單人獎金超過警戒線，顯示「預算警戒」。</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>目前建議</h2>
+        <ul class="note-list">
+          <li>這一版先忠實還原現有制度，方便張董直接試算。</li>
+          <li>下一版可再加：漸進式門檻、回款後計獎、毛利權重、獎金上限或分段遞減。</li>
+          <li>若要內部正式上線，也可以再補：匯入 Excel、儲存名冊、列印制度摘要。</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const sampleRows = [
+      ['業務A', 18000000, 12000000],
+      ['業務B', 9000000, 13000000],
+      ['業務C', 30000000, 15000000],
+      ['業務D', 6000000, 10000000],
+      ['業務E', 22000000, 26000000],
+      ['業務F', 42000000, 18000000],
+      ['業務G', 16000000, 7000000],
+      ['業務H', 28000000, 32000000]
+    ];
+
+    const body = document.getElementById('repTableBody');
+    const fmtMoney = (n) => new Intl.NumberFormat('zh-TW', { maximumFractionDigits: 0 }).format(Math.round(n || 0));
+    const fmtPct = (n) => `${(n * 100).toFixed(2).replace(/\.00$/, '')}%`;
+
+    function params() {
+      return {
+        monthlyThreshold: Number(document.getElementById('monthlyThreshold').value || 0),
+        annualThreshold: Number(document.getElementById('monthlyThreshold').value || 0) * 12,
+        newRate: Number(document.getElementById('newRate').value || 0) / 100,
+        oldRate: Number(document.getElementById('oldRate').value || 0) / 100,
+        cliffBand: Number(document.getElementById('cliffBand').value || 0) / 100,
+        alertLine: Number(document.getElementById('alertLine').value || 0),
+        marginalStep: Number(document.getElementById('marginalStep').value || 0)
+      };
+    }
+
+    function computeBonus(newSales, oldSales, p) {
+      const total = newSales + oldSales;
+      const newShare = total === 0 ? 0 : newSales / total;
+      const oldShare = total === 0 ? 0 : oldSales / total;
+      const allocatedNewThreshold = p.annualThreshold * newShare;
+      const allocatedOldThreshold = p.annualThreshold * oldShare;
+      const newBase = Math.max(0, newSales - allocatedNewThreshold);
+      const oldBase = Math.max(0, oldSales - allocatedOldThreshold);
+      const newBonus = total < p.annualThreshold ? 0 : newBase * p.newRate;
+      const oldBonus = total < p.annualThreshold ? 0 : oldBase * p.oldRate;
+      const bonus = newBonus + oldBonus;
+      const effectiveRate = total === 0 ? 0 : bonus / total;
+      let risk = '正常';
+      let riskClass = 'good';
+      if (total < p.annualThreshold) {
+        risk = '未達門檻';
+        riskClass = 'danger';
+      } else if (total <= p.annualThreshold * (1 + p.cliffBand)) {
+        risk = '激勵懸崖';
+        riskClass = 'warn';
+      } else if (bonus > p.alertLine) {
+        risk = '預算警戒';
+        riskClass = 'danger';
+      }
+      return { total, newShare, oldShare, newBonus, oldBonus, bonus, effectiveRate, risk, riskClass };
+    }
+
+    function marginalBonus(newSales, oldSales, p, type) {
+      const current = computeBonus(newSales, oldSales, p).bonus;
+      const next = type === 'new'
+        ? computeBonus(newSales + p.marginalStep, oldSales, p).bonus
+        : computeBonus(newSales, oldSales + p.marginalStep, p).bonus;
+      return next - current;
+    }
+
+    function addRow(name = '', newSales = 0, oldSales = 0) {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><input data-key="name" value="${name}" placeholder="例如：業務A" /></td>
+        <td class="right"><input data-key="new" type="number" min="0" step="10000" value="${newSales}" /></td>
+        <td class="right"><input data-key="old" type="number" min="0" step="10000" value="${oldSales}" /></td>
+        <td class="right" data-out="total">0</td>
+        <td class="right" data-out="newShare">0%</td>
+        <td class="right" data-out="oldShare">0%</td>
+        <td class="right" data-out="newBonus">0</td>
+        <td class="right" data-out="oldBonus">0</td>
+        <td class="right" data-out="bonus">0</td>
+        <td class="right" data-out="rate">0%</td>
+        <td data-out="risk"></td>
+        <td class="right" data-out="marginalNew">0</td>
+        <td class="right" data-out="marginalOld">0</td>
+        <td><button class="ghost remove-btn" type="button">刪除</button></td>
+      `;
+      body.appendChild(tr);
+      tr.querySelectorAll('input').forEach(input => input.addEventListener('input', recalc));
+      tr.querySelector('.remove-btn').addEventListener('click', () => { tr.remove(); recalc(); });
+      recalc();
+    }
+
+    function recalc() {
+      const p = params();
+      document.getElementById('annualThresholdKpi').textContent = fmtMoney(p.annualThreshold);
+      let sumNew = 0, sumOld = 0, sumTotal = 0, sumBonus = 0, sumRate = 0, count = 0;
+      let cliff = 0, danger = 0, under = 0;
+
+      [...body.querySelectorAll('tr')].forEach(tr => {
+        const newSales = Number(tr.querySelector('[data-key="new"]').value || 0);
+        const oldSales = Number(tr.querySelector('[data-key="old"]').value || 0);
+        const result = computeBonus(newSales, oldSales, p);
+        tr.querySelector('[data-out="total"]').textContent = fmtMoney(result.total);
+        tr.querySelector('[data-out="newShare"]').textContent = fmtPct(result.newShare);
+        tr.querySelector('[data-out="oldShare"]').textContent = fmtPct(result.oldShare);
+        tr.querySelector('[data-out="newBonus"]').textContent = fmtMoney(result.newBonus);
+        tr.querySelector('[data-out="oldBonus"]').textContent = fmtMoney(result.oldBonus);
+        tr.querySelector('[data-out="bonus"]').textContent = fmtMoney(result.bonus);
+        tr.querySelector('[data-out="rate"]').textContent = fmtPct(result.effectiveRate);
+        tr.querySelector('[data-out="marginalNew"]').textContent = fmtMoney(marginalBonus(newSales, oldSales, p, 'new'));
+        tr.querySelector('[data-out="marginalOld"]').textContent = fmtMoney(marginalBonus(newSales, oldSales, p, 'old'));
+        tr.querySelector('[data-out="risk"]').innerHTML = `<span class="pill ${result.riskClass}">${result.risk}</span>`;
+
+        sumNew += newSales; sumOld += oldSales; sumTotal += result.total; sumBonus += result.bonus; sumRate += result.effectiveRate; count += 1;
+        if (result.risk === '激勵懸崖') cliff += 1;
+        if (result.risk === '預算警戒') danger += 1;
+        if (result.risk === '未達門檻') under += 1;
+      });
+
+      document.getElementById('sumNew').textContent = fmtMoney(sumNew);
+      document.getElementById('sumOld').textContent = fmtMoney(sumOld);
+      document.getElementById('sumTotal').textContent = fmtMoney(sumTotal);
+      document.getElementById('sumBonus').textContent = fmtMoney(sumBonus);
+      document.getElementById('teamBonusKpi').textContent = fmtMoney(sumBonus);
+      document.getElementById('avgRateKpi').textContent = count ? fmtPct(sumRate / count) : '0%';
+      document.getElementById('riskKpi').textContent = `${under} 未達門檻 / ${cliff} 激勵懸崖 / ${danger} 預算警戒`;
+    }
+
+    document.getElementById('addRowBtn').addEventListener('click', () => addRow());
+    document.getElementById('sampleBtn').addEventListener('click', () => {
+      body.innerHTML = '';
+      sampleRows.forEach(row => addRow(...row));
+      recalc();
+    });
+    document.getElementById('clearBtn').addEventListener('click', () => {
+      body.innerHTML = '';
+      addRow();
+    });
+    document.querySelectorAll('#monthlyThreshold,#newRate,#oldRate,#cliffBand,#alertLine,#marginalStep').forEach(el => el.addEventListener('input', recalc));
+
+    sampleRows.forEach(row => addRow(...row));
+  </script>
+</body>
+</html>
