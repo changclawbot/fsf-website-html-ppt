@@ -32,8 +32,8 @@ h1,h2,h3,p,ul{margin:0}h1{font-size:var(--title);line-height:.92;letter-spacing:
 .control-dock{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 18px);transform:translateX(-50%);z-index:9999;display:flex;align-items:center;gap:.6rem;width:min(94vw,840px);padding:.54rem .62rem;border-radius:24px;background:rgba(255,255,255,.97);box-shadow:0 18px 55px rgba(0,0,0,.35);backdrop-filter:blur(18px);border:2px solid rgba(15,39,64,.12)}
 .control-title{flex:1 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:900;color:#12324a;font-size:clamp(.84rem,2vw,1.06rem)}.control-buttons{display:flex;gap:.42rem}.control-btn{min-width:70px;height:52px;padding:.28rem .62rem;border:0;border-radius:15px;background:#0f2740;color:#fff;font-weight:900;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.02;box-shadow:0 8px 18px rgba(15,39,64,.28)}.control-btn:hover{background:#1b4b74}.glyph{font-size:1.05rem}.label{margin-top:.18rem;font-size:.68rem}
 .mobile-dock{display:none}.mobile-buttons{display:grid;grid-template-columns:repeat(5,1fr);gap:.15rem;width:100%}.mobile-btn{height:40px;border:0;border-radius:10px;background:#0f2740;color:#fff;font-weight:900;display:flex;flex-direction:column;align-items:center;justify-content:center}.mobile-btn .glyph{font-size:.76rem}.mobile-btn .label{font-size:.42rem;margin-top:.1rem}
-.nav{position:fixed;right:14px;top:50%;translate:0 -50%;display:flex;flex-direction:column;gap:8px;z-index:12}.nav button{width:9px;height:9px;border:0;border-radius:999px;background:rgba(255,255,255,.24);cursor:pointer}.nav button.active{height:24px;background:var(--mint)}.progress{position:fixed;left:0;top:0;height:4px;width:0;background:linear-gradient(90deg,var(--mint),var(--green),var(--amber));z-index:13}.hint{position:fixed;left:16px;bottom:14px;color:rgba(255,255,255,.46);font-size:.78rem;z-index:12}.overview-panel{position:fixed;inset:0;display:none;z-index:9998;background:rgba(4,10,14,.76);backdrop-filter:blur(14px);padding:clamp(1rem,4vw,3rem);overflow:auto}.overview-panel.show{display:block}.overview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1rem;max-width:1100px;margin:0 auto}.overview-card{min-height:120px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:1rem;color:#fff;cursor:pointer;box-shadow:0 20px 60px rgba(0,0,0,.25)}.overview-card b{display:block;color:var(--green);font:700 .76rem ui-monospace,SFMono-Regular,Menlo,monospace;margin-bottom:.45rem}.overview-card span{font-weight:800;line-height:1.28}
-.text-focus img{filter:saturate(.7) brightness(.74)}.text-focus .card,.text-focus .visual,.text-focus .node,.text-focus .phase{border-color:rgba(101,242,208,.34)!important}
+.nav{position:fixed;right:14px;top:50%;translate:0 -50%;display:flex;flex-direction:column;gap:8px;z-index:12}.nav button{width:9px;height:9px;border:0;border-radius:999px;background:rgba(255,255,255,.24);cursor:pointer}.nav button.active{height:24px;background:var(--mint)}.progress{position:fixed;left:0;top:0;height:4px;width:0;background:linear-gradient(90deg,var(--mint),var(--green),var(--amber));z-index:13}.hint{position:fixed;left:16px;bottom:14px;color:rgba(255,255,255,.46);font-size:.78rem;z-index:12}.overview-panel{position:fixed;inset:0;display:none;z-index:9998;background:rgba(4,10,14,.76);backdrop-filter:blur(14px);padding:clamp(1rem,4vw,3rem);overflow:auto}.overview-panel.show{display:block}.overview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1rem;max-width:1100px;margin:0 auto}.overview-card{min-height:120px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:1rem;color:#fff;cursor:pointer;box-shadow:0 20px 60px rgba(0,0,0,.25)}.overview-card b{display:block;color:var(--green);font:700 .76rem ui-monospace,SFMono-Regular,Menlo,monospace;margin-bottom:.45rem}.overview-card span{display:block;font-weight:800;line-height:1.28;margin-bottom:.45rem}.overview-card p{margin:0;color:rgba(255,255,255,.78);font-size:.88rem;line-height:1.5}.control-btn.is-active,.mobile-btn.is-active{background:#1b6b57!important;box-shadow:0 0 0 2px rgba(101,242,208,.35),0 8px 18px rgba(15,39,64,.28)}.focus-toast{position:fixed;left:50%;top:18px;transform:translateX(-50%);z-index:2147483647;background:rgba(9,25,31,.92);color:#fff;padding:.62rem .9rem;border:1px solid rgba(101,242,208,.34);border-radius:999px;font-size:.84rem;box-shadow:0 18px 40px rgba(0,0,0,.28);opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease}.focus-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.text-focus img{filter:saturate(.35) brightness(.42);opacity:.22}.text-focus .visual{border-color:rgba(101,242,208,.45)!important}.text-focus .card,.text-focus .visual,.text-focus .node,.text-focus .phase,.text-focus .note{border-color:rgba(101,242,208,.55)!important;box-shadow:0 0 0 2px rgba(101,242,208,.14),var(--shadow)}.text-focus h2,.text-focus h3,.text-focus strong,.text-focus .quote{color:#ffffff}.text-focus p,.text-focus li{color:#e4f6ef}
 @media(max-width:960px){.grid.cols-4,.grid.cols-3,.timeline{grid-template-columns:repeat(2,1fr)}.two,.flow{grid-template-columns:1fr}.arrow{display:none}}
 @media(max-width:640px){.grid.cols-4,.grid.cols-3,.grid.cols-2,.timeline{grid-template-columns:1fr}.hint,.nav,.control-dock{display:none}.mobile-dock{display:block;position:fixed;left:8px;right:8px;bottom:calc(env(safe-area-inset-bottom,0px) + 12px);z-index:9999;padding:.22rem;border-radius:16px;background:rgba(255,255,255,.97);box-shadow:0 18px 55px rgba(0,0,0,.35);backdrop-filter:blur(18px);border:2px solid rgba(15,39,64,.12)}.visual img{height:34vh}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}}
@@ -246,14 +246,31 @@ h1,h2,h3,p,ul{margin:0}h1{font-size:var(--title);line-height:.92;letter-spacing:
   </div>
 </div>
 <div class="overview-panel" id="overviewPanel"><div class="overview-grid" id="overviewGrid"></div></div>
+<div class="focus-toast" id="focusToast">重點模式已開啟：已壓低圖片存在感、凸顯文字與分析重點</div>
 
 <script>
+const slideMeta=[
+  {title:'封面｜富盛豐生活植萃館全站分析',desc:'先交代這份簡報的範圍：首頁、分類、品牌、信任模組與轉換動線。'},
+  {title:'執行摘要｜先看整站最重要結論',desc:'快速看到這個站目前最強、最可惜、最值得押注的地方。'},
+  {title:'首頁首屏｜品牌與促銷怎麼開場',desc:'拆首頁第一印象、會員誘因與主標還能加強的位置。'},
+  {title:'網站架構｜5 大商品主軸與 3 條轉換入口',desc:'整理商品分類、信任支撐與會員／LINE 等轉換設計。'},
+  {title:'品類分布｜SKU 最重押在哪一塊',desc:'從 sitemap 看出 PetAngel、除甲醛、防蟲、清潔各自比重。'},
+  {title:'毛天使動能｜PetAngel 為什麼是主戰場',desc:'說明近期更新最密集的商品線與最值得放大的成長區塊。'},
+  {title:'品牌故事｜天然、安全、永續的核心敘事',desc:'濃縮品牌故事頁如何建立情感與商業說服力。'},
+  {title:'信任資產｜檢驗、認證、回饋與制度頁',desc:'整理哪些頁面正在幫品牌補可信度，以及為何該再前置。'},
+  {title:'內容 SEO｜部落格與內容漏斗現況',desc:'分析 blog 題目方向、搜尋機會與導流還缺哪一段。'},
+  {title:'已做對的事｜目前站上最有價值的基礎',desc:'盤點這個站已經建立好的五個優勢。'},
+  {title:'主要缺口｜最該補的六個問題',desc:'整理首頁、導購、證據前置與內容漏斗的主要缺口。'},
+  {title:'4 週行動｜如果現在就要升級',desc:'給出從首頁、分類、內容到毛孩專區的分週執行建議。'},
+  {title:'最終結論｜把商城變成解決方案平台',desc:'總結整站升級後最可能帶來的理解、信任與轉換提升。'}
+];
 const slides=[...document.querySelectorAll('.slide')];
 const nav=document.getElementById('nav');
 const progress=document.getElementById('progress');
 const controlTitle=document.getElementById('controlTitle');
 const overviewPanel=document.getElementById('overviewPanel');
 const overviewGrid=document.getElementById('overviewGrid');
+const focusToast=document.getElementById('focusToast');
 let current=0; let textFocus=false;
 slides.forEach((slide,i)=>{
   const dot=document.createElement('button');
@@ -261,26 +278,27 @@ slides.forEach((slide,i)=>{
   nav.appendChild(dot);
   const card=document.createElement('div');
   card.className='overview-card';
-  card.innerHTML=`<b>${String(i+1).padStart(2,'0')}</b><span>${slide.dataset.title||'Slide'}</span>`;
+  const meta=slideMeta[i]||{title:slide.dataset.title||'投影片',desc:'點擊後可直接跳到這一頁'};
+  card.innerHTML=`<b>${String(i+1).padStart(2,'0')}</b><span>${meta.title}</span><p>${meta.desc}</p>`;
   card.addEventListener('click',()=>{go(i);toggleOverview(false);});
   overviewGrid.appendChild(card);
 });
 function update(){
   progress.style.width=((current+1)/slides.length*100)+'%';
   [...nav.children].forEach((b,i)=>b.classList.toggle('active',i===current));
-  controlTitle.textContent=slides[current].dataset.title||'投影片';
+  controlTitle.textContent=(slideMeta[current]?.title)||slides[current].dataset.title||'投影片';
   slides[current].scrollIntoView({behavior:'smooth',block:'start'});
 }
 function updateNavOnly(){
   progress.style.width=((current+1)/slides.length*100)+'%';
   [...nav.children].forEach((b,i)=>b.classList.toggle('active',i===current));
-  controlTitle.textContent=slides[current].dataset.title||'投影片';
+  controlTitle.textContent=(slideMeta[current]?.title)||slides[current].dataset.title||'投影片';
 }
 function go(i){current=Math.max(0,Math.min(slides.length-1,i));update();}
 function next(){go(current+1)}
 function prev(){go(current-1)}
 function toggleOverview(force){const show=force ?? !overviewPanel.classList.contains('show');overviewPanel.classList.toggle('show',show)}
-function toggleFocus(){textFocus=!textFocus;document.body.classList.toggle('text-focus',textFocus)}
+function toggleFocus(){textFocus=!textFocus;document.body.classList.toggle('text-focus',textFocus);document.querySelectorAll('[data-act="focus"]').forEach(el=>el.classList.toggle('is-active',textFocus));if(focusToast){focusToast.textContent=textFocus?'重點模式已開啟：已壓低圖片存在感、凸顯文字與分析重點':'重點模式已關閉：恢復原始完整瀏覽';focusToast.classList.add('show');clearTimeout(window.__focusToastTimer);window.__focusToastTimer=setTimeout(()=>focusToast.classList.remove('show'),1300);}}
 function toggleFullscreen(){if(!document.fullscreenElement){document.documentElement.requestFullscreen?.()}else{document.exitFullscreen?.()}}
 document.querySelectorAll('[data-act="next"]').forEach(el=>el.addEventListener('click',next));
 document.querySelectorAll('[data-act="prev"]').forEach(el=>el.addEventListener('click',prev));
