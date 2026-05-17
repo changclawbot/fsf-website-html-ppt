@@ -20,6 +20,16 @@
     "zip_url": "https://drive.google.com/file/d/1YzsXqBGCbMn3oFcBgH3saEHwHRdJkpYZ/view?usp=drivesdk"
   },
   {
+    "slug": "sales-bonus-calculator",
+    "name": "富盛豐業務獎金試算工具",
+    "desc": "把原本 Excel 版制度做成網頁版，直接輸入每位業務的新客 / 舊客年度業績，立即看到個人獎金、團隊總獎金、有效獎金率與風險警示。",
+    "source": "業務獎金 Excel 規則轉為互動式 HTML 工具頁",
+    "date": "2026-05-17",
+    "category": "工具 / 試算",
+    "url": "https://changclawbot.github.io/fsf-website-html-ppt/sales-bonus-calculator/",
+    "zip_url": ""
+  },
+  {
     "slug": "petangel-ai-google-keyword-intelligence",
     "name": "毛天使 AI 廣告後台分析｜Google × 富盛豐產品關鍵字情報圖文簡報",
     "desc": "拆解 Jason 提供的 AI 廣告後台網址，整理 Google 關鍵字池、品牌防禦、蝦皮成交驗證、預算邏輯、AI 文案與禁用詞治理，並提出富盛豐 / 毛天使後續建議。",
@@ -76,7 +86,7 @@
     "source": "https://www.fsf-alexandra.com/ + https://www.fsfstore.com/ 可見頁面與結構化資料",
     "date": "2026-05-15",
     "category": "品牌分析",
-    "url": "https://changclawbot.github.io/fsf-website-html-ppt/",
+    "url": "https://changclawbot.github.io/fsf-website-html-ppt/root-dual-website-analysis/",
     "zip_url": "https://drive.google.com/file/d/14zsoDXpfTWUjX5ATVXyw1GLZEw6zYpI5/view?usp=drivesdk"
   }
 ]
