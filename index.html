@@ -17,7 +17,6 @@ h1{margin:16px 0 12px;font-size:clamp(2.2rem,6vw,4.3rem);line-height:.95;letter-
 .list{display:grid;gap:14px;margin-top:8px} .item{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:18px} .item .mini{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-size:1.45rem;background:linear-gradient(135deg,#56b7ff,#8a80ff)} .meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px} .tag{padding:6px 10px;border-radius:999px;background:rgba(118,243,216,.1);border:1px solid rgba(118,243,216,.16);font-size:.78rem;color:#dffdf7} .date{padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);font-size:.78rem;color:#dbe6fb}
 .item h3{margin:0 0 8px;font-size:1.15rem} .item p{margin:0;color:var(--muted);line-height:1.62} .item a.link{display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:10px 14px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);font-weight:800}
 .section-title{margin:24px 0 14px;font-size:clamp(1.4rem,3vw,2.2rem);letter-spacing:-.03em} .section-note{color:var(--muted);margin:0 0 18px;line-height:1.7}
-.backbar{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);display:flex;gap:10px;z-index:30;padding:8px;border-radius:20px;background:rgba(6,15,28,.82);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(16px);box-shadow:var(--shadow)} .backbar a,.backbar button{border:0;background:rgba(255,255,255,.06);color:var(--ink);padding:12px 15px;border-radius:14px;font-weight:900;font-size:.95rem;cursor:pointer} .backbar a.home{background:linear-gradient(135deg,var(--cyan),var(--mint));color:#06213a}
 .small{font-size:.9rem;color:var(--muted)}
 @media(max-width:640px){.wrap{padding:16px 14px 110px}.item{grid-template-columns:1fr}.item .mini{width:48px;height:48px}}
 </style>
@@ -60,10 +59,6 @@ h1{margin:16px 0 12px;font-size:clamp(2.2rem,6vw,4.3rem);line-height:.95;letter-
   <p>之後只要我有更新：1) 富盛豐網址列表、2) HTML PPT 主目錄、3) 小張技能頁，我都會固定把這個主網頁連結一起附給你，讓你直接從這裡往下點。</p>
 </section>
 
-</div>
-<div class="backbar">
-  <button onclick="history.length > 1 ? history.back() : location.href='/fsf-website-html-ppt/'">↩ 返回上一頁</button>
-  <a class="home" href="/fsf-website-html-ppt/">⌂ 回主網頁</a>
 </div>
 </body>
 </html>
