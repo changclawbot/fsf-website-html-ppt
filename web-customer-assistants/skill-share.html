@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>網頁客服助手技能說明｜小張超能力</title>
+<meta name="description" content="整理毛天使與富盛豐 OEM 網頁客服助手的用途、前後端串接方式、嵌入程式碼與技能分享入口。" />
+<style>
+:root{--bg:#07111f;--bg2:#0c1930;--panel:rgba(16,30,56,.82);--line:rgba(125,206,255,.18);--ink:#f4f8ff;--muted:#b8c8e6;--mint:#7bf0d4;--cyan:#79cfff;--blue:#173154;--shadow:0 24px 70px rgba(0,0,0,.32)}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC",sans-serif;background:radial-gradient(circle at top left,rgba(121,207,255,.14),transparent 24%),linear-gradient(180deg,var(--bg),var(--bg2) 58%,#08111f);color:var(--ink)}a{color:inherit;text-decoration:none}code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.wrap{max-width:1120px;margin:0 auto;padding:20px 18px 110px}.hero{padding:18px 0 22px}.kicker{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(123,240,212,.08);border:1px solid rgba(123,240,212,.16);color:var(--mint);font:700 .8rem ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;text-transform:uppercase}
+h1{margin:16px 0 12px;font-size:clamp(2.2rem,6vw,4rem);line-height:.95;letter-spacing:-.05em}.lead{max-width:880px;color:var(--muted);font-size:clamp(1rem,2vw,1.14rem);line-height:1.75}
+.grid{display:grid;gap:18px}.cols2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}.card{background:linear-gradient(180deg,rgba(16,34,66,.92),rgba(12,24,48,.86));border:1px solid var(--line);border-radius:28px;padding:22px;box-shadow:var(--shadow)}.card h2,.card h3{margin:0 0 12px}.card p,.card li{color:var(--muted);line-height:1.72}.card ul{margin:0;padding-left:20px}.meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}.tag{padding:6px 10px;border-radius:999px;background:rgba(123,240,212,.1);border:1px solid rgba(123,240,212,.16);font-size:.78rem;color:#dffdf7}.linkrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 16px;border-radius:16px;font-weight:900;background:linear-gradient(135deg,var(--cyan),var(--mint));color:#06213a}.btn.secondary{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:var(--ink)}
+pre{margin:0;padding:16px 18px;border-radius:18px;background:#06101d;border:1px solid rgba(255,255,255,.08);overflow:auto;color:#dff6ff;line-height:1.65;font-size:.92rem}
+.small{font-size:.92rem;color:var(--muted)}
+@media(max-width:640px){.wrap{padding:16px 14px 110px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <div class="kicker">WEB CUSTOMER ASSISTANT</div>
+    <h1>網頁客服助手技能說明</h1>
+    <p class="lead">這頁把「可嵌入網站的客服助手」整理成可直接分享的技能頁，包含用途、頁面入口、嵌入碼、後端綁定重點，以及後續要怎麼擴充成更多品牌客服。</p>
+  </section>
+
+  <section class="grid cols2">
+    <article class="card">
+      <div class="meta"><span class="tag">技能分享連結</span></div>
+      <h2>這個技能現在能做什麼</h2>
+      <ul>
+        <li>在網站右下角放一個可開合的客服 Widget</li>
+        <li>依不同 <code>data-site</code> 切換不同品牌 / 知識範圍</li>
+        <li>前台頁面可做成品牌專屬歡迎語、快速問題與說明區塊</li>
+        <li>可快速複製到毛天使、富盛豐 OEM，之後也能擴到更多站點</li>
+      </ul>
+      <div class="linkrow">
+        <a class="btn" href="./index.html">打開頁面入口</a>
+        <a class="btn secondary" href="./petangel-assistant.html">毛天使版</a>
+        <a class="btn secondary" href="./fsfoem-assistant.html">富盛豐 OEM 版</a>
+      </div>
+    </article>
+    <article class="card">
+      <div class="meta"><span class="tag">公開文件</span></div>
+      <h2>目前已整理好的公開頁</h2>
+      <ul>
+        <li>毛天使客服助手展示頁</li>
+        <li>富盛豐 OEM 客服助手展示頁</li>
+        <li>客服助手總入口頁</li>
+        <li>這份技能說明 / 分享頁</li>
+      </ul>
+      <p class="small">如果之後要給外部設計、前端或合作廠商看，直接丟這頁就夠了。</p>
+    </article>
+  </section>
+
+  <section class="card" style="margin-top:18px;">
+    <div class="meta"><span class="tag">嵌入程式</span><span class="tag">前端用</span></div>
+    <h2>任何網站都能放的基本嵌入碼</h2>
+    <pre>&lt;script
+  src="https://ipoehawk.jarvisclawbot.com/a-agent/widget.js"
+  data-bot-name="毛天使客服"
+  data-brand="PetAngel 毛天使"
+  data-site="petangel"
+  data-primary="#4cb9a8"
+  data-secondary="#8fd1c7"&gt;
+&lt;/script&gt;</pre>
+    <p class="small" style="margin-top:12px;">富盛豐 OEM 版只要把 <code>data-bot-name</code>、<code>data-brand</code>、<code>data-site</code> 與配色改成對應版本即可。</p>
+  </section>
+
+  <section class="grid cols2" style="margin-top:18px;">
+    <article class="card">
+      <div class="meta"><span class="tag">後端綁定</span></div>
+      <h3>必要條件</h3>
+      <ul>
+        <li><code>data-site="petangel"</code> 要綁到毛天使客服知識庫</li>
+        <li><code>data-site="fsfoem"</code> 要綁到富盛豐 OEM 知識庫</li>
+        <li>兩條線的 prompt / KB / 回答邊界要繼續完全分離</li>
+      </ul>
+    </article>
+    <article class="card">
+      <div class="meta"><span class="tag">下一版建議</span></div>
+      <h3>值得補強的地方</h3>
+      <ul>
+        <li>讓 <code>widget.js</code> 直接支援 welcome 話術與 quick buttons 設定</li>
+        <li>加上站點設定 JSON，避免每次都另外 patch HTML</li>
+        <li>後台增加貼資料 / 更新知識入口，讓客服維護更快</li>
+      </ul>
+    </article>
+  </section>
+</div>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>毛天使客服助手</title>
+  <style>
+    :root {
+      --bg: #f4fbf8;
+      --ink: #173238;
+      --muted: #5f777c;
+      --line: rgba(23, 50, 56, 0.12);
+      --card: rgba(255,255,255,0.9);
+      --primary: #4cb9a8;
+      --secondary: #8fd1c7;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", sans-serif;
+      color: var(--ink);
+      background: linear-gradient(180deg, #f7fffb 0%, #ecf8f4 100%);
+    }
+    .hero {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 56px 24px 120px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 24px;
+      align-items: start;
+    }
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: 0 20px 60px rgba(42, 106, 95, 0.12);
+      padding: 28px;
+      backdrop-filter: blur(10px);
+    }
+    .kicker {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(76, 185, 168, 0.12);
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: .04em;
+    }
+    h1 {
+      margin: 16px 0 14px;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.08;
+    }
+    .lead {
+      margin: 0 0 18px;
+      font-size: 18px;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+    .chips, .faq { display: flex; flex-wrap: wrap; gap: 10px; }
+    .chip {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(76, 185, 168, 0.25);
+      background: rgba(76, 185, 168, 0.08);
+      color: var(--ink);
+      font-weight: 700;
+      font-size: 14px;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 22px;
+    }
+    p, li {
+      line-height: 1.8;
+      color: var(--muted);
+    }
+    ul { margin: 0; padding-left: 20px; }
+    .faq button {
+      border: 0;
+      border-radius: 14px;
+      padding: 12px 14px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      box-shadow: inset 0 0 0 1px rgba(23, 50, 56, 0.09);
+      cursor: pointer;
+      text-align: left;
+    }
+    .note {
+      margin-top: 14px;
+      font-size: 14px;
+    }
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; padding-bottom: 110px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="hero">
+    <section class="panel">
+      <span class="kicker">PetAngel 客服助手</span>
+      <h1>毛天使網頁客服助手</h1>
+      <p class="lead">這個版本對齊毛天使既有客服範圍，重點處理產品資訊、使用方式、購買前說明、售後與品質問題。右下角可直接開啟客服視窗測試。</p>
+      <div class="chips">
+        <span class="chip">產品資訊</span>
+        <span class="chip">使用方式</span>
+        <span class="chip">購買引導</span>
+        <span class="chip">售後協助</span>
+      </div>
+    </section>
+    <aside class="panel">
+      <h2>回答範圍</h2>
+      <ul>
+        <li>毛天使產品、規格、價格、使用方式與基本客服問題</li>
+        <li>單一商品是否有貨、是否可購買，以現行毛天使正式資料為準</li>
+        <li>品質或售後問題，優先請客戶提供照片、批號、平台與訂單資訊</li>
+      </ul>
+      <p class="note">不回答醫療診斷、疾病判斷、天氣新聞、OEM 代工或與毛天使無關的問題。</p>
+    </aside>
+    <section class="panel">
+      <h2>常見可直接測試的問題</h2>
+      <div class="faq" id="faq-list">
+        <button type="button" data-question="毛天使有哪些洗毛精可以選？">毛天使有哪些洗毛精可以選？</button>
+        <button type="button" data-question="如果我想買防蚤驅蚊相關產品，該怎麼選？">如果我想買防蚤驅蚊相關產品，該怎麼選？</button>
+        <button type="button" data-question="我要買毛天使商品，現在主要可以去哪裡買？">我要買毛天使商品，現在主要可以去哪裡買？</button>
+        <button type="button" data-question="如果商品有問題，需要提供哪些資訊給客服？">如果商品有問題，需要提供哪些資訊給客服？</button>
+      </div>
+    </section>
+    <section class="panel">
+      <h2>前台口徑</h2>
+      <p>語氣以真人客服為準，簡潔、自然、口語化，避免 AI 感、查詢感過重的說法。導購時優先走毛天使現行規則，超出資料範圍則婉拒，不亂延伸。</p>
+    </section>
+  </main>
+
+  <script
+    src="https://ipoehawk.jarvisclawbot.com/a-agent/widget.js"
+    data-bot-name="毛天使客服"
+    data-brand="PetAngel 毛天使"
+    data-site="petangel"
+    data-primary="#4cb9a8"
+    data-secondary="#8fd1c7">
+  </script>
+  <script>
+    (function () {
+      const presetQuestions = [
+        '毛天使有哪些洗毛精可以選？',
+        '我要買毛天使商品',
+        '商品有問題怎麼處理？'
+      ];
+
+      function waitWidgetReady(tries) {
+        const msgs = document.querySelector('.jyic-a-agent-msgs');
+        const chips = Array.from(document.querySelectorAll('.jyic-a-agent-chip'));
+        const input = document.querySelector('.jyic-a-agent-input');
+        const button = document.querySelector('.jyic-a-agent-button');
+        const title = document.querySelector('.jyic-a-agent-title');
+        const sub = document.querySelector('.jyic-a-agent-sub');
+        const avatar = document.querySelector('.jyic-a-agent-avatar');
+        if (!msgs || chips.length < 3 || !input || !button || !title || !sub || !avatar) {
+          if (tries > 0) return setTimeout(() => waitWidgetReady(tries - 1), 200);
+          return;
+        }
+        title.textContent = '毛天使客服';
+        sub.textContent = 'PetAngel 毛天使｜線上客服';
+        avatar.textContent = '毛';
+        button.textContent = '毛';
+        input.placeholder = '請輸入毛天使相關問題…';
+        const first = msgs.querySelector('.jyic-a-agent-bot');
+        if (first) {
+          first.textContent = '您好，歡迎來到毛天使客服。若您想了解產品特色、使用方式、購買資訊或售後協助，都可以直接告訴我。';
+        }
+        chips.forEach((chip, index) => { chip.textContent = presetQuestions[index] || chip.textContent; });
+      }
+
+      waitWidgetReady(20);
+
+      document.querySelectorAll('#faq-list button').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const widgetToggle = document.querySelector('.jyic-a-agent-button');
+          const panel = document.querySelector('.jyic-a-agent-panel');
+          const chips = Array.from(document.querySelectorAll('.jyic-a-agent-chip'));
+          const question = btn.dataset.question;
+          if (widgetToggle && panel && !panel.classList.contains('open')) widgetToggle.click();
+          const matched = chips.find((chip) => chip.textContent.trim() === question.trim());
+          if (matched) return matched.click();
+          const input = document.querySelector('.jyic-a-agent-input');
+          const form = document.querySelector('.jyic-a-agent-form');
+          if (input && form) {
+            input.value = question;
+            form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

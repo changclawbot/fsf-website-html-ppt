@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>富盛豐 OEM 客服助手</title>
+  <style>
+    :root {
+      --bg: #eef4ff;
+      --ink: #14233f;
+      --muted: #586887;
+      --line: rgba(20, 35, 63, 0.12);
+      --card: rgba(255,255,255,0.92);
+      --primary: #4f86ff;
+      --secondary: #8ec5ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", sans-serif;
+      color: var(--ink);
+      background: linear-gradient(180deg, #f7faff 0%, #eaf2ff 100%);
+    }
+    .hero {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 56px 24px 120px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      align-items: start;
+    }
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: 0 20px 60px rgba(58, 93, 164, 0.12);
+      padding: 28px;
+      backdrop-filter: blur(10px);
+    }
+    .kicker {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(79, 134, 255, 0.12);
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: .04em;
+    }
+    h1 {
+      margin: 16px 0 14px;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.08;
+    }
+    .lead {
+      margin: 0 0 18px;
+      font-size: 18px;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+    .chips, .faq { display: flex; flex-wrap: wrap; gap: 10px; }
+    .chip {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(79, 134, 255, 0.25);
+      background: rgba(79, 134, 255, 0.08);
+      color: var(--ink);
+      font-weight: 700;
+      font-size: 14px;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 22px;
+    }
+    p, li {
+      line-height: 1.8;
+      color: var(--muted);
+    }
+    ul { margin: 0; padding-left: 20px; }
+    .faq button {
+      border: 0;
+      border-radius: 14px;
+      padding: 12px 14px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      box-shadow: inset 0 0 0 1px rgba(20, 35, 63, 0.09);
+      cursor: pointer;
+      text-align: left;
+    }
+    .note {
+      margin-top: 14px;
+      font-size: 14px;
+    }
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; padding-bottom: 110px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="hero">
+    <section class="panel">
+      <span class="kicker">FSF OEM / ODM</span>
+      <h1>富盛豐 OEM 網頁客服助手</h1>
+      <p class="lead">這個版本對齊富盛豐 OEM / ODM 客服線，重點處理代工合作、需求訪談、打樣、MOQ、交期、報價與包材等問題。右下角可直接開啟客服視窗測試。</p>
+      <div class="chips">
+        <span class="chip">OEM / ODM 諮詢</span>
+        <span class="chip">打樣流程</span>
+        <span class="chip">報價需求</span>
+        <span class="chip">MOQ / 交期</span>
+      </div>
+    </section>
+    <aside class="panel">
+      <h2>回答範圍</h2>
+      <ul>
+        <li>天然植萃日化產品 OEM / ODM 相關諮詢</li>
+        <li>合作流程、打樣、量產、配方、包材、需求蒐集</li>
+        <li>報價、MOQ、交期以需求條件確認後再進一步評估</li>
+      </ul>
+      <p class="note">不回答與富盛豐 OEM / ODM 無關的問題，也不先亂報未確認的 MOQ、交期或正式報價。</p>
+    </aside>
+    <section class="panel">
+      <h2>常見可直接測試的問題</h2>
+      <div class="faq" id="faq-list">
+        <button type="button" data-question="富盛豐 OEM 可以做哪些類型的產品？">富盛豐 OEM 可以做哪些類型的產品？</button>
+        <button type="button" data-question="如果我要做代工，通常合作流程怎麼走？">如果我要做代工，通常合作流程怎麼走？</button>
+        <button type="button" data-question="MOQ 和報價是不是可以先評估？">MOQ 和報價是不是可以先評估？</button>
+        <button type="button" data-question="如果我想客製配方或包材，可以一起討論嗎？">如果我想客製配方或包材，可以一起討論嗎？</button>
+      </div>
+    </section>
+    <section class="panel">
+      <h2>前台口徑</h2>
+      <p>這條線只談富盛豐代工合作本身。回答方向以低風險、可追溯、先確認需求再往下談為主，不延伸到醫療宣稱或與 OEM / ODM 無關的泛聊天內容。</p>
+    </section>
+  </main>
+
+  <script
+    src="https://ipoehawk.jarvisclawbot.com/a-agent/widget.js"
+    data-bot-name="富盛豐 OEM 客服"
+    data-brand="富盛豐 OEM / ODM"
+    data-site="fsfoem"
+    data-primary="#4f86ff"
+    data-secondary="#8ec5ff">
+  </script>
+  <script>
+    (function () {
+      const presetQuestions = [
+        '富盛豐 OEM 可以做哪些類型的產品？',
+        '如果我要做代工，通常合作流程怎麼走？',
+        'MOQ 和報價是不是可以先評估？'
+      ];
+
+      function waitWidgetReady(tries) {
+        const msgs = document.querySelector('.jyic-a-agent-msgs');
+        const chips = Array.from(document.querySelectorAll('.jyic-a-agent-chip'));
+        const input = document.querySelector('.jyic-a-agent-input');
+        const button = document.querySelector('.jyic-a-agent-button');
+        const title = document.querySelector('.jyic-a-agent-title');
+        const sub = document.querySelector('.jyic-a-agent-sub');
+        const avatar = document.querySelector('.jyic-a-agent-avatar');
+        if (!msgs || chips.length < 3 || !input || !button || !title || !sub || !avatar) {
+          if (tries > 0) return setTimeout(() => waitWidgetReady(tries - 1), 200);
+          return;
+        }
+        title.textContent = '富盛豐 OEM 客服';
+        sub.textContent = '富盛豐 OEM / ODM｜線上客服';
+        avatar.textContent = '豐';
+        button.textContent = '豐';
+        input.placeholder = '請輸入富盛豐 OEM / ODM 相關問題…';
+        const first = msgs.querySelector('.jyic-a-agent-bot');
+        if (first) {
+          first.textContent = '您好，歡迎來到富盛豐 OEM 客服。若您想了解代工合作流程、產品類型、打樣、MOQ、交期或報價評估，都可以直接告訴我。';
+        }
+        chips.forEach((chip, index) => { chip.textContent = presetQuestions[index] || chip.textContent; });
+      }
+
+      waitWidgetReady(20);
+
+      document.querySelectorAll('#faq-list button').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const widgetToggle = document.querySelector('.jyic-a-agent-button');
+          const panel = document.querySelector('.jyic-a-agent-panel');
+          const chips = Array.from(document.querySelectorAll('.jyic-a-agent-chip'));
+          const question = btn.dataset.question;
+          if (widgetToggle && panel && !panel.classList.contains('open')) widgetToggle.click();
+          const matched = chips.find((chip) => chip.textContent.trim() === question.trim());
+          if (matched) return matched.click();
+          const input = document.querySelector('.jyic-a-agent-input');
+          const form = document.querySelector('.jyic-a-agent-form');
+          if (input && form) {
+            input.value = question;
+            form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

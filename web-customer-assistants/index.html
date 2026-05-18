@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>富盛豐客服助手頁面入口</title>
+  <style>
+    :root {
+      --bg: #08131f;
+      --panel: rgba(12, 27, 42, 0.92);
+      --text: #e9f3ff;
+      --muted: #9eb3c8;
+      --line: rgba(255,255,255,0.1);
+      --pet1: #8fd1c7;
+      --pet2: #4cb9a8;
+      --oem1: #8ec5ff;
+      --oem2: #4f86ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", sans-serif;
+      background: radial-gradient(circle at top, #14304d 0%, var(--bg) 52%, #050b12 100%);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      padding: 28px;
+    }
+    .wrap { width: min(1080px, 100%); }
+    h1 { margin: 0 0 10px; font-size: clamp(28px, 4vw, 44px); }
+    p.lead { margin: 0 0 28px; color: var(--muted); line-height: 1.7; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 24px;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 18px 60px rgba(0,0,0,0.25);
+      transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 22px 70px rgba(0,0,0,0.35);
+    }
+    .badge {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .pet .badge { background: rgba(76, 185, 168, 0.16); color: var(--pet1); }
+    .oem .badge { background: rgba(79, 134, 255, 0.16); color: var(--oem1); }
+    .card h2 { margin: 0 0 8px; font-size: 24px; }
+    .card p { margin: 0 0 14px; color: var(--muted); line-height: 1.7; }
+    ul { margin: 0; padding-left: 18px; color: var(--text); line-height: 1.8; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>客服助手頁面入口</h1>
+    <p class="lead">這裡先整理成兩個可直接展示的網頁版本：一個給毛天使消費者客服，一個給富盛豐 OEM / ODM 代工客服。頁面已嵌入右下角客服 Widget，並各自套用不同的問答範圍與前台文案。</p>
+    <p class="lead" style="margin-top:-10px;">另外也補了一頁完整說明文件，方便直接分享給前端、設計或合作方看串接方式與技能說明。</p>
+    <section class="grid">
+      <a class="card pet" href="./petangel-assistant.html">
+        <span class="badge">PetAngel</span>
+        <h2>毛天使客服助手</h2>
+        <p>對應毛天使前台客服範圍，聚焦產品、使用方式、購買前說明與售後協助。</p>
+        <ul>
+          <li>導購優先以毛天使現行規則為準</li>
+          <li>不回答醫療診斷與無關話題</li>
+          <li>網頁可直接嵌入現場展示</li>
+        </ul>
+      </a>
+      <a class="card oem" href="./fsfoem-assistant.html">
+        <span class="badge">FSF OEM</span>
+        <h2>富盛豐 OEM 客服助手</h2>
+        <p>對應富盛豐 OEM / ODM 代工客服範圍，聚焦合作流程、打樣、報價、MOQ、交期與需求蒐集。</p>
+        <ul>
+          <li>只談 OEM / ODM 與代工合作</li>
+          <li>不亂報未確認 MOQ / 交期 / 報價</li>
+          <li>可作為網站嵌入式客服展示頁</li>
+        </ul>
+      </a>
+      <a class="card oem" href="./skill-share.html">
+        <span class="badge">Skill Share</span>
+        <h2>完整文件與技能分享頁</h2>
+        <p>整理嵌入碼、站點綁定方式、用途說明與後續擴充建議，適合直接轉給前端或合作方。</p>
+        <ul>
+          <li>含 GitHub Pages 公開入口</li>
+          <li>含嵌入式 Widget 範例碼</li>
+          <li>含後端知識分流重點</li>
+        </ul>
+      </a>
+    </section>
+  </main>
+</body>
+</html>
